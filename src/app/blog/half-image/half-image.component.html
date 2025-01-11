@@ -1,0 +1,72 @@
+
+<div class="page-wraper">
+
+
+    <!-- header -->
+    <app-header-light3></app-header-light3>
+    <!-- header END -->
+    <!-- Content -->
+    <div class="page-content bg-gray">
+        <!-- inner page banner -->
+        <app-banner1 [data] = "banner"></app-banner1>
+        <!-- inner page banner END -->
+        <!-- contact area -->
+        <div class="content-area bg-gray">
+		<div class="container">
+			<div class="row">
+				<ng-template [ngIf]="layout.sidebar">
+					<div class="col-xl-3 col-lg-4" *ngIf="layout.sidebarPosition=='left'">
+						<aside class="side-bar sticky-top">
+							<app-search-form3></app-search-form3>
+							<app-recent-posts1></app-recent-posts1>
+							<app-our-gallery1></app-our-gallery1>
+							<app-category-list1></app-category-list1>
+							<app-tag-list1></app-tag-list1>
+						</aside>
+					</div>
+				</ng-template>
+			
+				<div class="" [ngClass]="{'col-xl-9 col-lg-8': layout.sidebar === true, 'col-xl-12 col-lg-12': layout.sidebar === false}">
+					<!-- Blog half image -->
+
+					<div *ngFor="let item of gridData" class="blog-post blog-md clearfix shadow bg-white">
+						<app-blog-style-image [newItemEvent]="item"></app-blog-style-image>
+					</div>
+
+					<!-- Blog half image END -->
+					<!-- Pagination  -->
+					<div class="pagination-bx rounded-sm primary clearfix text-center">
+						<ul class="pagination">
+							<li class="previous"><a href="javascript:void(0);"><i class="ti-arrow-left"></i> Prev</a></li>
+							<li class="active"><a href="javascript:void(0);">1</a></li>
+							<li><a href="javascript:void(0);">2</a></li>
+							<li><a href="javascript:void(0);">3</a></li>
+							<li class="next"><a href="javascript:void(0);">Next <i class="ti-arrow-right"></i></a></li>
+						</ul>
+					</div>
+					<!-- Pagination END -->
+				</div>
+				<ng-template [ngIf]="layout.sidebar">
+					<div class="col-xl-3 col-lg-4" *ngIf="layout.sidebarPosition=='right'">
+						<aside class="side-bar sticky-top">
+							<app-search-form3></app-search-form3>
+							<app-recent-posts1></app-recent-posts1>
+							<app-our-gallery1></app-our-gallery1>
+							<app-category-list1></app-category-list1>
+							<app-tag-list1></app-tag-list1>
+						</aside>
+					</div>
+				</ng-template>
+			</div>
+		</div>
+        </div>
+    </div>
+    <!-- Content END-->
+	<!-- Footer -->
+   <!-- Newsletter -->
+	<app-newsletter2></app-newsletter2>
+   <!-- Footer -->
+    <app-footer13></app-footer13>
+    <!-- scroll top button -->
+    <app-scroltop></app-scroltop>
+</div>

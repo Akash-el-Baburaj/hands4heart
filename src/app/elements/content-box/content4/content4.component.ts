@@ -1,0 +1,10 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-content4',
+  templateUrl: './content4.component.html',
+  styleUrls: ['./content4.component.css']
+})
+export class Content4Component {
+
+}

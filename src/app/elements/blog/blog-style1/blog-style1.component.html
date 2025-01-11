@@ -1,0 +1,32 @@
+<div class="blog-post blog-grid blog-rounded bg-white shadow">
+    <div class="dlab-post-media dlab-img-effect">
+        <a routerLink="{{ titleUrl }}"><img src="{{ image }}" alt="" /></a>
+    </div>
+    <div class="dlab-info p-a25">
+        <div class="dlab-post-meta">
+            <ul>
+                <li class="post-author"> <i class="la la-user-circle"></i> By <a href="javascript:void(0);">Jamie</a>
+                </li>
+                <li class="post-tag"> <a href="javascript:void(0);">{{ postType }}</a> </li>
+            </ul>
+        </div>
+        <div class="dlab-post-title ">
+            <h4 class="post-title"><a routerLink="{{ titleUrl }}">{{ title }}</a></h4>
+        </div>
+        <div class="dlab-post-text">
+            <p>{{ description }}</p>
+        </div>
+        <div class="post-footer">
+            <div class="dlab-post-meta">
+                <ul>
+                    <li class="post-date"> <i class="la la-clock"></i> {{ date }} </li>
+                </ul>
+            </div>
+            <ul class="dlab-social-icon dez-border">
+                <li *ngFor="let item of icon">
+                    <a class="site-button circle-sm {{ item }}" href="javascript:void(0);"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

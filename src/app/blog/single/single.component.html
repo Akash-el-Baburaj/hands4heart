@@ -1,0 +1,171 @@
+<div class="page-wraper">
+
+    <!-- header -->
+    <app-header-light3></app-header-light3>
+    <!-- header END -->
+    <!-- Content -->
+    <div class="page-content bg-white">
+        <!-- inner page banner -->
+        <app-banner1 [data]="banner"></app-banner1>
+        <!-- inner page banner END -->
+        <!-- contact area -->
+        <div class="content-area">
+            <div class="container max-w900">
+
+                <div class="row">
+
+                    <ng-template [ngIf]="layout.sidebar">
+                        <div class="col-xl-3 col-lg-4 col-md-12" *ngIf="layout.sidebarPosition=='left'">
+                            <aside class="side-bar sticky-top">
+                                <app-search-form3></app-search-form3>
+                                <app-recent-posts1></app-recent-posts1>
+                                <app-our-gallery1></app-our-gallery1>
+                                <app-category-list1></app-category-list1>
+                                <app-tag-list1></app-tag-list1>
+                            </aside>
+                        </div>
+                    </ng-template>
+
+                    <!-- left part start -->
+                    <div class=""
+                        [ngClass]="{'col-xl-9 col-lg-8 col-md-12 m-b30': layout.sidebar === true, 'col-xl-12 col-lg-12': layout.sidebar === false}">
+                        <!-- blog start -->
+                        <div class="blog-post blog-single">
+                            <div class="dlab-info">
+                                <div class="dlab-post-meta">
+                                    <ul>
+                                        <li class="post-author"> <i class="la la-user-circle"></i> By <a
+                                                href="javascript:void(0);">Caroline</a> </li>
+                                        <li class="post-date"> <i class="la la-clock"></i> <strong>01 June</strong>
+                                            <span> 2024</span> </li>
+                                        <li class="post-tag"> <a href="javascript:void(0);">Education</a> </li>
+                                    </ul>
+                                </div>
+                                <h2 class="dlab-title">Here's What People Are Saying About</h2>
+                                <div class="dlab-media">
+                                    <a href="javascript:void(0);"><img src="assets/images/blog/default/thum3.jpg"
+                                            alt=""></a>
+                                </div>
+                                <div class="dlab-post-text text">
+                                    <p>Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. Sed maximus orci ac
+                                        condi mentum efficitur. Suspendi potenti. Fusce diam felis, ullamcor aca felis
+                                        sed, volutpat varius tortor. Ut eleifend justo sed quam blandit, vehicula ante
+                                        hendrerit. Sed condimentum libero vel eros porta, eu malesuada nulla bibendum.
+                                        Proin varius sollicitudin nulla quis fermentum. Nunc vitae arcu eget diam
+                                        gravida ultrices finibus nec mi. Maecenas egestas libero.</p>
+                                    <p>Donec ultricies convallis urna. Morbi consequat vestibulum nunc sed semper. Proin
+                                        iaculis risus eleifend, efficitur eros et, tristique tortor. Integer nec lacinia
+                                        augue. Curabitur mattis vel orci id mattis. Aliquam eu dignissim sem. Interdum
+                                        et malesuada fames ac ante ipsum primis in faucibus. Mauris vitae fermentum
+                                        quam.</p>
+                                    <ul>
+                                        <li><a href="javascript:void(0);">Duis auctor sed elit quis consequat.</a> Fusce
+                                            est quam, sodales vel eros vitae, dictum consectetur dolor. Fusce convallis
+                                            mauris tellus, eu aliquet magna aliquet eget.</li>
+                                        <li>Nam iaculis, <a href="javascript:void(0);">enim ut elementum maximus, quam
+                                                lectus convallis metus, </a>id suscipit risus lectus id urna. Cras
+                                            viverra consectetur diam. Morbi sed consequat tellus, in vehicula urna.</li>
+                                        <li><a href="javascript:void(0);">Morbi sit amet diam sodales, sodales purus
+                                                quis, </a>feugiat turpis. Maecenas elementum mauris quis plac erat
+                                            maximus. <a href="javascript:void(0);">Curabitur elementum lobortis
+                                                malesuada.</a></li>
+                                    </ul>
+                                    <p>Aliquam laoreet fringilla velit, quis pulvinar ex bibendum vestibulum. Aenean vel
+                                        dapibus ex. Curabitur sodales dui ut hendrerit volutpat. Phasellus fringilla
+                                        semper urna, eu dapibus lacus porttitor at. Sed eget pellentes orci. Aliquam
+                                        pulvinar augue sed molestie semper. Integer ullamcorper magna fringilla arcu
+                                        rutrum, sed porttitor ex viverra. </p>
+                                    <ul class="wp-block-gallery columns-3">
+                                        <li class="blocks-gallery-item"><img alt=""
+                                                src="assets/images/gallery/pic2.jpg"></li>
+                                        <li class="blocks-gallery-item"><img alt=""
+                                                src="assets/images/gallery/pic1.jpg"></li>
+                                    </ul>
+                                    <h4>Curabitur elementum lobortis malesuada.</h4>
+                                    <p>Aliquam laoreet fringilla velit, quis pulvinar ex bibendum vestibulum. Aenean vel
+                                        dapibus ex. Curabitur sodales dui ut hendrerit volutpat. Phasellus fringilla
+                                        semper urna, eu dapibus lacus porttitor at. Sed eget pellentes orci. Aliquam
+                                        pulvinar augue sed molestie semper. Integer ullamcorper magna fringilla arcu
+                                        rutrum, sed porttitor ex viverra. </p>
+                                    <blockquote class="wp-block-quote">
+                                        <p>Use this static Page to test the Theme’s handling of the Blog Posts Index
+                                            page. If the site is set to display a static Page on the Front Page, and
+                                            this Page is.</p>
+                                        <cite>WordPress Community</cite>
+                                    </blockquote>
+                                    <p>Cras ac erat sapien. Etiam porta, arcu sed scelerisque dapibus, orci felis
+                                        tincidunt tellus, at bibendum ex velit ac dolor. Aenean auctor, lectus laoreet
+                                        efficitur dapibus, orci nulla ultrices risus, sed volutpat nisl nulla at felis.
+                                        Integer ligula risus, ultricies eu velit non, rutrum consectetur neque. Sed
+                                        ullamcorper sed massa quis hendrerit. </p>
+                                    <p>Nulla ultrices diam at odio malesuada lacinia. Fusce eget posuere purus. Donec
+                                        accumsan vehicula mi, id imperdiet nulla ornare eu. Orci varius natoque
+                                        penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                                    <p>Praesent vehicula neque et augue consectetur placerat. Ut pellentesque euismod
+                                        sapien eget venenatis. Proin massa lacus, dapibus a scelerisque a, molestie sit
+                                        amet mauris. Cras maximus lectus quis orci feugiat, at tristique velit bibendum.
+                                        Etiam augue arcu, cursus id egestas ut, viverra at urna. Quisque ipsum sit amet
+                                        aliquet tempus. </p>
+
+                                </div>
+                                <div class="post-footer">
+                                    <div class="dlab-meta">
+                                        <span class="title">TAGS : </span>
+                                        <ul class="tag-list">
+                                            <li class="post-tag"><a href="javascript:void(0);">#Lifestyle</a></li>
+                                            <li class="post-tag"><a href="javascript:void(0);">#Blog</a></li>
+                                            <li class="post-tag"><a href="javascript:void(0);">#Instagram</a></li>
+                                            <li class="post-tag"><a href="javascript:void(0);">#Image</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="share-post">
+                                        <ul class="list-inline m-b0">
+                                            <li><a href="javascript:void(0);"
+                                                    class="site-button sharp radius-xl facebook"><i
+                                                        class="fa fa-facebook"></i></a></li>
+                                            <li><a href="javascript:void(0);"
+                                                    class="site-button sharp radius-xl instagram"><i
+                                                        class="fa fa-instagram"></i></a></li>
+                                            <li><a href="javascript:void(0);"
+                                                    class="site-button sharp radius-xl twitter"><i
+                                                        class="fa fa-twitter"></i></a></li>
+                                            <li><a href="javascript:void(0);"
+                                                    class="site-button sharp radius-xl linkedin"><i
+                                                        class="fa fa-linkedin"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear m-b30" id="comment-list">
+                            <app-comments1></app-comments1>
+                        </div>
+                        <!-- Form -->
+                        <app-comment-form1 [data]="layout"></app-comment-form1>
+                        <!-- blog END -->
+                    </div>
+                    <!-- Side bar start -->
+                    <ng-template [ngIf]="layout.sidebar">
+                        <div class="col-xl-3 col-lg-4 col-md-12" *ngIf="layout.sidebarPosition=='right'">
+                            <aside class="side-bar sticky-top">
+                                <app-search-form3></app-search-form3>
+                                <app-recent-posts1></app-recent-posts1>
+                                <app-our-gallery1></app-our-gallery1>
+                                <app-category-list1></app-category-list1>
+                                <app-tag-list1></app-tag-list1>
+                            </aside>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <!-- Content END-->
+        <!-- Footer -->
+        <!-- Newsletter -->
+        <app-newsletter2></app-newsletter2>
+        <!-- Footer -->
+        <app-footer13></app-footer13>
+        <!-- Footer END-->
+        <!-- scroll top button -->
+    <app-scroltop></app-scroltop>
+    </div>

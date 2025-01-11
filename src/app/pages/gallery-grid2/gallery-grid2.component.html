@@ -1,0 +1,43 @@
+
+<div class="page-wraper">
+
+	<!-- header -->
+    <app-header-light3></app-header-light3>
+    <!-- header END -->
+    <!-- Content -->
+    <div class="page-content bg-gray">
+        <!-- inner page banner -->
+        <app-banner1 [data] = "banner"></app-banner1>
+        <!-- inner page banner END -->
+        <!-- contact area -->
+        <div class="content-block">
+			<!-- Portfolio  -->
+			<div class="section-full content-inner portfolio bg-gray" id="portfolio">
+				<div class="container">
+					<div class="site-filters style1 clearfix center  m-b40">
+						<ul class="filters" data-toggle="buttons">
+							<li data-filter="" class="btn active"><input type="radio"><a href="javascript:void(0);"><span>All</span></a></li>
+							<li data-filter="web" class="btn"><input type="radio"><a href="javascript:void(0);"><span>Web Design</span></a></li>
+							<li data-filter="advertising" class="btn"><input type="radio"><a href="javascript:void(0);"><span>Photography</span></a></li>
+							<li data-filter="branding" class="btn"><input type="radio"><a href="javascript:void(0);"><span>Management</span></a></li>
+							<li data-filter="design" class="btn"><input type="radio"><a href="javascript:void(0);"><span>Advertising</span></a></li>
+							<li data-filter="photography" class="btn"><input type="radio"><a href="javascript:void(0);"><span>Collage</span></a></li>
+						</ul>
+					</div>   
+					<div class="clearfix" id="lightgallery">
+						<app-gallery4 [data]="galleries"></app-gallery4>
+					</div>
+				</div>
+			</div>
+        </div>
+		<!-- contact area END -->
+    </div>
+    <!-- Content END-->
+	<!-- Footer -->
+   <!-- Newsletter -->
+	<app-newsletter2></app-newsletter2>
+   <!-- Footer -->
+    <app-footer13></app-footer13>
+     <!-- scroll top button -->
+	 <app-scroltop></app-scroltop>
+</div>

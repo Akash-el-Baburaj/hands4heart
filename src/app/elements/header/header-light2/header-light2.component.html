@@ -1,0 +1,86 @@
+<header class="site-header mo-left header">
+    <!-- main header -->
+    <div class="sticky-header main-bar-wraper header-curve navbar-expand-lg">
+        <div class="main-bar clearfix bg-primary">
+            <div class="container clearfix">
+                <!-- website logo -->
+                <div class="logo-header mostion logo-dark">
+                    <a [routerLink]="['/home-university']"><img src="assets/images/logo.png" alt=""></a>
+                </div>
+                <!-- nav toggle button -->
+                <button class="navbar-toggler collapsed navicon justify-content-end" 
+                    (click)="clickEvent()" type="button" [ngClass]="{'open': collapseToggle}">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- extra nav -->
+                <div class="extra-nav">
+                    <div class="extra-cell">
+                        <button id="quik-search-btn" type="button" class="site-button-link"(click)="searchOpen()"><i class="la la-search"></i></button>
+                    </div>
+                </div>
+                <!-- Quik search -->
+                <div class="dlab-quik-search" class="{{searchToggle ? 'On d-block':'d-none'}}">
+                    <form action="#">
+                        <input name="search" value="" type="text" class="form-control" placeholder="Type to search">
+                        <span id="quik-search-remove" (click)="searchOpen()"><i class="ti-close"></i></span>
+                    </form>
+                </div>
+                <!-- main nav -->
+                <div class="header-nav navbar-collapse collapse justify-content-end" [ngClass]="{'collapse show': collapseToggle}">
+                    <div class="logo-header d-md-block d-lg-none">
+                        <a [routerLink]="['/home-university']"><img src="assets/images/logo.png" alt=""></a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li *ngFor="let item of sidebarMenu; let i = index;" class="{{ item.menuClass }}" [ngClass]="{'open': i.toString() == toggleMenu}" [ngClass]="{'active': item.title == activeMenu}">
+                            <a href="javascript:void(0);" (click)="opneMenu(i)">{{ item.title }}<i class="fa fa-chevron-down"></i></a>
+                            <ul *ngIf="item.subMenu" class="{{ item.subMenuClass }}">
+                                <li *ngFor="let subitem of item.subMenu; let sec_i = index" [ngClass]="{'open': sec_i.toString() == toggleSubMenu}">
+                                    <a                                   
+                                        *ngIf="subitem.route && subitem.themeColor "
+                                        [routerLink]="[subitem.route]" 
+                                        (click)="handleActiveMenu(subitem.route)"
+                                        (click)="themeColor(subitem.themeColor)"
+                                    >
+                                        <img src="{{ subitem.img }}" alt="">
+                                        <span>{{ subitem.title }}</span>
+                                    </a>
+                                    <a                                   
+                                        *ngIf="subitem.route && !subitem.themeColor"
+                                        (click)="handleActiveMenu(subitem.route)"
+                                        [routerLink]="[subitem.route]"
+                                    >
+                                        <span>{{ subitem.title }}</span>
+                                    </a>
+                                    <a 
+                                        *ngIf="subitem.subSubMenu"
+                                        href="javascript:void(0)" 
+                                        (click)="opneSubMenu(sec_i)"
+                                    >
+                                        <span>{{ subitem.title }}</span>
+                                        <i *ngIf="item.subMenuClass == 'sub-menu tab-content'" class="fa fa-angle-right"></i>
+                                    </a>
+                                    <ul *ngIf="subitem.subSubMenu" [ngClass]="{'sub-menu': item.title == 'Features'}">
+                                        <li *ngFor="let subsubitme of subitem.subSubMenu">
+                                            <a [routerLink]="[subsubitme.route]">{{ subsubitme.title }}</a>
+                                        </li>
+                                    </ul>  
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="dlab-social-icon">
+                        <ul>
+                            <li><a class="site-button circle fa fa-facebook" href="javascript:void(0);"></a></li>
+                            <li><a class="site-button  circle fa fa-twitter" href="javascript:void(0);"></a></li>
+                            <li><a class="site-button circle fa fa-linkedin" href="javascript:void(0);"></a></li>
+                            <li><a class="site-button circle fa fa-instagram" href="javascript:void(0);"></a></li>
+                        </ul>
+                    </div>		
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main header END -->
+</header>

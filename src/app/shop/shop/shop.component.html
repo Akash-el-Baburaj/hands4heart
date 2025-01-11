@@ -1,0 +1,57 @@
+
+<div class="page-wraper">
+
+    <!-- header -->
+    <app-header-light3></app-header-light3>
+    <!-- header END -->
+    <!-- Content -->
+    <div class="page-content bg-white">
+        <!-- inner page banner -->
+        <app-banner1 [data] = "banner"></app-banner1>
+        <!-- inner page banner END -->
+        <!-- contact area -->
+        <div class="section-full content-inner">
+            <!-- Product -->
+            <div class="container">
+                <div class="row">
+					<div *ngFor="let item of shopData" class="col-lg-3 col-md-4 col-sm-6">
+						<div class="item-box m-b10">
+							<div class="item-img">
+								<img src="{{ item.img }}" alt=""/>
+								<div class="item-info-in full">
+									<div class="center p-lr40">
+										<a href="javascript:void(0);" class="site-button radius-xl m-b10 btn-block"><i class="la la-shopping-cart"></i> Add To Cart</a>
+										<a href="javascript:void(0);" class="site-button radius-xl btn-block"><i class="la la-heart-o"></i> Wishlist</a>
+									</div>
+								</div>
+							</div>
+							<div class="item-info text-center text-black p-a10">
+								<h6 class="item-title font-weight-500"><a [routerLink]="['{ item.titleUrl }']">{{ item.title }}</a></h6>
+								<ul class="item-review">
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star-half-o"></i></li>
+									<li><i class="fa fa-star-o"></i></li>
+								</ul>
+								<h4 class="item-price"><del>${{ item.priceDic }}</del> <span class="text-primary">${{ item.price }}</span></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            <!-- Product END -->
+		</div>
+		<!-- Shop Service info -->
+		<app-icon-box4></app-icon-box4>
+		<!-- Shop Service info End -->
+    </div>
+    <!-- Content End -->
+    <!-- Newsletter -->
+	<app-newsletter2></app-newsletter2>
+   <!-- Footer -->
+    <app-footer13></app-footer13>
+    <!-- Footer END-->
+    <!-- scroltop -->
+    <app-scroltop></app-scroltop>
+</div>

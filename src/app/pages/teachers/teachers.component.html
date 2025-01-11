@@ -1,0 +1,56 @@
+
+<div class="page-wraper">
+
+    <!-- header -->
+    <app-header-light3></app-header-light3>
+    <!-- header END -->
+    <!-- Content -->
+    <div class="page-content bg-white">
+        <!-- inner page banner -->
+        <app-banner1 [data] = "banner"></app-banner1>
+        <!-- inner page banner END -->
+        <!-- contact area -->
+        <div class="content-block">
+			<!-- Our Team -->
+			<div class="section-full content-inner">
+				<div class="container">
+					<div class="row">
+						<div *ngFor="let data of teachersData" class="col-lg-3 col-md-6 col-sm-6">
+							<div class="dlab-box m-b30 dlab-team1">
+								<div class="dlab-media">
+									<a routerLink="{{ data.url }}">
+										<img width="358" height="460" alt="" src="{{ data.img }}">
+									</a>
+								</div>
+								<div class="dlab-info">
+									<h4 class="dlab-title"><a routerLink="{{ data.url }}">{{ data.name }}</a></h4>
+									<span class="dlab-position"> {{ data.position }} </span>
+									<ul class="dlab-social-icon dez-border">
+										<li><a class="fa fa-facebook" href="javascript:void(0);"></a></li>
+										<li><a class="fa fa-twitter" href="javascript:void(0);"></a></li>
+										<li><a class="fa fa-linkedin" href="javascript:void(0);"></a></li>
+										<li><a class="fa fa-pinterest" href="javascript:void(0);"></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Our Team END -->
+			<!-- Client logo -->
+			<app-client1></app-client1>
+			<!-- Client logo END -->
+		</div>
+		<!-- contact area END -->
+    </div>
+    <!-- Content END-->
+	<!-- Footer -->
+   <!-- Newsletter -->
+	<app-newsletter2></app-newsletter2>
+   <!-- Footer -->
+    <app-footer13></app-footer13>
+    <!-- Footer END-->
+     <!-- scroll top button -->
+	 <app-scroltop></app-scroltop>
+</div>

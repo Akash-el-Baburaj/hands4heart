@@ -1,0 +1,89 @@
+
+<div class="page-wraper">
+
+    <!-- header -->
+    <app-header-light3></app-header-light3>
+    <!-- header END -->
+    <!-- Content -->
+    <div class="page-content bg-gray">
+        <!-- inner page banner -->
+        <app-banner1 [data] = "banner"></app-banner1>
+        <!-- inner page banner END -->
+		<div class="content-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Side bar start -->
+                    <div class="col-lg-3 col-md-5">
+                        <aside class="side-bar sticky-top">
+                            <app-search-form3></app-search-form3>
+                            <app-recent-posts1></app-recent-posts1>
+                            <app-our-gallery1></app-our-gallery1>
+                            <app-category-list1></app-category-list1>
+                            <app-tag-list1></app-tag-list1>
+                        </aside>
+                    </div>
+                    <!-- Side bar END -->
+					<!-- left part start -->
+                    <div class="col-lg-9 col-md-7">
+                        <div class="row">
+							<div *ngFor="let rowdata of courceData" class="col-lg-4">
+								<div class="dlab-box courses-bx">
+									<div class="dlab-media"> 
+										<img src="{{ rowdata.img }}" alt="">
+										<div class="user-info">
+											<img src="assets/images/testimonials/pic1.jpg" alt="">
+											<h6 class="title">Jack Ronan</h6>
+											<div class="review">
+												<ul class="item-review">
+													<li><i class="fa fa-star"></i></li>
+													<li><i class="fa fa-star"></i></li>
+													<li><i class="fa fa-star"></i></li>
+													<li><i class="fa fa-star-half-o"></i></li>
+													<li><i class="fa fa-star-o"></i></li>
+												</ul>
+												<span>10 Review</span>
+											</div>
+										</div>
+									</div>
+									<div class="dlab-info">
+										<h6 class="dlab-title"><a [routerLink]="['/courses-details']">{{ rowdata.title }}</a></h6>
+										<p> {{ rowdata.desc }} </p>
+										<div class="courses-info">
+											<ul>
+												<li><i class="fa fa-users"></i> {{ rowdata.use_student }} </li>
+											</ul>
+											<span class="price">${{rowdata.price}}.00</span>
+										</div>
+									</div>
+								</div>
+							</div>
+		
+							<!-- Pagination start -->
+                            <div class="pagination-bx rounded-sm primary clearfix m-b30 text-center col-md-12">
+								<ul class="pagination">
+									<li class="previous"><a href="javascript:void(0);"><i class="ti-arrow-left"></i> Prev</a></li>
+									<li class="active"><a href="javascript:void(0);">1</a></li>
+									<li><a href="javascript:void(0);">2</a></li>
+									<li><a href="javascript:void(0);">3</a></li>
+									<li class="next"><a href="javascript:void(0);">Next <i class="ti-arrow-right"></i></a></li>
+								</ul>
+							</div>
+                            <!-- Pagination END -->
+                        </div>
+                    </div>
+                    <!-- left part start -->
+                </div>
+            </div>
+        </div>
+	</div>
+    <!-- Content END-->
+    <!-- Footer -->
+   <!-- Newsletter -->
+	<app-newsletter2></app-newsletter2>
+   <!-- Footer -->
+    <app-footer13></app-footer13>
+    <!-- Footer END-->
+    <!-- scroll top button -->
+    <!-- scroltop -->
+    <app-scroltop></app-scroltop>
+</div>

@@ -1,0 +1,60 @@
+<div class="page-wraper">
+
+	<!-- header -->
+	<app-header-light3></app-header-light3>
+	<!-- header END -->
+	<!-- Content -->
+	<div class="page-content bg-white">
+		<!-- inner page banner -->
+		<app-banner1 [data]="banner"></app-banner1>
+		<!-- inner page banner END -->
+		<!-- contact area -->
+		<div class="content-block">
+			<!-- Features -->
+			<div class="section-full content-inner bg-gray">
+				<div class="container">
+					<div class="section-head text-black text-center">
+						<h2 class="title">Our Services</h2>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry has been the
+							industry's standard dummy text ever since the been when an unknown printer.</p>
+					</div>
+					<div class="row">
+
+						<ng-container *ngFor="let service of services">
+							<div class="col-lg-4 col-md-6 col-sm-6 m-b30">
+
+								<div class="dlab-box service-box-2">
+									<div class="dlab-media radius-sm dlab-img-overlay1 dlab-img-effect rotate">
+										<a href="javascript:void(0);"><img src="{{service.service_image}}" alt=""></a>
+									</div>
+									<div class="dlab-info">
+										<h4 class="title"><a href="javascript:void(0);">{{service.title}}</a></h4>
+										<p>{{service.description}}</p>
+										<a href="javascript:void(0);"
+											class="site-button btnhover14 btn-tb">{{service.button_text}}</a>
+									</div>
+								</div>
+							</div>
+						</ng-container>
+					</div>
+				</div>
+			</div>
+			<!-- Features End -->
+			<app-content14></app-content14>
+			<!-- Content Section End -->
+			<!-- Testimonials -->
+			<app-testimonial4></app-testimonial4>
+			<!-- Testimonials END -->
+		</div>
+		<!-- contact area END -->
+	</div>
+	<!-- Content END-->
+	<!-- Footer -->
+	<!-- Newsletter -->
+	<app-newsletter2></app-newsletter2>
+	<!-- Footer -->
+	<app-footer13></app-footer13>
+	<!-- Footer END-->
+	<!-- scroll top button -->
+	<app-scroltop></app-scroltop>
+</div>
