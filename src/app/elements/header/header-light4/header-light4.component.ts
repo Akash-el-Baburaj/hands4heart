@@ -96,8 +96,9 @@ export class HeaderLight4Component {
     })
   }
 
-  sidebarMenu: MenuType[] = [
-    // {
+  // sidebarMenu: MenuType[] = [
+    sidebarMenu: any[] = [
+      // {
     //   title: 'Home',
     //   menuClass: 'has-mega-menu homedemo',
     //   subMenuClass: 'mega-menu',
@@ -161,27 +162,27 @@ export class HeaderLight4Component {
           subSubMenu: [
             {
               title: 'Header 1',
-              route: '/header-style-1',
+              // route: '/header-style-1',
             },
             {
               title: 'Header 2',
-              route: '/header-style-2',
+              // route: '/header-style-2',
             },
             {
               title: 'Header 3',
-              route: '/header-style-3',
+              // route: '/header-style-3',
             },
             {
               title: 'Header 4',
-              route: '/header-style-4',
+              // route: '/header-style-4',
             },
             {
               title: 'Header 5',
-              route: '/header-style-5',
+              // route: '/header-style-5',
             },
             {
               title: 'Header 6',
-              route: '/header-style-6',
+              // route: '/header-style-6',
             },
           ]
         },
@@ -190,27 +191,27 @@ export class HeaderLight4Component {
           subSubMenu: [
             {
               title: 'Header 1',
-              route: '/header-style-dark-1',
+              // route: '/header-style-dark-1',
             },
             {
               title: 'Header 2',
-              route: '/header-style-dark-2',
+              // route: '/header-style-dark-2',
             },
             {
               title: 'Header 3',
-              route: '/header-style-dark-3',
+              // route: '/header-style-dark-3',
             },
             {
               title: 'Header 4',
-              route: '/header-style-dark-4',
+              // route: '/header-style-dark-4',
             },
             {
               title: 'Header 5',
-              route: '/header-style-dark-5',
+              // route: '/header-style-dark-5',
             },
             {
               title: 'Header 6',
-              route: '/header-style-dark-6',
+              // route: '/header-style-dark-6',
             },
           ]
         },
@@ -219,51 +220,51 @@ export class HeaderLight4Component {
           subSubMenu: [
             {
               title: 'Footer 1',
-              route: '/footer-1',
+              // route: '/footer-1',
             },
             {
               title: 'Footer 2',
-              route: '/footer-2',
+              // route: '/footer-2',
             },
             {
               title: 'Footer 3',
-              route: '/footer-3',
+              // route: '/footer-3',
             },
             {
               title: 'Footer 4',
-              route: '/footer-4',
+              // route: '/footer-4',
             },
             {
               title: 'Footer 5',
-              route: '/footer-5',
+              // route: '/footer-5',
             },
             {
               title: 'Footer 6',
-              route: '/footer-6',
+              // route: '/footer-6',
             },
             {
               title: 'Footer 7',
-              route: '/footer-7',
+              // route: '/footer-7',
             },
             {
               title: 'Footer 8',
-              route: '/footer-8',
+              // route: '/footer-8',
             },
             {
               title: 'Footer 9',
-              route: '/footer-9',
+              // route: '/footer-9',
             },
             {
               title: 'Footer 10',
-              route: '/footer-10',
+              // route: '/footer-10',
             },
             {
               title: 'Footer 11',
-              route: '/footer-11',
+              // route: '/footer-11',
             },
             {
               title: 'Footer 12',
-              route: '/footer-12',
+              // route: '/footer-12',
             },
           ]
         }
@@ -279,23 +280,23 @@ export class HeaderLight4Component {
           subSubMenu: [
             {
               title: 'About us 1',
-              route: '/about-1',
+              // route: '/about-1',
             },
             {
               title: 'About us 2',
-              route: '/about-2',
+              // route: '/about-2',
             },
             {
               title: 'Services 1',
-              route: '/services-1',
+              // route: '/services-1',
             },
             {
               title: 'Services 2',
-              route: '/services-2',
+              // route: '/services-2',
             },
             {
               title: 'Faqs',
-              route: '/faq-1',
+              // route: '/faq-1',
             }
           ]
         },
@@ -304,23 +305,23 @@ export class HeaderLight4Component {
           subSubMenu: [
             {
               title: 'Teachers',
-              route: '/teacher',
+              // route: '/teacher',
             },
             {
               title: 'Teachers Profile',
-              route: '/teachers-profile',
+              // route: '/teachers-profile',
             },
             {
               title: 'Courses',
-              route: '/courses',
+              // route: '/courses',
             },
             {
               title: 'Courses Details',
-              route: '/courses-details',
+              // route: '/courses-details',
             },
             {
               title: 'Events',
-              route: '/event',
+              // route: '/event',
             }
           ]
         },
@@ -329,23 +330,23 @@ export class HeaderLight4Component {
           subSubMenu: [
             {
               title: 'Events Details',
-              route: '/event-details',
+              // route: '/event-details',
             },
             {
               title: 'Help Desk',
-              route: '/help-desk',
+              // route: '/help-desk',
             },
             {
               title: 'Privacy Policy',
-              route: '/privacy-policy',
+              // route: '/privacy-policy',
             },
             {
               title: 'Error-404',
-              route: '/error-404',
+              // route: '/error-404',
             },
             {
               title: 'Error-405',
-              route: '/error-405',
+              // route: '/error-405',
             }
           ]
         },
@@ -354,58 +355,58 @@ export class HeaderLight4Component {
           subSubMenu: [
             {
               title: 'Gallery Grid 2',
-              route: '/gallery-grid-2',
+              // route: '/gallery-grid-2',
             },
             {
               title: 'Gallery Grid 3',
-              route: '/gallery-grid-3',
+              // route: '/gallery-grid-3',
             },
             {
               title: 'Gallery Grid 4',
-              route: '/gallery-grid-4',
+              // route: '/gallery-grid-4',
             }
           ]
         }
       ]
     },
-    {
-      title: 'Shop',
-      subMenuClass: 'sub-menu',
-      subMenu: [
-        {
-          title: 'Shop',
-          route: '/shop'
-        },
-        {
-          title: 'Shop Sidebar',
-          route: '/shop-sidebar',
-        },
-        {
-          title: 'Product Details',
-          route: '/shop-product-details',
-        },
-        {
-          title: 'Cart',
-          route: '/shop-cart',
-        },
-        {
-          title: 'Wishlist',
-          route: '/shop-wishlist',
-        },
-        {
-          title: 'Checkout',
-          route: '/shop-checkout',
-        },
-        {
-          title: 'Login',
-          route: '/shop-login',
-        },
-        {
-          title: 'Register',
-          route: '/shop-register',
-        }
-      ]
-    },
+    // {
+    //   title: 'Shop',
+    //   subMenuClass: 'sub-menu',
+    //   subMenu: [
+    //     {
+    //       title: 'Shop',
+    //       // route: '/shop'
+    //     },
+    //     {
+    //       title: 'Shop Sidebar',
+    //       // route: '/shop-sidebar',
+    //     },
+    //     {
+    //       title: 'Product Details',
+    //       // route: '/shop-product-details',
+    //     },
+    //     {
+    //       title: 'Cart',
+    //       // route: '/shop-cart',
+    //     },
+    //     {
+    //       title: 'Wishlist',
+    //       // route: '/shop-wishlist',
+    //     },
+    //     {
+    //       title: 'Checkout',
+    //       // route: '/shop-checkout',
+    //     },
+    //     {
+    //       title: 'Login',
+    //       // route: '/shop-login',
+    //     },
+    //     {
+    //       title: 'Register',
+    //       // route: '/shop-register',
+    //     }
+    //   ]
+    // },
     {
       title: 'Blog',
       menuClass: 'has-mega-menu',
@@ -416,19 +417,19 @@ export class HeaderLight4Component {
           subSubMenu: [
             {
               title: 'Half image',
-              route: '/blog-half-img',
+              // route: '/blog-half-img',
             },
             {
               title: 'Half image sidebar',
-              route: '/blog-half-img-sidebar',
+              // route: '/blog-half-img-sidebar',
             },
             {
               title: 'Half image sidebar',
-              route: '/blog-half-img-left-sidebar',
+              // route: '/blog-half-img-left-sidebar',
             },
             {
               title: 'Large image',
-              route: '/blog-large-img',
+              // route: '/blog-large-img',
             }
           ]
         },
@@ -437,19 +438,19 @@ export class HeaderLight4Component {
           subSubMenu: [
             {
               title: 'Large image sideba',
-              route: '/blog-large-img-sidebar',
+              // route: '/blog-large-img-sidebar',
             },
             {
               title: 'Large image sidebar left',
-              route: '/blog-large-img-left-sidebar',
+              // route: '/blog-large-img-left-sidebar',
             },
             {
               title: 'Grid 2',
-              route: '/blog-grid-2',
+              // route: '/blog-grid-2',
             },
             {
               title: 'Grid 2 sidebar',
-              route: '/blog-grid-2-sidebar',
+              // route: '/blog-grid-2-sidebar',
             }
           ]
         },
@@ -458,19 +459,19 @@ export class HeaderLight4Component {
           subSubMenu: [
             {
               title: 'Grid 2 sidebar left',
-              route: '/blog-grid-2-sidebar-left',
+              // route: '/blog-grid-2-sidebar-left',
             },
             {
               title: 'Grid 3',
-              route: '/blog-grid-3',
+              // route: '/blog-grid-3',
             },
             {
               title: 'Grid 3 sidebar',
-              route: '/blog-grid-3-sidebar',
+              // route: '/blog-grid-3-sidebar',
             },
             {
               title: 'Grid 3 sidebar left',
-              route: '/blog-grid-3-sidebar-left',
+              // route: '/blog-grid-3-sidebar-left',
             }
           ]
         },
@@ -479,19 +480,19 @@ export class HeaderLight4Component {
           subSubMenu: [
             {
               title: 'Grid 4',
-              route: '/blog-grid-4',
+              // route: '/blog-grid-4',
             },
             {
               title: 'Single',
-              route: '/blog-single',
+              // route: '/blog-single',
             },
             {
               title: 'Single sidebar',
-              route: '/blog-single-sidebar',
+              // route: '/blog-single-sidebar',
             },
             {
               title: 'Single sidebar right',
-              route: '/blog-single-left-sidebar',
+              // route: '/blog-single-left-sidebar',
             }
           ]
         }
@@ -503,19 +504,19 @@ export class HeaderLight4Component {
       subMenu: [
         {
           title: 'Contact us 1',
-          route: '/contact-1',
+          // route: '/contact-1',
         },
         {
           title: 'Contact us 2',
-          route: '/contact-2',
+          // route: '/contact-2',
         },
         {
           title: 'Contact us 3',
-          route: '/contact-3',
+          // route: '/contact-3',
         },
         {
           title: 'Contact us 4',
-          route: '/contact-4',
+          // route: '/contact-4',
         }
       ]
     }

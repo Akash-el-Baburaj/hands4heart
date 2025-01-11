@@ -6,8 +6,9 @@
     background-size: cover;
     background-position: center;
 }
+
 .logo-header img {
-    width: 200px;
+    width: 100px;
 }
 .radius-xl.outline{
 	border-radius:20px;
