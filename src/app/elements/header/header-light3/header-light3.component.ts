@@ -156,221 +156,222 @@ export class HeaderLight3Component {
     //   ]
     // },
     {
-      title: 'Features',
-      subMenuClass: 'sub-menu tab-content',
-      subMenu: [
-        {
-          title: 'Header Light',
-          subSubMenu: [
-            {
-              title: 'Header 1',
-              // route: '/header-style-1',
-            },
-            {
-              title: 'Header 2',
-              // route: '/header-style-2',
-            },
-            {
-              title: 'Header 3',
-              // route: '/header-style-3',
-            },
-            {
-              title: 'Header 4',
-              // route: '/header-style-4',
-            },
-            {
-              title: 'Header 5',
-              // route: '/header-style-5',
-            },
-            {
-              title: 'Header 6',
-              // route: '/header-style-6',
-            },
-          ]
-        },
-        {
-          title: 'Header Dark',
-          subSubMenu: [
-            {
-              title: 'Header 1',
-              // route: '/header-style-dark-1',
-            },
-            {
-              title: 'Header 2',
-              // route: '/header-style-dark-2',
-            },
-            {
-              title: 'Header 3',
-              // route: '/header-style-dark-3',
-            },
-            {
-              title: 'Header 4',
-              // route: '/header-style-dark-4',
-            },
-            {
-              title: 'Header 5',
-              // route: '/header-style-dark-5',
-            },
-            {
-              title: 'Header 6',
-              // route: '/header-style-dark-6',
-            },
-          ]
-        },
-        {
-          title: 'Footer',
-          subSubMenu: [
-            {
-              title: 'Footer 1',
-              // route: '/footer-1',
-            },
-            {
-              title: 'Footer 2',
-              // route: '/footer-2',
-            },
-            {
-              title: 'Footer 3',
-              // route: '/footer-3',
-            },
-            {
-              title: 'Footer 4',
-              // route: '/footer-4',
-            },
-            {
-              title: 'Footer 5',
-              // route: '/footer-5',
-            },
-            {
-              title: 'Footer 6',
-              // route: '/footer-6',
-            },
-            {
-              title: 'Footer 7',
-              // route: '/footer-7',
-            },
-            {
-              title: 'Footer 8',
-              // route: '/footer-8',
-            },
-            {
-              title: 'Footer 9',
-              // route: '/footer-9',
-            },
-            {
-              title: 'Footer 10',
-              // route: '/footer-10',
-            },
-            {
-              title: 'Footer 11',
-              // route: '/footer-11',
-            },
-            {
-              title: 'Footer 12',
-              // route: '/footer-12',
-            },
-          ]
-        }
-      ]
+      title: 'About Us',
+      // route: '/about-1',
+      // subMenuClass: 'sub-menu tab-content',
+      // subMenu: [
+      //   {
+      //     title: 'Header Light',
+      //     subSubMenu: [
+      //       {
+      //         title: 'Header 1',
+      //         // route: '/header-style-1',
+      //       },
+      //       {
+      //         title: 'Header 2',
+      //         // route: '/header-style-2',
+      //       },
+      //       {
+      //         title: 'Header 3',
+      //         // route: '/header-style-3',
+      //       },
+      //       {
+      //         title: 'Header 4',
+      //         // route: '/header-style-4',
+      //       },
+      //       {
+      //         title: 'Header 5',
+      //         // route: '/header-style-5',
+      //       },
+      //       {
+      //         title: 'Header 6',
+      //         // route: '/header-style-6',
+      //       },
+      //     ]
+      //   },
+      //   {
+      //     title: 'Header Dark',
+      //     subSubMenu: [
+      //       {
+      //         title: 'Header 1',
+      //         // route: '/header-style-dark-1',
+      //       },
+      //       {
+      //         title: 'Header 2',
+      //         // route: '/header-style-dark-2',
+      //       },
+      //       {
+      //         title: 'Header 3',
+      //         // route: '/header-style-dark-3',
+      //       },
+      //       {
+      //         title: 'Header 4',
+      //         // route: '/header-style-dark-4',
+      //       },
+      //       {
+      //         title: 'Header 5',
+      //         // route: '/header-style-dark-5',
+      //       },
+      //       {
+      //         title: 'Header 6',
+      //         // route: '/header-style-dark-6',
+      //       },
+      //     ]
+      //   },
+      //   {
+      //     title: 'Footer',
+      //     subSubMenu: [
+      //       {
+      //         title: 'Footer 1',
+      //         // route: '/footer-1',
+      //       },
+      //       {
+      //         title: 'Footer 2',
+      //         // route: '/footer-2',
+      //       },
+      //       {
+      //         title: 'Footer 3',
+      //         // route: '/footer-3',
+      //       },
+      //       {
+      //         title: 'Footer 4',
+      //         // route: '/footer-4',
+      //       },
+      //       {
+      //         title: 'Footer 5',
+      //         // route: '/footer-5',
+      //       },
+      //       {
+      //         title: 'Footer 6',
+      //         // route: '/footer-6',
+      //       },
+      //       {
+      //         title: 'Footer 7',
+      //         // route: '/footer-7',
+      //       },
+      //       {
+      //         title: 'Footer 8',
+      //         // route: '/footer-8',
+      //       },
+      //       {
+      //         title: 'Footer 9',
+      //         // route: '/footer-9',
+      //       },
+      //       {
+      //         title: 'Footer 10',
+      //         // route: '/footer-10',
+      //       },
+      //       {
+      //         title: 'Footer 11',
+      //         // route: '/footer-11',
+      //       },
+      //       {
+      //         title: 'Footer 12',
+      //         // route: '/footer-12',
+      //       },
+      //     ]
+      //   }
+      // ]
     },
-    {
-      title: 'Pages',
-      menuClass: 'has-mega-menu',
-      subMenuClass: 'mega-menu',
-      subMenu: [
-        {
-          title: 'Pages',
-          subSubMenu: [
-            {
-              title: 'About us 1',
-              // route: '/about-1',
-            },
-            {
-              title: 'About us 2',
-              // route: '/about-2',
-            },
-            {
-              title: 'Services 1',
-              // route: '/services-1',
-            },
-            {
-              title: 'Services 2',
-              // route: '/services-2',
-            },
-            {
-              title: 'Faqs',
-              // route: '/faq-1',
-            }
-          ]
-        },
-        {
-          title: 'Pages',
-          subSubMenu: [
-            {
-              title: 'Teachers',
-              // route: '/teacher',
-            },
-            {
-              title: 'Teachers Profile',
-              // route: '/teachers-profile',
-            },
-            {
-              title: 'Courses',
-              // route: '/courses',
-            },
-            {
-              title: 'Courses Details',
-              // route: '/courses-details',
-            },
-            {
-              title: 'Events',
-              // route: '/event',
-            }
-          ]
-        },
-        {
-          title: 'Pages',
-          subSubMenu: [
-            {
-              title: 'Events Details',
-              // route: '/event-details',
-            },
-            {
-              title: 'Help Desk',
-              // route: '/help-desk',
-            },
-            {
-              title: 'Privacy Policy',
-              // route: '/privacy-policy',
-            },
-            {
-              title: 'Error-404',
-              // route: '/error-404',
-            },
-            {
-              title: 'Error-405',
-              // route: '/error-405',
-            }
-          ]
-        },
-        {
-          title: 'Pages',
-          subSubMenu: [
-            {
-              title: 'Gallery Grid 2',
-              // route: '/gallery-grid-2',
-            },
-            {
-              title: 'Gallery Grid 3',
-              // route: '/gallery-grid-3',
-            },
-            {
-              title: 'Gallery Grid 4',
-              // route: '/gallery-grid-4',
-            }
-          ]
-        }
-      ]
-    },
+    // {
+    //   title: 'Pages',
+    //   menuClass: 'has-mega-menu',
+    //   subMenuClass: 'mega-menu',
+    //   subMenu: [
+    //     {
+    //       title: 'Pages',
+    //       subSubMenu: [
+    //         {
+    //           title: 'About us 1',
+    //           // route: '/about-1',
+    //         },
+    //         {
+    //           title: 'About us 2',
+    //           // route: '/about-2',
+    //         },
+    //         {
+    //           title: 'Services 1',
+    //           // route: '/services-1',
+    //         },
+    //         {
+    //           title: 'Services 2',
+    //           // route: '/services-2',
+    //         },
+    //         {
+    //           title: 'Faqs',
+    //           // route: '/faq-1',
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       title: 'Pages',
+    //       subSubMenu: [
+    //         {
+    //           title: 'Teachers',
+    //           // route: '/teacher',
+    //         },
+    //         {
+    //           title: 'Teachers Profile',
+    //           // route: '/teachers-profile',
+    //         },
+    //         {
+    //           title: 'Courses',
+    //           // route: '/courses',
+    //         },
+    //         {
+    //           title: 'Courses Details',
+    //           // route: '/courses-details',
+    //         },
+    //         {
+    //           title: 'Events',
+    //           // route: '/event',
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       title: 'Pages',
+    //       subSubMenu: [
+    //         {
+    //           title: 'Events Details',
+    //           // route: '/event-details',
+    //         },
+    //         {
+    //           title: 'Help Desk',
+    //           // route: '/help-desk',
+    //         },
+    //         {
+    //           title: 'Privacy Policy',
+    //           // route: '/privacy-policy',
+    //         },
+    //         {
+    //           title: 'Error-404',
+    //           // route: '/error-404',
+    //         },
+    //         {
+    //           title: 'Error-405',
+    //           // route: '/error-405',
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       title: 'Pages',
+    //       subSubMenu: [
+    //         {
+    //           title: 'Gallery Grid 2',
+    //           // route: '/gallery-grid-2',
+    //         },
+    //         {
+    //           title: 'Gallery Grid 3',
+    //           // route: '/gallery-grid-3',
+    //         },
+    //         {
+    //           title: 'Gallery Grid 4',
+    //           // route: '/gallery-grid-4',
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // },
     // {
     //   title: 'Shop',
     //   subMenuClass: 'sub-menu',
