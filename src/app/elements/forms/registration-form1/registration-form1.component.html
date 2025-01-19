@@ -39,26 +39,44 @@
                 </div>
             </div>
             <div class="col-lg-5 m-b30">
-                <div class="register-form style1 mb-2">
-                    <form method="post" class="dzForm" action="script/contact.php">
+                <div class="register-form style1 mb-2 d-flex align-items-center blur-card">
+                    <form [formGroup]="signUpForm" class="dzForm"  (ngSubmit)="onSubmit()">
                         <input type="hidden" value="Appointment" name="dzToDo" >
                         <div class="row sp15">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input name="dzName" class="form-control" placeholder="Name" type="text">
+                                    <input name="dzName" class="form-control" placeholder="Name" type="text" formControlName="full_name" >
+                                </div>
+                            </div>
+                            <div class="col-md-12 px-2">
+                                <div class="form-group">
+                                    <div class="d-flex">
+                                        <select class="w-auto" formControlName="code" aria-label="Country code">
+                                            <option value="+1">+1 (USA)</option>
+                                            <option value="+44">+44 (UK)</option>
+                                            <option value="+91">+91 (India)</option>
+                                            <option value="+61">+61 (Australia)</option>
+                                            <!-- Add more country codes as needed -->
+                                        </select>
+                                    <!-- </div>
+                                    <div class="col-8"> -->
+                                        <!-- <div class=""> -->
+                                            <input name="dzPhone" class="form-control" formControlName="mob" style="width: 90% !important" placeholder="Phone" type="text">
+                                        <!-- </div> -->
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input name="dzEmail" class="form-control" placeholder="Email" type="text">
+                                    <input name="dzEmail" class="form-control" formControlName="email" placeholder="Email" type="text">
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <input name="dzOther[date]" class="form-control" placeholder="Select Date" type="text">
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="col-md-12">
+                            <!-- <div class="col-md-12">
                                 <div class="form-group">
                                     <select class="bs-select-hidden" name="dzOther[service]" >
                                         <option value="Yoda">Mathematics</option>
@@ -74,9 +92,9 @@
                                         <textarea name="dzMessage" rows="4" class="form-control" required=""></textarea>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-12 text-center">
-                                <button name="submit" type="submit" value="Submit" class="site-button btn-block"><span>Submit</span></button>
+                                <button name="submit" type="submit" value="Submit" class="site-button btn-block"><span>Sign Up</span></button>
                             </div>
                         </div>
                     </form>

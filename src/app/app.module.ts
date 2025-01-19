@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LightgalleryModule } from 'lightgallery/angular';
 
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeUniversityComponent } from './home-university/home-university.component';
@@ -200,6 +203,13 @@ import { Gallery5Component } from './elements/gallery/gallery5/gallery5.componen
 import { Gallery6Component } from './elements/gallery/gallery6/gallery6.component';
 import { Courses6Component } from './elements/courses/courses6/courses6.component';
 import { LightgalleryComponent } from './elements/widgets/lightgallery/lightgallery.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtInterceptor } from './core/helpers/jwt.interceptor';
+import { ErrorInterceptor } from './core/helpers/error.interceptor';
+
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -403,9 +413,26 @@ import { LightgalleryComponent } from './elements/widgets/lightgallery/lightgall
   imports: [
     BrowserModule,
     LightgalleryModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule, 
+    FormsModule,
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      closeButton: true,
+      progressBar: false,
+     }),
+    BrowserAnimationsModule,
+    NgbCarouselModule
   ],
-  providers: [],
+  exports: [
+    RegistrationForm1Component,
+  ],
+  providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

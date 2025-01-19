@@ -4,7 +4,7 @@
         <div class="main-bar clearfix border-top">
             <div class="container clearfix">
                 <!-- website logo -->
-                <div class="logo-header mostion logo-dark" style="width: 100px !important">
+                <div class="logo-header mostion logo-dark" style="width: auto !important">
                     <a href="index.html"><img src="assets/images/logo-4.png" style="height: 60ppx !important;" alt=""></a>
                 </div>
                 <!-- nav toggle button -->
@@ -18,7 +18,10 @@
                 <div class="extra-nav">
                     <div class="extra-cell">
                         <button id="quik-search-btn" type="button" class="site-button-link" (click)="searchOpen()"><i class="la la-search"></i></button>
-                        <a href="javascript:void(0);" class="site-button btnhover14">Apply Now</a>
+                        <a href="javascript:void(0);" *ngIf="user === null" class="site-button btnhover14" (click)="navigateToLogin()">Login</a>
+                        <a href="javascript:void(0);" *ngIf="user !== null" class="site-button btnhover14" (click)="openLogoutModal(staticBackdropModal)">LogOut</a>
+                        <!-- <button class="btn btn-primary" (click)="openModal(content)">Open Modal</button> -->
+
                     </div>
                 </div>
                 <!-- Quik search -->
@@ -86,3 +89,54 @@
     <!-- main header END -->
 </header>
 <!-- header END -->
+
+<ng-template #positionModal let-modal style="z-index: none !important;">
+    <div >
+        <div class="modal-header d-flex justify-content-center w-100 text-center bg-white text-dark" style="border: none !important;">
+            <h4 class="modal-title pull-left text-dark"><span class="mdi mdi-alert-outline text-warning"></span> Login</h4>
+            <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    
+                </button> -->
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="signinForm">
+                <div class="mb-3">
+                    <label for="name" class="form-label fs-12">Phone</label>
+                    <input type="text" id="name" formControlName="phone" name="dzPhone" class="form-control" placeholder="Phone">
+                </div>
+                <!-- <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email">
+                </div> -->
+            </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-center" style="border: none !important;">
+            <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+            <button type="button" class="btn btn-warning" (click)="modal.close('Ok click')">Login</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #staticBackdropModal let-modal>
+    <div>
+        <div class="modal-header d-flex justify-content-center w-100 text-center" style="border: none !important;">
+            <h4 class="modal-title pull-left "><span class="mdi mdi-alert-outline text-warning"></span> Are
+                you sure? </h4>
+            <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+            </button> -->
+        </div>
+        <div class="modal-body text-center">
+            <p class="m-0">Are you sure you want to logout ?</p>
+        </div>
+        <div class="modal-footer d-flex justify-content-center" style="border: none !important;">
+            <button type="button" class="btn btn-outline-theme rounded-pill p-0"
+                style="width: 116px !important; height: 32px !important;"
+                (click)="modal.close('Close click')">No</button>
+            <button type="button" class="btn btn-theme rounded-pill p-0"
+                style="width: 116px !important; height: 32px !important;"
+                (click)="logOUt()">Yes</button>
+        </div>
+    </div>
+
+</ng-template>

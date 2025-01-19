@@ -3054,9 +3054,9 @@ blockquote:before {
 }
 .logo-header img,
 .logo-footer img {
-    height: 75px !important;
+    height: auto !important;
 	width: 100%;
-	max-width: 100px;
+	max-width: 55px;
 }
 .logo-header span,
 .logo-footer span {
@@ -3086,7 +3086,7 @@ blockquote:before {
     }
 	.logo-header img, 
 	.logo-footer img {
-		max-width: 135px;
+		max-width: 85px;
 	}
     .is-fixed .logo-header a img,
     .is-fixed.header-curve .logo-header a img {

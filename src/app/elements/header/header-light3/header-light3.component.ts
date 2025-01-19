@@ -97,6 +97,10 @@ export class HeaderLight3Component {
       })
     })
   }
+  
+  navigateToLogin() {
+    this.router.navigate(['user/login']);
+  }
 
   // sidebarMenu: MenuType[] = [
     sidebarMenu: any[] = [

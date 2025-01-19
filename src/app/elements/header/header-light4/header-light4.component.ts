@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location, PlatformLocation } from '@angular/common';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../../core/service/authentication.service';
 
 interface MenuType {
   title: string;
@@ -31,14 +34,26 @@ export class HeaderLight4Component {
   toggleSubMenu: string = '';
   currentHref: string = "";
   activeMenu: string = "";
+  modalRef!: NgbModalRef | null;
+  signinForm!: FormGroup;
+  user: any | null = null;
 
-  constructor(public router: Router, private backLocation: PlatformLocation, private location: Location) {
+  constructor(
+    public router: Router,
+    private backLocation: PlatformLocation,
+    private location: Location,
+    private modalService: NgbModal,
+    private fb: FormBuilder,
+    private authService: AuthenticationService
+  ) {
     router.events.subscribe((val) => {
       if (location.path() != '') {
         this.currentHref = location.path();
       } else {
         this.currentHref = 'Home'
       }
+      this.user = localStorage.getItem('userId') ? localStorage.getItem('userId') : null;
+      console.log('this.user =>> ', this.user)
     });
 
     backLocation.onPopState(() => {   // back click get url
@@ -50,8 +65,21 @@ export class HeaderLight4Component {
 
   ngOnInit(): void {
     this.handleActiveMenu(this.currentHref);
+    this._initForm();
   }
 
+  _initForm() {
+    this.signinForm = this.fb.group({
+      phone: ['', Validators.required],
+    });
+  }
+
+  logOUt() {
+    this.authService.logout()
+    localStorage.clear();
+    this.user = null;
+    this.modalRef?.close();
+  }
 
   themeColor(itme: any) {
     this.cssUrl = document.getElementById("cssFileUrl");
@@ -521,5 +549,92 @@ export class HeaderLight4Component {
         }
       ]
     }
-  ]
+    ]
+  
+  navigateToLogin() {
+    this.router.navigate(['/user/login']);
+  }
+  
+  openVerticallyCentered(content: TemplateRef<NgbModal>): void {
+    if (this.modalRef) {
+      console.log('Modal is already open');
+      return;
+    }
+
+    this.modalRef = this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+      backdrop: false,
+      centered: true,
+      windowClass: 'custom-modal'
+    });
+
+    this.modalRef.result
+      .then(
+        () => {
+          // Modal closed
+          this.modalRef = null;
+        },
+        () => {
+          // Modal dismissed
+          this.modalRef = null;
+        }
+      );
+    //  this.modalService.open(content, { centered: true, backdrop: false, keyboard: false, windowClass: 'custom-modal', size: 'sm' });
+    
+  }
+
+  openLogoutModal(content: TemplateRef<NgbModal>): void {
+    if (this.modalRef) {
+      console.log('Modal is already open');
+      return;
+    }
+
+    this.modalRef = this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+      backdrop: false,
+      centered: false,
+      windowClass: 'custom-modal'
+    });
+
+    this.modalRef.result
+      .then(
+        () => {
+          // Modal closed
+          this.modalRef = null;
+        },
+        () => {
+          // Modal dismissed
+          this.modalRef = null;
+        }
+      );
+    //  this.modalService.open(content, { centered: true, backdrop: false, keyboard: false, windowClass: 'custom-modal', size: 'sm' });
+    
+  }
+  
+  //  openModal(content: any) {
+  //   if (this.modalRef) {
+  //     console.log('Modal is already open');
+  //     return;
+  //   }
+
+  //   this.modalRef = this.modalService.open(content, {
+  //     ariaLabelledBy: 'modal-basic-title',
+  //     size: 'lg',
+  //     backdrop: 'static',
+  //   });
+
+  //   this.modalRef.result
+  //     .then(
+  //       () => {
+  //         // Modal closed
+  //         this.modalRef = null;
+  //       },
+  //       () => {
+  //         // Modal dismissed
+  //         this.modalRef = null;
+  //       }
+  //     );
+  // }
 }
