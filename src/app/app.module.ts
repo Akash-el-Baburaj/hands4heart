@@ -209,6 +209,9 @@ import { ErrorInterceptor } from './core/helpers/error.interceptor';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
+import { EnrolledCoursesComponent } from './pages/enrolled-courses/enrolled-courses.component';
+import { TestEvaluationComponent } from './pages/test-evaluation/test-evaluation.component';
 
 @NgModule({
   declarations: [
@@ -409,6 +412,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     Gallery6Component,
     Courses6Component,
     LightgalleryComponent,
+    MyCoursesComponent,
+    EnrolledCoursesComponent,
+    TestEvaluationComponent,
   ],
   imports: [
     BrowserModule,
@@ -418,6 +424,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot({
+      // positionClass: 'toast-top-right',
       timeOut: 3000,
       closeButton: true,
       progressBar: false,

@@ -2,7 +2,7 @@
 <div class="page-wraper">
 
     <!-- header -->
-    <app-header-light3></app-header-light3>
+    <app-header-light4></app-header-light4>
     <!-- header END -->
     <!-- Content -->
     <div class="page-content bg-gray">
@@ -14,7 +14,7 @@
 				<div class="row">
 					<div class="col-lg-12 m-b30">
 						<div class="course-view text-center">
-							<h2 class="m-t0 m-b10 font-28 title text-black">Become a PHP Master and Make Money</h2>
+							<h2 class="m-t0 m-b10 font-28 title text-black">{{courseTitle}}</h2>
 							<ul class="course-info">
 								<li> 
 									<i class="fa fa-user"></i> <span> 65</span> 
@@ -38,22 +38,17 @@
 								<div class="teacher-info text-center">
 									<div class="top-info">
 										<span class="price text-primary">Free</span>
-										<a href="" class="site-button button-sm">Take This Course</a>
+										<a href="javascript: void(0)" class="site-button button-sm">{{ userProfile.paymentStatus }}</a>
 									</div>
 									<div class="teacher-pic"> 
-										<a href="#"><img src="assets/images/testimonials/pic1.jpg" alt=""></a> 
+										<a href="#"><img src="assets/images/testimonials/pic2.jpg" alt=""></a> 
 									</div>
-									<h4 class="name">Henry H. Garrick</h4>
-									<span class="position">course instructor</span>
+									<h4 class="name">{{ userProfile.user_name }}</h4>
+									<span class="position">{{ userProfile.user_Phone }}</span>
 									<div class="clearfix m-b20">
-										<a href="" class="site-button button-sm">FOLLOW NOW <i class="fa fa-user-plus m-l5"></i></a>
+										<a href="" class="site-button button-sm">{{ userProfile.createdBy }}<i class="fa fa-envelope-o m-l5"></i></a>
 									</div>
-									<ul class="social-list">
-										<li><a href="javascript:void(0);" class="site-button circle fa fa-facebook facebook"></a></li>
-										<li><a href="javascript:void(0);" class="site-button circle fa fa-twitter twitter"></a></li>
-										<li><a href="javascript:void(0);" class="site-button circle fa fa-linkedin linkedin"></a></li>
-										<li><a href="javascript:void(0);" class="site-button circle fa fa-whatsapp whatsapp"></a></li>
-									</ul>
+									
 								</div>
 							</div>
 							<app-category-list1></app-category-list1>
@@ -72,7 +67,7 @@
 							<div class="col-lg-12">
 								
 								<!-- Tabs -->
-								<app-courses6></app-courses6>
+								<app-courses6 [data]="CourseDetailsData"></app-courses6>
 								<!-- Tabs End-->
 
 							</div>

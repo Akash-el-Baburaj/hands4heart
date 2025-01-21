@@ -64,8 +64,10 @@ export class HeaderLight4Component {
   }
 
   ngOnInit(): void {
+    this.getUserProfile();
     this.handleActiveMenu(this.currentHref);
     this._initForm();
+    this.couserScreenEnable();
   }
 
   _initForm() {
@@ -74,10 +76,41 @@ export class HeaderLight4Component {
     });
   }
 
+  couserScreenEnable() {
+    const coursesMenu = this.sidebarMenu.find((menu) => menu.title === 'Courses');
+    if (coursesMenu) {
+      if (this.user.length > 0) {
+        coursesMenu.subMenu = [
+          ...coursesMenu.subMenu,
+          { title: 'My Courses', route: '/my-courses' },
+          // { title: 'Enrolled Courses', route: '/enrolled-courses' }
+        ];
+      }
+    }
+
+    if (this.user.length > 0) {
+      this.sidebarMenu.splice(2, 0, {
+        title: 'AccessMent',
+        route: '/accessment'
+      });
+    }
+  }
+
+  getUserProfile() {
+    this.authService.getUserProfile().subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.user = res.data
+        }
+      }
+    })
+  }
+
   logOUt() {
-    this.authService.logout()
+    this.user = [];
+    this.couserScreenEnable();
+    this.authService.logout();
     localStorage.clear();
-    this.user = null;
     this.modalRef?.close();
   }
 
@@ -124,63 +157,12 @@ export class HeaderLight4Component {
     })
   }
 
+  navigateTo(url: string) {
+    this.router.navigate([url])
+  }
+
   // sidebarMenu: MenuType[] = [
     sidebarMenu: any[] = [
-      // {
-    //   title: 'Home',
-    //   menuClass: 'has-mega-menu homedemo',
-    //   subMenuClass: 'mega-menu',
-    //   subMenu: [
-    //     {
-    //       title: 'Home - University',
-    //       route: '/home-university',
-    //       img: 'assets/demo/index.jpg',
-    //       themeColor: '1'
-    //     },
-    //     {
-    //       title: 'Home - Kindergarten',
-    //       route: '/home-kindergarten',
-    //       img: 'assets/demo/index-2.jpg',
-    //       themeColor: '2'
-    //     },
-    //     {
-    //       title: 'Home - Collage',
-    //       route: '/home-college',
-    //       img: 'assets/demo/index-3.jpg',
-    //       themeColor: '3'
-    //     },
-    //     {
-    //       title: 'Home - Coaching',
-    //       route: '/home-coaching',
-    //       img: 'assets/demo/index-4.jpg',
-    //       themeColor: '4'
-    //     },
-    //     {
-    //       title: 'Home - School',
-    //       route: '/home-school',
-    //       img: 'assets/demo/index-5.jpg',
-    //       themeColor: '2'
-    //     },
-    //     {
-    //       title: 'Home - Online Courese',
-    //       route: '/home-online-course',
-    //       img: 'assets/demo/index-6.jpg',
-    //       themeColor: '4'
-    //     },
-    //     {
-    //       title: 'Home - Language School',
-    //       route: '/home-language-school',
-    //       img: 'assets/demo/index-7.jpg',
-    //       themeColor: '3'
-    //     },
-    //     {
-    //       title: 'Home - Kids School',
-    //       route: '/home-kids-school',
-    //       img: 'assets/demo/index-8.jpg',
-    //       themeColor: '2'
-    //     }
-    //   ]
-    // },
     {
       title: 'About Us',
       // route: '/blog-half-img',
@@ -298,6 +280,13 @@ export class HeaderLight4Component {
       //     ]
       //   }
       // ]
+    },
+    {
+      title: 'Courses',
+      subMenuClass: 'sub-menu',
+      subMenu: [
+        { title: 'All Courses', route: '/courses' }
+      ] // Initially empty, dynamically updated
     },
     // {
     //   title: 'Pages',

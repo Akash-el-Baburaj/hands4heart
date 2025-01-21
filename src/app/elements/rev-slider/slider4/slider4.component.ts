@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/core/service/users.service';
+import { Banners, Banner } from 'src/app/core/model/banners.model';
+
 declare  var jQuery:  any;
 declare  var dz_rev_slider_4:  any;
 
@@ -9,37 +12,69 @@ declare  var dz_rev_slider_4:  any;
   templateUrl: './slider4.component.html',
   styleUrls: ['./slider4.component.css']
 })
-export class Slider4Component {
+export class Slider4Component implements OnInit, AfterViewInit {
 
   videoUrl: string = ''; // Raw video URL (from YouTube or Vimeo)
   videoType: 'youtube' | 'vimeo' | 'local' = 'youtube'; // Type of video (YouTube, Vimeo)
   sanitizedYouTubeUrl: SafeResourceUrl | null = null;
   sanitizedVimeoUrl: SafeResourceUrl | null = null;
+  page: number = 1;
+  banners: Banner[] = [];
+  safeBanners: { [key: string]: SafeResourceUrl } = {};
 
-  constructor(private sanitizer: DomSanitizer, private router: Router) { }
+
+  constructor(private sanitizer: DomSanitizer, private router: Router, private userService: UsersService) { }
   ngOnInit(): void {
      this.videoUrl = 'https://www.youtube.com/watch?v=DUaxt8OlT3o'; // Change this dynamically
-    this.processVideoUrl();
-	  (function ($) {
+     this.getBanner();
+    // this.processVideoUrl();
+	  // (function ($) {
+    //     dz_rev_slider_4();
+    // })(jQuery);
+  }
+
+  ngAfterViewInit(): void {
+    // Ensure that jQuery is executed after Angular renders the view
+    setTimeout(() => {
+      (function ($) {
         dz_rev_slider_4();
-    })(jQuery);
+      })(jQuery);
+    });
   }
 
 
-  processVideoUrl(): void {
-    if (this.videoUrl.includes('youtube.com') || this.videoUrl.includes('youtu.be')) {
+  getBanner() {
+    this.userService.getBanners(this.page).subscribe({
+      next: (res: Banners) => {
+        if (res.success) {
+          this.banners = res.data.banner;
+          this.banners.forEach(banner => {
+            // Sanitize URLs based on banner type
+            this.safeBanners[banner.id] = this.sanitizer.bypassSecurityTrustResourceUrl(banner.videoUrl);
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching banners:', err);
+      }
+    });
+  }
+
+
+  processVideoUrl(data: any): void {
+    if (data.includes('youtube.com') || data.includes('youtu.be')) {
       this.videoType = 'youtube';
-      this.sanitizedYouTubeUrl = this.getYouTubeEmbedUrl(this.videoUrl);
-    } else if (this.videoUrl.includes('vimeo.com')) {
+      this.sanitizedYouTubeUrl = this.getYouTubeEmbedUrl(data);
+    } else if (data.includes('vimeo.com')) {
       this.videoType = 'vimeo';
-      this.sanitizedVimeoUrl = this.getVimeoEmbedUrl(this.videoUrl);
+      this.sanitizedVimeoUrl = this.getVimeoEmbedUrl(data);
     }
   }
 
   getYouTubeEmbedUrl(url: string): SafeResourceUrl {
-    const videoId = this.extractYouTubeVideoId(url);
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+    // const videoId = this.extractYouTubeVideoId(url);
+    // const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   extractYouTubeVideoId(url: string): string {

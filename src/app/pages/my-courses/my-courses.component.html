@@ -36,25 +36,25 @@
                                 <div *ngFor="let rowdata of courseLIst" class="col-lg-4">
                                     <div class="dlab-box courses-bx">
                                         <div class="dlab-media">
-                                            <img [src]="rowdata.img || 'assets/images/images.png'" alt="{{ rowdata.name }}" loading="lazy">
+                                            <img [src]="rowdata.img || 'assets/images/images.png'" alt="No image" loading="lazy">
                                         </div>
                                         <div class="dlab-info">
                                             <h6 class="dlab-title">
-                                                <a [routerLink]="['/courses-details/']">{{ rowdata.name }}</a>
+                                                <a href="javascript: void(0)" (click)="navigateToCourseDetails(rowdata)">{{ rowdata?.CourseDetails.name }}</a>
                                             </h6>
-                                            <p>{{ rowdata.description }}</p>
+                                            <p>{{ rowdata?.CourseDetails.description }}</p>
                                             <div class="courses-info">
-												<div class="review">
-													<ul class="item-review">
-														<li><i class="fa fa-star"></i></li>
-														<li><i class="fa fa-star"></i></li>
-														<li><i class="fa fa-star"></i></li>
-														<li><i class="fa fa-star-half-o"></i></li>
-														<li><i class="fa fa-star-o"></i></li>
-													</ul>
-													<span>10 Review</span>
-												</div>
-                                                <button class="btn btn-sm btn-outline-warning" (click)="getEnroll(rowdata.id)">Enroll</button>
+                                                <div class="review">
+                                                    <ul class="item-review">
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star"></i></li>
+                                                        <li><i class="fa fa-star-half-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                    <span>10 Review</span>
+                                                </div>
+                                                <button class="btn btn-sm btn-success" (click)="navigateToCourseDetails(rowdata)">view</button>
                                             </div>
                                         </div>
                                     </div>
@@ -64,6 +64,10 @@
                             <!-- Show No Data message -->
                             <div *ngIf="!loading && courseLIst.length === 0" class="col-12 text-center">
                                 <p>No courses available at the moment.</p>
+                                <button class="site-button btnhover13 mt-3"  (click)="showNoCoursesToast()">
+                                    Browse All Courses
+                                </button>
+                                
                             </div>
 
                             <!-- Pagination -->

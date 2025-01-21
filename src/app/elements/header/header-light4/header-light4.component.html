@@ -38,7 +38,7 @@
                     </div>
                     <ul class="nav navbar-nav">
                         <li *ngFor="let item of sidebarMenu; let i = index;" class="{{ item.menuClass }}" [ngClass]="{'open': i.toString() == toggleMenu}" [ngClass]="{'active': item.title == activeMenu}">
-                            <a href="javascript:void(0);" (click)="opneMenu(i)">{{ item.title }}<i class="fa fa-chevron-down"></i></a>
+                            <a *ngIf="item.subMenu" href="javascript:void(0);" (click)="opneMenu(i)">{{ item.title }}<i  class="fa fa-chevron-down"></i></a>
                             <ul *ngIf="item.subMenu" class="{{ item.subMenuClass }}">
                                 <li *ngFor="let subitem of item.subMenu; let sec_i = index" [ngClass]="{'open': sec_i.toString() == toggleSubMenu}">
                                     <a                                   
@@ -72,6 +72,9 @@
                                     </ul>  
                                 </li>
                             </ul>
+                            <a *ngIf="!item.subMenu" href="javascript:void(0);" (click)="navigateTo(item.route)"
+                                        (click)="themeColor(item.themeColor)">{{ item.title }}</a>
+
                         </li>
                     </ul>
                     <div class="dlab-social-icon">
