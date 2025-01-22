@@ -80,7 +80,7 @@ import { HomeLanguageSchoolComponent } from './home-language-school/home-languag
 import { HomeKidsSchoolComponent } from './home-kids-school/home-kids-school.component';
 import { CommonModule } from '@angular/common';
 import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
-import { TestEvaluationComponent } from './pages/test-evaluation/test-evaluation.component';
+// import { TestEvaluationComponent } from './pages/test-evaluation/test-evaluation.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeCoachingComponent },
@@ -141,7 +141,7 @@ const routes: Routes = [
 	{path: 'teachers-profile', component: TeachersProfileComponent},
 	{path: 'courses', component: CourcesComponent},
 	{path: 'my-courses', component: MyCoursesComponent},
-	{path: 'accessment', component: TestEvaluationComponent},
+	// {path: 'accessment', component: TestEvaluationComponent},
 	{path: 'courses-details', component: CourcesDetailsComponent},
 	{path: 'event', component: EventsComponent},
 	{path: 'event-details', component: EventsDetailsComponent},
