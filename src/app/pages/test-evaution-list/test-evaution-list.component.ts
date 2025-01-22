@@ -12,9 +12,9 @@ export class TestEvautionListComponent implements OnInit {
   assessmentList: any[] = [];
 
   banner : any = {
-		pagetitle: "Courses Details",
-		bg_image: "assets/images/banners/bnr4.jpg",
-		title: "Courses Details",
+		pagetitle: "Assessment List",
+		bg_image: "assets/images/banner/bnr4.jpg",
+		title: "Assessment List",
 	}
 
   loading: boolean = false;

@@ -12,7 +12,7 @@ import { AccessmentService } from 'src/app/core/service/accessment.service';
 export class TestEvaluationComponent {
   banner: any = {
     pagetitle: "Assessment",
-    bg_image: "src/assets/images/banner/bnr3.jpg",
+    bg_image: "assets/images/banner/bnr1.jpg",
     title: "Assessment",
   };
 
