@@ -1,0 +1,124 @@
+<div class="page-wraper">
+    <!-- header -->
+    <app-header-light4></app-header-light4>
+    <!-- header END -->
+    <!-- Content -->
+    <div class="page-content bg-gray">
+        <!-- inner page banner -->
+        <app-banner1 [data]="banner"></app-banner1>
+        <!-- inner page banner END -->
+        <div class="content-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                      <h3>Assessment</h3>
+                    </div>
+                    <div class="col-6 text-right">
+                      <!-- Select Quiz: -->
+                      <!-- <select  *ngIf="filteredQuestions.length >= 0" >
+                        <option *ngFor="let quiz of quizes" [value]="quiz.id">{{quiz.name}}</option>
+                      </select> -->
+
+                      <button *ngIf="quizes.length === 0" (click)="navigateTo('/my-courses')" class="site-button btnhover13">Go To My Courses</button>
+                    </div>
+                  </div>
+                  <div id="quiz">
+                    <!-- <h2 class="text-center font-weight-normal">{{quiz.name}}</h2> -->
+                    <hr />
+                  
+                    <div id="quiz">
+                      <div *ngIf="mode == 'quiz' && quiz">
+                        <div *ngFor="let question of filteredQuestions;">
+                          <h3 class="font-weight-normal">{{ pager.index + 1 }}. {{ question.name }}</h3>
+                          <div class="row text-left options">
+                            <div
+                              class="col-6 option"
+                              *ngFor="let option of question.options"
+                              [ngClass]="{'selected': option.selected}"
+                              (click)="onSelect(question, option)"
+                            >
+                              <label class="font-weight-normal">
+                                <input
+                                  id="{{ option.id }}"
+                                  type="checkbox"
+                                  [(ngModel)]="option.selected"
+                                  (change)="onSelect(question, option);"
+                                  style="display: none"
+                                />
+                                {{ option.name }}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <hr />
+                        <div class="text-center">
+                          <!-- <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(0)">First</button> -->
+                          <button class="btn btn-default me-2" *ngIf="config.allowBack" (click)="goTo(pager.index - 1)">Prev</button>
+                          <button
+                            class="btn btn-primary"
+                            [disabled]="!isOptionSelected(filteredQuestions[0])"
+                            (click)="goTo(pager.index + 1)"
+                          >
+                            Next
+                          </button>
+                          <!-- <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.count - 1)">Last</button> -->
+                        </div>
+                      </div>
+                      <div *ngIf="quizes.length === 0" class="text-center">
+                        No data found, Please go to <a class="btn btn-link btn-primary px-0" [routerLink]="['/my-courses']">My Course</a> page.
+                      </div>
+                    </div>
+                    
+                  
+                    <div class="row text-center" *ngIf="mode=='review'">
+                      <div class="col-4 cursor-pointer" *ngFor="let question of quiz.questions; let index = index;">
+                        <div (click)="goTo(index)" class="p-3 mb-2 {{ isAnswered(question) == 'Answered'? 'bg-info': 'bg-warning' }}">{{index + 1}}. {{ isAnswered(question) }}</div>
+                      </div>
+                    </div>
+                    <div class="result" *ngIf="mode == 'result'">
+                      <h2>Quiz Results</h2>
+                      <div *ngFor="let question of quiz.questions; let index = index;">
+                        <h5>{{ index + 1 }}. {{ question.name }}</h5>
+                        <div *ngFor="let option of question.options;">
+                          <label>
+                            <input type="checkbox" [checked]="option.selected" disabled />
+                            {{ option.name }} 
+                            <!-- <span *ngIf="option.isCorrect" class="text-success">(Correct)</span> -->
+                          </label>
+                        </div>
+                        <div class="alert" [ngClass]="{'alert-success': question.isCorrect, 'alert-danger': !question.isCorrect}">
+                          Your answer is {{ question.isCorrect ? 'correct' : 'wrong' }}.
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- <div class="result" *ngIf="mode=='result'">
+                      <h2>Quiz Result</h2>
+                      <div *ngFor="let question of quiz.questions; let index = index">
+                        <div class="result-question">
+                          <h5>{{index + 1}}. {{question.name}}</h5>
+                          <div class="row">
+                            <div class="col-6" *ngFor="let Option of question.options">
+                              <input id="{{Option.id}}" type="checkbox" disabled="disabled" [(ngModel)]="Option.selected" /> {{Option.name}}
+                            </div>
+                          </div>
+                          <div class="p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
+                        </div>
+                      </div>
+                      <h4 class="alert alert-info text-center">You may close this window now.</h4>
+                    </div> -->
+                    <hr />
+                    <div *ngIf="mode!='result'">
+                      <button class="btn btn-warning" (click)="mode = 'quiz'">Quiz</button>
+                      <button class="btn btn-info" (click)="mode = 'review'">Review</button>
+                      <button class="btn btn-primary" (click)="onSubmit();">Submit Quiz</button>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content END -->
+    <app-newsletter2></app-newsletter2>
+    <app-footer13></app-footer13>
+    <app-scroltop></app-scroltop>
+</div>

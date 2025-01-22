@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/core/service/course.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cources-details',
@@ -15,6 +16,8 @@ export class CourcesDetailsComponent implements OnInit {
 		title: "Courses Details",
 	}
 
+  courseId: string = '';
+  courseVideo: any;
   courseDetails: any;
   courseTitle: string = '';
   userProfile: {
@@ -32,7 +35,7 @@ export class CourcesDetailsComponent implements OnInit {
   courseObjective: string = '';
   CourseDetailsData: any;
 
-  constructor(private courseService: CourseService, private route: ActivatedRoute) {
+  constructor(private courseService: CourseService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router) {
     this.getCourseId();
   }
 
@@ -47,6 +50,7 @@ export class CourcesDetailsComponent implements OnInit {
       if (DATA) {
         data = JSON.parse(DATA)
         const course_Id = data.CourseDetails.id;
+        this.courseId = course_Id;
         this.getCourseDetailsByCourseId(course_Id);
         this.userProfile.user_name = data.user_name;
         this.userProfile.user_Phone = data.user_phone;
@@ -84,5 +88,27 @@ export class CourcesDetailsComponent implements OnInit {
     }
 
     return DATA
+  }
+
+  getCourseVideo(event: any) {
+    this.courseVideo = event
+  }
+
+  getSafeUrl(videoUrl: string): SafeResourceUrl {
+    // Sanitize the video URL to make it safe for Angular
+    console.log('video url => ', videoUrl)
+    const videoId = this.getYouTubeVideoId(videoUrl);
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
+
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  }
+
+  private getYouTubeVideoId(url: string): string | null {
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|.+\?v=))([\w-]{11})/);
+    return match ? match[1] : null; // Return the video ID or null if not found
+  }
+
+  navigateToTestList(id: string) {
+    this.router.navigate(['/test-list'], {queryParams: {id: id}})
   }
 }

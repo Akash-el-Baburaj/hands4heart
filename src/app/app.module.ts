@@ -211,7 +211,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
 import { EnrolledCoursesComponent } from './pages/enrolled-courses/enrolled-courses.component';
-// import { TestEvaluationComponent } from './pages/test-evaluation/test-evaluation.component';
+import { TestEvaluationComponent } from './pages/test-evaluation/test-evaluation.component';
+import { TestEvautionListComponent } from './pages/test-evaution-list/test-evaution-list.component';
 
 @NgModule({
   declarations: [
@@ -414,7 +415,8 @@ import { EnrolledCoursesComponent } from './pages/enrolled-courses/enrolled-cour
     LightgalleryComponent,
     MyCoursesComponent,
     EnrolledCoursesComponent,
-    // TestEvaluationComponent,
+    TestEvaluationComponent,
+    TestEvautionListComponent,
   ],
   imports: [
     BrowserModule,

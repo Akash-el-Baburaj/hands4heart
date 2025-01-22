@@ -31,6 +31,16 @@ export class Slider4Component implements OnInit, AfterViewInit {
 	  // (function ($) {
     //     dz_rev_slider_4();
     // })(jQuery);
+    jQuery(document).ready(function () {
+      jQuery("#slider").on("revolution.slide.onloaded", function () {
+          const videoElement:any = document.querySelector('video[src="assets/video/cpr.mp4"]');
+          if (videoElement) {
+              videoElement.muted = true; // Ensure muting is enforced after library initialization
+          }
+      });
+  });
+  
+    
   }
 
   ngAfterViewInit(): void {

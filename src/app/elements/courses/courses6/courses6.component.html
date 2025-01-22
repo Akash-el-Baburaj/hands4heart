@@ -51,6 +51,47 @@
         </div>
         <div id="curriculum" class="tab-pane">
             <h3 class="m-t0 m-b15">Curriculum</h3>
+            <ng-container *ngFor="let course of courseDetails; let i = index">
+              <h5 class="text-primary">Lesson {{ i + 1 }}</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Lecture</th>
+                    <th>Unit</th>
+                    <th class="text-right">Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <span><i class="fa fa-file-o m-r10"></i>Lecture {{ i + 1 }}</span>
+                    </td>
+                    <td style="cursor: pointer;" (click)="getCourseVideo(course.video_url)">{{ course.name }}</td>
+                    <td class="text-right">
+                      <span><i class="fa fa-clock-o m-r10"></i> 00 : 10 : 00</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" class="text-center">
+                        <img [src]="course.img  || 'assets/images/images.png'" (click)="getCourseVideo(course.video_url)" style="width: 100%; height: 250px;" alt="">
+                      <!-- <iframe
+                        *ngIf="course.video_url"
+                        [src]="getSafeUrl(course.video_url)"
+                        width="100%"
+                        height="300"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                      </iframe> -->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
+          </div>
+          
+        <!-- <div id="curriculum" class="tab-pane">
+            <h3 class="m-t0 m-b15">Curriculum</h3>
             <h5 class="text-primary">Lesson 3</h5>
             <table class="table" >
                 <thead>
@@ -189,7 +230,7 @@
                     </td>
                 </tr>
             </table>
-        </div>
+        </div> -->
         <div id="instructor" class="tab-pane">
             <h3 class="m-t0">Instructor</h3>
             <div id="comments-1" class="dlab-instructor">

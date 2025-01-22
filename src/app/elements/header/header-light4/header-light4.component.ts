@@ -90,8 +90,8 @@ export class HeaderLight4Component {
 
     if (this.user.length > 0) {
       this.sidebarMenu.splice(2, 0, {
-        title: 'AccessMent',
-        route: '/accessment'
+        title: 'AssessMent',
+        route: '/assessment'
       });
     }
   }
@@ -111,6 +111,7 @@ export class HeaderLight4Component {
     this.couserScreenEnable();
     this.authService.logout();
     localStorage.clear();
+    this.navigateTo('')
     this.modalRef?.close();
   }
 

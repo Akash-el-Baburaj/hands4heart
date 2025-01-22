@@ -35,9 +35,9 @@ export class JwtInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(tap((event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
             const token = event.headers.get('Authorization')
-            if (token && token.length) {
-              this.authService.updateToken(token)
-            }
+            // if (token && token.length) {
+            //   this.authService.updateToken(token)
+            // }
           }
         }, 
         (err: any) => {

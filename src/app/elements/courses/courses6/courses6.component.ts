@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-courses6',
@@ -8,13 +9,31 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 export class Courses6Component implements OnChanges {
 
   @Input()  data: any;
+  @Output() courseSelected = new EventEmitter<any>(); // Emits selected course to parent
 
-  constructor() {}
+  courseDetails: any[] = [];
+
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       console.log('details data =< ', this.data)
+      this.courseDetails = this.data.details.details
+      console.log('this.courseDetails = ',JSON.stringify(this.data.details.details))
     }
   }
+
+  getSafeUrl(videoUrl: string): SafeResourceUrl {
+    // Ensure the video starts muted
+    const urlWithParams = `${videoUrl}?autoplay=1&mute=1`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(urlWithParams);
+  }
+
+  getCourseVideo(videoUrl: string) {
+    const data = videoUrl;
+    this.courseSelected.emit(data)
+  }
+
+
 
 }

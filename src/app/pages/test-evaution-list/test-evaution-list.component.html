@@ -1,0 +1,87 @@
+<div class="page-wraper">
+    <!-- header -->
+    <app-header-light4></app-header-light4>
+    <!-- header END -->
+    <!-- Content -->
+    <div class="page-content bg-gray">
+        <!-- inner page banner -->
+        <app-banner1 [data]="banner"></app-banner1>
+        <!-- inner page banner END -->
+        <div class="content-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Side bar start -->
+                    <div class="col-lg-3 col-md-5">
+                        <aside class="side-bar sticky-top">
+                            <app-search-form3></app-search-form3>
+                            <app-recent-posts1></app-recent-posts1>
+                            <app-our-gallery1></app-our-gallery1>
+                            <app-category-list1></app-category-list1>
+                            <app-tag-list1></app-tag-list1>
+                        </aside>
+                    </div>
+                    <!-- Side bar END -->
+                    <!-- left part start -->
+                    <div class="col-lg-9 col-md-7">
+                        <div class="row">
+                            <!-- Show loader while loading -->
+                            <div *ngIf="loading" class="col-12 text-center">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+
+                            <!-- Show courses -->
+                            <ng-container *ngIf="!loading">
+                                <div *ngFor="let rowdata of assessmentList" class="col-lg-4">
+                                    <div class="dlab-box courses-bx">
+                                        <div class="dlab-media">
+                                            <img [src]="rowdata.img || 'assets/images/images.png'" alt="{{ rowdata.name }}" loading="lazy">
+                                        </div>
+                                        <div class="dlab-info">
+                                            <h6 class="dlab-title">
+                                                <a href="javascript:void(0)">{{ rowdata.title }}</a>
+                                            </h6>
+                                            <p>{{ rowdata.description }}</p>
+                                            <div class="courses-info">
+												<!-- <div class="review">
+													<ul class="item-review">
+														<li><i class="fa fa-star"></i></li>
+														<li><i class="fa fa-star"></i></li>
+														<li><i class="fa fa-star"></i></li>
+														<li><i class="fa fa-star-half-o"></i></li>
+														<li><i class="fa fa-star-o"></i></li>
+													</ul>
+													<span>10 Review</span>
+												</div> -->
+                                                <button class="site-button btnhover13 w-100" (click)="startAssessment(rowdata.id)">Start Assessment</button>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                            <!-- Show No Data message -->
+                            <div *ngIf="!loading && assessmentList.length === 0" class="col-12 text-center">
+                                <p>No courses available at the moment.</p>
+                            </div>
+
+                            <!-- Pagination -->
+                            <div *ngIf="!loading && assessmentList.length > 0" class="pagination-bx rounded-sm primary clearfix m-b30 text-center col-md-12">
+                                <ul class="pagination">
+                                    <!-- <li class="previous"><a href="javascript:void(0);" (click)="loadPreviousPage()"><i class="ti-arrow-left"></i> Prev</a></li>
+                                    <li class="next"><a href="javascript:void(0);" (click)="loadNextPage()">Next <i class="ti-arrow-right"></i></a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- left part end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content END -->
+    <app-newsletter2></app-newsletter2>
+    <app-footer13></app-footer13>
+    <app-scroltop></app-scroltop>
+</div>

@@ -1,0 +1,50 @@
+.btn{
+    border-radius: 0;
+}
+
+.option {
+    background-color: #cadaee;
+    font-size: 20px;
+    padding: 10px;
+    margin: 3px;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    width: 49%;
+}
+
+.option.selected {
+    border-color: #3168d6; /* Highlight border color */
+    background-color: #215ba1; /* Slightly darker background */
+    color: #fff;
+}
+
+    #quiz .options input[type=checkbox] {
+        height:22px;
+        width:22px;
+    }
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.result-question{
+    background-color:#eee;
+    margin:4px;
+    padding:6px;
+}
+
+@media only screen and (max-width: 480px) {
+    h1,.h1{
+        font-size:22px;
+    }
+    h2,.h2{
+        font-size:20px;
+    }
+    h3,.h3{
+        font-size:18px;
+    }
+    .option {
+        font-size: 16px;
+        padding: 6px;
+    }
+}
