@@ -52,7 +52,6 @@ export class CourcesDetailsComponent implements OnInit {
       if (DATA) {
         data = JSON.parse(DATA)
         const course_Id = data.CourseDetails.id;
-        console.log(' data details <*> ', data)
         this.courseId = course_Id;
         this.getCourseDetailsByCourseId(course_Id);
         this.paymentStatus = data.paymentStatus

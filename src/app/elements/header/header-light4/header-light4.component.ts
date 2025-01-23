@@ -53,7 +53,6 @@ export class HeaderLight4Component {
         this.currentHref = 'Home'
       }
       this.user = localStorage.getItem('userId') ? localStorage.getItem('userId') : null;
-      console.log('this.user =>> ', this.user)
     });
 
     backLocation.onPopState(() => {   // back click get url
