@@ -64,7 +64,6 @@ export class LoginComponent implements OnInit {
       formData.append('phone', this.loginForm.value.phone);
       this.authService.login(formData).subscribe({
         next: (res) => {
-          console.log(res);
           if (res.success) {
             const DATA = res.data;
             this.userID - DATA.user_id;
@@ -97,7 +96,6 @@ export class LoginComponent implements OnInit {
       formData.append('otpKey', this.otpKey);
       this.authService.otpVerification(formData).subscribe({
         next: (res) => {
-          console.log(res);
           if (res.success) {
             this.toastr.success(res.message);
             localStorage.setItem('userId', res.data.user_id);

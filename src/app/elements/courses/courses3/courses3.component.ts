@@ -54,7 +54,6 @@ export class Courses3Component implements OnInit {
     this.courseService.getCourseList(page).subscribe({
       next: (res: CourseList) => {
         this.courseList =res.data.courses
-        console.log('course list =>> ', this.courseList)
       }
     })
   }

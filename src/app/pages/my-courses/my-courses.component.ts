@@ -59,7 +59,6 @@ export class MyCoursesComponent implements OnInit {
     }
 
     showNoCoursesToast() {
-      console.log('here')
       this.toastr.info(
         'No courses available. Click here to browse all courses.',
         'No Data');
