@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LightgalleryModule } from 'lightgallery/angular';
 
@@ -213,6 +213,7 @@ import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
 import { EnrolledCoursesComponent } from './pages/enrolled-courses/enrolled-courses.component';
 import { TestEvaluationComponent } from './pages/test-evaluation/test-evaluation.component';
 import { TestEvautionListComponent } from './pages/test-evaution-list/test-evaution-list.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -432,7 +433,13 @@ import { TestEvautionListComponent } from './pages/test-evaution-list/test-evaut
       progressBar: false,
      }),
     BrowserAnimationsModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   exports: [
     RegistrationForm1Component,
