@@ -9,6 +9,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class Courses6Component implements OnChanges {
 
   @Input()  data: any;
+  @Input() PaymentStatus: string = ''; 
   @Output() courseSelected = new EventEmitter<any>(); // Emits selected course to parent
 
   courseDetails: any[] = [];
@@ -17,9 +18,7 @@ export class Courses6Component implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
-      console.log('details data =< ', this.data)
       this.courseDetails = this.data.details.details
-      console.log('this.courseDetails = ',JSON.stringify(this.data.details.details))
     }
   }
 

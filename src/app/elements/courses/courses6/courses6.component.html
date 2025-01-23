@@ -7,23 +7,23 @@
             </a>
         </li>
         <li>
-            <a data-toggle="tab" href="#curriculum">
+            <a data-toggle="tab" href="#curriculum" [ngClass]="{'disabled-link': PaymentStatus === 'unpaid'}" >
                 <i class="fa fa-cube"></i>
                 <span class="title-head">Curriculum</span>
             </a>
         </li>
-        <li>
-            <a data-toggle="tab" href="#instructor">
+        <!-- <li>
+            <a data-toggle="tab" href="#instructor" [ngClass]="{'disabled-link': PaymentStatus === 'unpaid'}" >
                 <i class="fa fa-user"></i>
                 <span class="title-head">Instructor</span>
             </a>
         </li>
         <li>
-            <a data-toggle="tab" href="#review">
+            <a data-toggle="tab" href="#review" [ngClass]="{'disabled-link': PaymentStatus === 'unpaid'}" >
                 <i class="fa fa-comments"></i>
                 <span class="title-head">Review </span> <span class="text-primary">(3)</span>
             </a>
-        </li>
+        </li> -->
     </ul>
     <div class="tab-content">
         <div id="description" class="tab-pane active">

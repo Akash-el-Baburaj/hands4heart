@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/core/service/course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cources-details',
@@ -19,6 +20,7 @@ export class CourcesDetailsComponent implements OnInit {
   courseId: string = '';
   courseVideo: any;
   courseDetails: any;
+  paymentStatus: string = 'unpaid';
   courseTitle: string = '';
   userProfile: {
     user_name: string;
@@ -35,7 +37,7 @@ export class CourcesDetailsComponent implements OnInit {
   courseObjective: string = '';
   CourseDetailsData: any;
 
-  constructor(private courseService: CourseService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router) {
+  constructor(private courseService: CourseService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private toastr: ToastrService) {
     this.getCourseId();
   }
 
@@ -50,8 +52,10 @@ export class CourcesDetailsComponent implements OnInit {
       if (DATA) {
         data = JSON.parse(DATA)
         const course_Id = data.CourseDetails.id;
+        console.log(' data details <*> ', data)
         this.courseId = course_Id;
         this.getCourseDetailsByCourseId(course_Id);
+        this.paymentStatus = data.paymentStatus
         this.userProfile.user_name = data.user_name;
         this.userProfile.user_Phone = data.user_phone;
         this.userProfile.paymentStatus = data.paymentStatus;
@@ -111,4 +115,16 @@ export class CourcesDetailsComponent implements OnInit {
   navigateToTestList(id: string) {
     this.router.navigate(['/test-list'], {queryParams: {id: id}})
   }
+  getEnroll(id: string) {
+    const formData = new FormData()
+    formData.append('course_id', id)
+    this.courseService.courseEnroll(formData).subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.toastr.success(res.message, 'SUCCESS')
+        }
+      }
+    })
+  }
+
 }

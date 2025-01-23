@@ -88,12 +88,12 @@ export class HeaderLight4Component {
       }
     }
 
-    if (this.user.length > 0) {
-      this.sidebarMenu.splice(2, 0, {
-        title: 'AssessMent',
-        route: '/assessment'
-      });
-    }
+    // if (this.user.length > 0) {
+    //   this.sidebarMenu.splice(2, 0, {
+    //     title: 'AssessMent',
+    //     route: '/assessment'
+    //   });
+    // }
   }
 
   getUserProfile() {
@@ -283,12 +283,16 @@ export class HeaderLight4Component {
       // ]
     },
     {
-      title: 'Courses',
-      subMenuClass: 'sub-menu',
-      subMenu: [
-        { title: 'All Courses', route: '/courses' }
-      ] // Initially empty, dynamically updated
+      title: 'Program',
+      route: '/program'
     },
+    // {
+    //   title: 'Courses',
+    //   subMenuClass: 'sub-menu',
+    //   subMenu: [
+    //     { title: 'All Courses', route: '/courses' }
+    //   ] // Initially empty, dynamically updated
+    // },
     // {
     //   title: 'Pages',
     //   menuClass: 'has-mega-menu',

@@ -51,8 +51,8 @@
 									
 								</div>
 							</div>
-							<app-category-list1></app-category-list1>
-							<app-recent-posts1></app-recent-posts1>
+							<!-- <app-category-list1></app-category-list1> -->
+							<app-recent-posts1 [data]="CourseDetailsData" (courseSelected)="getCourseVideo($event)"></app-recent-posts1>
 						</aside>
 					</div>
 					<!-- Side bar END -->
@@ -74,12 +74,18 @@
 								</div>
 							</div>
 							<div class="col-lg-12 mb-3 d-flex justify-content-end">
-								<button class="btn btn-sm btn-info text-white" style="width: 150px !important;" (click)="navigateToTestList(courseId)">Test</button>
+								<div class="site-button w-25 me-2" *ngIf="paymentStatus === 'paid'" style="
+															background-color: #fff !important;
+															color: #000;
+															border: 2px solid #000;">ENROLLED <i class="fa fa-check-circle" ></i>
+</div>
+								<button class="site-button btnhover10  w-25" *ngIf="paymentStatus === 'unpaid'"  (click)="getEnroll(courseId)">ENROLL</button>
+								<button class="site-button btnhover14  w-25 ms-3" (click)="navigateToTestList(courseId)">Test</button>
 							</div>
 							<div class="col-lg-12">
 								
 								<!-- Tabs -->
-								<app-courses6 [data]="CourseDetailsData" (courseSelected)="getCourseVideo($event)"></app-courses6>
+								<app-courses6 [data]="CourseDetailsData" [PaymentStatus]="paymentStatus" (courseSelected)="getCourseVideo($event)"></app-courses6>
 								<!-- Tabs End-->
 
 							</div>

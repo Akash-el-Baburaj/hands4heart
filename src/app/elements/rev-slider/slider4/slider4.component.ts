@@ -60,7 +60,7 @@ export class Slider4Component implements OnInit, AfterViewInit {
           this.banners = res.data.banner;
           this.banners.forEach(banner => {
             // Sanitize URLs based on banner type
-            this.safeBanners[banner.id] = this.sanitizer.bypassSecurityTrustResourceUrl(banner.videoUrl);
+            this.safeBanners[banner.id] = this.sanitizer.bypassSecurityTrustResourceUrl(`${banner.videoUrl}ddsds?autoplay=1&mute=1`);
           });
         }
       },

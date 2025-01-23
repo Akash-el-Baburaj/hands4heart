@@ -33,6 +33,7 @@ export class MyCoursesComponent implements OnInit {
         next: (res: any) => {
           if (res.success) {
             this.courseLIst = res.data.enrolled;
+            this.navigateToCourseDetails(this.courseLIst[0])
           } else {
             this.courseLIst = [];
           }
