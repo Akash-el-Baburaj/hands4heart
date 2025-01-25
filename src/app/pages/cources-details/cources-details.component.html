@@ -52,7 +52,7 @@
 								</div>
 							</div>
 							<!-- <app-category-list1></app-category-list1> -->
-							<app-recent-posts1 class="d-none d-md-block" [data]="CourseDetailsData" (courseSelected)="getCourseVideo($event)"></app-recent-posts1>
+							<app-recent-posts1 class="d-none d-md-block" [ngClass]="{'disabled-link': paymentStatus === 'unpaid'}" [data]="CourseDetailsData" (courseSelected)="getCourseVideo($event)"></app-recent-posts1>
 						</aside>
 					</div>
 					<!-- Side bar END -->
@@ -65,7 +65,7 @@
 							<div class="col-lg-12">
 								<div class="media m-b30">
 									<img *ngIf="!courseVideo" src="assets/images/blog/default/thum1.jpg" alt="">
-									<app-video-embed *ngIf="courseVideo" [VideoURL]="getSafeUrl(courseVideo)" [VideoType]="VideoType"></app-video-embed>
+									<app-video-embed class="w-100" *ngIf="courseVideo" [VideoURL]="getSafeUrl(courseVideo)" [VideoType]="VideoType"></app-video-embed>
 									<!-- <iframe 
 											*ngIf="courseVideo" 
 											[src]="getSafeUrl(courseVideo)" 
@@ -94,7 +94,7 @@
 							<div class="col-lg-12">
 								
 								<!-- Tabs -->
-								<app-courses6 [data]="CourseDetailsData" [PaymentStatus]="paymentStatus" (courseSelected)="getCourseVideo($event)"></app-courses6>
+								<app-courses6 [data]="CourseDetailsData" [ngClass]="{'disabled-link': paymentStatus === 'unpaid'}" [PaymentStatus]="paymentStatus" (courseSelected)="getCourseVideo($event)"></app-courses6>
 								<!-- Tabs End-->
 
 							</div>
