@@ -214,6 +214,7 @@ import { EnrolledCoursesComponent } from './pages/enrolled-courses/enrolled-cour
 import { TestEvaluationComponent } from './pages/test-evaluation/test-evaluation.component';
 import { TestEvautionListComponent } from './pages/test-evaution-list/test-evaution-list.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { VideoEmbedComponent } from './elements/video-embed/video-embed.component';
 
 @NgModule({
   declarations: [
@@ -418,6 +419,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     EnrolledCoursesComponent,
     TestEvaluationComponent,
     TestEvautionListComponent,
+    VideoEmbedComponent,
   ],
   imports: [
     BrowserModule,
@@ -443,6 +445,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   ],
   exports: [
     RegistrationForm1Component,
+    VideoEmbedComponent
   ],
   providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

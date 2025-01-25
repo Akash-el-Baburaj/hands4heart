@@ -12,9 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 export class CourcesDetailsComponent implements OnInit {
 
   banner : any = {
-		pagetitle: "Courses Details",
+		pagetitle: "Program", //rename to course details
 		bg_image: "",
-		title: "Courses Details",
+		title: "Program",
 	}
 
   courseId: string = '';
@@ -36,6 +36,7 @@ export class CourcesDetailsComponent implements OnInit {
   courserDescription: string = '';
   courseObjective: string = '';
   CourseDetailsData: any;
+  VideoType: string = '';
 
   constructor(private courseService: CourseService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private toastr: ToastrService) {
     this.getCourseId();
@@ -97,18 +98,61 @@ export class CourcesDetailsComponent implements OnInit {
     this.courseVideo = event
   }
 
-  getSafeUrl(videoUrl: string): SafeResourceUrl {
-    // Sanitize the video URL to make it safe for Angular
-    console.log('video url => ', videoUrl)
-    const videoId = this.getYouTubeVideoId(videoUrl);
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
+  // getSafeUrl(videoUrl: string): SafeResourceUrl {
+  //   // Sanitize the video URL to make it safe for Angular
+  //   console.log('video url => ', videoUrl)
+  //   const videoId = this.getYouTubeVideoId(videoUrl);
+  //   const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
 
-    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  //   return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  // }
+
+  // private getYouTubeVideoId(url: string): string | null {
+  //   const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|.+\?v=))([\w-]{11})/);
+  //   return match ? match[1] : null; // Return the video ID or null if not found
+  // }
+
+  getSafeUrl(videoUrl: string): SafeResourceUrl {
+    console.log('Video URL => ', videoUrl);
+
+    if (this.isYouTubeUrl(videoUrl)) {
+      const videoId = this.getYouTubeVideoId(videoUrl);
+      const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      this.VideoType = 'youtube';
+      return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+    } else if (this.isVimeoUrl(videoUrl)) {
+      const videoId = this.getVimeoVideoId(videoUrl);
+      const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+      this.VideoType = 'vimeo';
+      return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+    } else if (this.isServerHostedUrl(videoUrl)) {
+      this.VideoType = 'server';
+      return this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
+    } else {
+      throw new Error('Unsupported video URL');
+    }
   }
 
-  private getYouTubeVideoId(url: string): string | null {
-    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|.+\?v=))([\w-]{11})/);
-    return match ? match[1] : null; // Return the video ID or null if not found
+  private isYouTubeUrl(url: string): boolean {
+    return /(?:youtube\.com|youtu\.be)/.test(url);
+  }
+
+  private getYouTubeVideoId(url: string): string {
+    const match = url.match(/(?:youtube\.com\/.*v=|youtu\.be\/)([^&?]+)/);
+    return match ? match[1] : '';
+  }
+
+  private isVimeoUrl(url: string): boolean {
+    return /vimeo\.com/.test(url);
+  }
+
+  private getVimeoVideoId(url: string): string {
+    const match = url.match(/vimeo\.com\/(\d+)/);
+    return match ? match[1] : '';
+  }
+
+  private isServerHostedUrl(url: string): boolean {
+    return /\.(mp4|webm|ogg)$/.test(url);
   }
 
   navigateToTestList(id: string) {

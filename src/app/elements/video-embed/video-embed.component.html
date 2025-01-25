@@ -1,0 +1,32 @@
+<div class="video-container">
+    <div *ngIf="isLoading" class="loader">
+        Loading...
+      </div>
+  <video
+  *ngIf="!isLoading && VideoType === 'server'"
+    controls
+    autoplay
+    
+    playsinline
+    width="100%"
+    height="auto"
+    #videoPlayer
+    (ended)="onVideoEnded(videoPlayer)"
+    (loadedmetadata)="onMetadataLoaded(videoPlayer)"
+  >
+    <source
+      [src]="videoEmbedUrl"
+      type="video/mp4"
+    />
+    Your browser does not support the video tag.
+  </video>
+  <iframe
+        *ngIf="VideoType !== 'server'"
+        [src]="videoEmbedUrl"
+        width="100%"
+        height="auto"
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+      ></iframe>
+</div>
