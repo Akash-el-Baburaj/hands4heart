@@ -85,7 +85,7 @@
 								</div>
 								<button class="site-button btnhover10  w-25" *ngIf="paymentStatus === 'unpaid'"  (click)="getEnroll(courseId)">ENROLL</button>
 								<button class="site-button btnhover14  w-25 ms-3" (click)="navigateToTestList(courseId)">Test</button>
-								<button class="site-button btnhover12" (click)="getCertificate(certificate, courseId)">Certificate</button>
+								<button class="site-button btnhover14 w-25 ms-3" (click)="getCertificate(certificate, courseId)">Certificate</button>
 							</div>
 							<div class="col-lg-12 d-sm-block d-md-none mt-2">
 								<app-recent-posts1 class="d-block d-md-none" [ngClass]="{'disabled-link': paymentStatus === 'unpaid'}"  [data]="CourseDetailsData" (courseSelected)="getCourseVideo($event)"></app-recent-posts1>
