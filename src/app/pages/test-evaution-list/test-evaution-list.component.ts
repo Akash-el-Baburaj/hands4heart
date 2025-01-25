@@ -29,7 +29,7 @@ export class TestEvautionListComponent implements OnInit {
 
   getCourseId() {
     let id: any;
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params: any) => {
       const ID = params['id']; 
       if (ID) {
         id = JSON.parse(ID);

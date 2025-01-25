@@ -39,7 +39,7 @@ export class HeaderDark4Component {
 	activeMenu: string = "";
 
 	constructor(public router: Router, private backLocation: PlatformLocation, private location: Location) {
-		router.events.subscribe((val) => {
+		router.events.subscribe((val: any) => {
 			if (location.path() != '') {
 				this.currentHref = location.path();
 			} else {

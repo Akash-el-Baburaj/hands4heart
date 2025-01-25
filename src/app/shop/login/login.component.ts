@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       const formData = new FormData();
       formData.append('phone', this.loginForm.value.phone);
       this.authService.login(formData).subscribe({
-        next: (res) => {
+        next: (res: any) => {
           if (res.success) {
             const DATA = res.data;
             this.userID - DATA.user_id;
@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
       formData.append('otp', this.otpForm.value.otp);
       formData.append('otpKey', this.otpKey);
       this.authService.otpVerification(formData).subscribe({
-        next: (res) => {
+        next: (res: any) => {
           if (res.success) {
             this.toastr.success(res.message);
             localStorage.setItem('userId', res.data.user_id);
@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit {
             this.inValidOtpMessage = res.message;
           }
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err);
           console.error(err.error.message);
           this.toastr.success(err.error.message);
@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
 
   getUserDetails() {
     this.authService.getUserProfile().subscribe({
-      next: (res) => {
+      next: (res: any) => {
         this.user = res.data;
         localStorage.setItem('user', JSON.stringify(this.user));
       }

@@ -46,7 +46,7 @@ export class HeaderLight4Component {
     private fb: FormBuilder,
     private authService: AuthenticationService
   ) {
-    router.events.subscribe((val) => {
+    router.events.subscribe((val: any) => {
       if (location.path() != '') {
         this.currentHref = location.path();
       } else {

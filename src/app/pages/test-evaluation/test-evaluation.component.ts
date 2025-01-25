@@ -59,7 +59,7 @@ export class TestEvaluationComponent {
 
   getCourseId() {
     let id: any;
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params: any) => {
       const ID = params['id']; 
       if (ID) {
         id = ID;
@@ -108,7 +108,7 @@ export class TestEvaluationComponent {
           console.error('Failed to load quiz:', res.message);
         }
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error fetching quiz:', err);
       },
     });

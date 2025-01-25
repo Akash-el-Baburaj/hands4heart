@@ -43,10 +43,10 @@ export class RegistrationForm1Component implements OnInit {
       formData.append('code', this.signUpForm.value.code);
       formData.append('email', this.signUpForm.value.email);
       this.authService.signUp(formData).subscribe({
-        next: (res) => {
+        next: (res: any) => {
           console.log(res);
         },
-        error: (err) => {
+        error: (err: any) => {
           console.log(err);
         }
       })

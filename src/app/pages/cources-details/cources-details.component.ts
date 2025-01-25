@@ -3,6 +3,7 @@ import { CourseService } from 'src/app/core/service/course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cources-details',
@@ -38,7 +39,14 @@ export class CourcesDetailsComponent implements OnInit {
   CourseDetailsData: any;
   VideoType: string = '';
 
-  constructor(private courseService: CourseService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, private toastr: ToastrService) {
+  constructor(
+    private courseService: CourseService, 
+    private route: ActivatedRoute, 
+    private sanitizer: DomSanitizer, 
+    private router: Router, 
+    private toastr: ToastrService,
+    private modalService: NgbModal
+  ) {
     this.getCourseId();
   }
 
@@ -48,7 +56,7 @@ export class CourcesDetailsComponent implements OnInit {
 
   getCourseId() {
     let data: any;
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params: any) => {
       const DATA = params['data']; 
       if (DATA) {
         data = JSON.parse(DATA)
@@ -168,6 +176,21 @@ export class CourcesDetailsComponent implements OnInit {
         }
       }
     })
+  }
+
+  openCentered(content: any) {
+    this.modalService.open(content, { centered: true });
+  }
+
+  getCertificate(content: any, CourseId: string) {
+    const formData = new FormData();
+    formData.append('courseId', CourseId);
+    this.courseService.getCertificate(formData).subscribe({
+      next: (res: any) => {
+        console.log('res certificate => ', res)
+      }
+    })
+    this.openCentered(content)
   }
 
 }

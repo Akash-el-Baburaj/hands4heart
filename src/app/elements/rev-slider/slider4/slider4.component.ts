@@ -64,7 +64,7 @@ export class Slider4Component implements OnInit, AfterViewInit {
           });
         }
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error fetching banners:', err);
       }
     });

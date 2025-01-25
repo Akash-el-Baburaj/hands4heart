@@ -1,9 +1,11 @@
 <div class="video-container">
-    <div *ngIf="isLoading" class="loader">
+    <div class="loading-contaner" *ngIf="isLoading">
+      <div class="loader">
         Loading...
       </div>
+    </div>
   <video
-  *ngIf="!isLoading && VideoType === 'server'"
+  *ngIf="VideoType === 'server'"
     controls
     autoplay
     
@@ -13,6 +15,7 @@
     #videoPlayer
     (ended)="onVideoEnded(videoPlayer)"
     (loadedmetadata)="onMetadataLoaded(videoPlayer)"
+    (timeupdate)="onTimeUpdate(videoPlayer)"
   >
     <source
       [src]="videoEmbedUrl"

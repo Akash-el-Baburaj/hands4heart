@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LightgalleryModule } from 'lightgallery/angular';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -215,6 +215,7 @@ import { TestEvaluationComponent } from './pages/test-evaluation/test-evaluation
 import { TestEvautionListComponent } from './pages/test-evaution-list/test-evaution-list.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { VideoEmbedComponent } from './elements/video-embed/video-embed.component';
+import { CertificateComponent } from './elements/certificate/certificate.component';
 
 @NgModule({
   declarations: [
@@ -420,6 +421,7 @@ import { VideoEmbedComponent } from './elements/video-embed/video-embed.componen
     TestEvaluationComponent,
     TestEvautionListComponent,
     VideoEmbedComponent,
+    CertificateComponent,
   ],
   imports: [
     BrowserModule,
@@ -442,10 +444,12 @@ import { VideoEmbedComponent } from './elements/video-embed/video-embed.componen
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    NgbModalModule
   ],
   exports: [
     RegistrationForm1Component,
-    VideoEmbedComponent
+    VideoEmbedComponent,
+    CertificateComponent
   ],
   providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
