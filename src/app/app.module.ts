@@ -216,6 +216,8 @@ import { TestEvautionListComponent } from './pages/test-evaution-list/test-evaut
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { VideoEmbedComponent } from './elements/video-embed/video-embed.component';
 import { CertificateComponent } from './elements/certificate/certificate.component';
+import { QrGeneratorComponent } from './elements/qr-generator/qr-generator.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -422,6 +424,7 @@ import { CertificateComponent } from './elements/certificate/certificate.compone
     TestEvautionListComponent,
     VideoEmbedComponent,
     CertificateComponent,
+    QrGeneratorComponent,
   ],
   imports: [
     BrowserModule,
@@ -444,12 +447,14 @@ import { CertificateComponent } from './elements/certificate/certificate.compone
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    NgbModalModule
+    NgbModalModule,
+    QRCodeModule
   ],
   exports: [
     RegistrationForm1Component,
     VideoEmbedComponent,
-    CertificateComponent
+    CertificateComponent,
+    QrGeneratorComponent
   ],
   providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

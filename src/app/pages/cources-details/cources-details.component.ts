@@ -38,6 +38,7 @@ export class CourcesDetailsComponent implements OnInit {
   courseObjective: string = '';
   CourseDetailsData: any;
   VideoType: string = '';
+  qrData: any | null = null;
 
   constructor(
     private courseService: CourseService, 
@@ -185,12 +186,16 @@ export class CourcesDetailsComponent implements OnInit {
   getCertificate(content: any, CourseId: string) {
     const formData = new FormData();
     formData.append('courseId', CourseId);
-    this.courseService.getCertificate(formData).subscribe({
-      next: (res: any) => {
-        console.log('res certificate => ', res)
-      }
-    })
+    this.qrData = 'CERT-3-4-1737805743557';
     this.openCentered(content)
+    // this.courseService.getCertificate(formData).subscribe({
+    //   next: (res: any) => {
+    //     console.log('res certificate => ', res)
+    //     this.qrData = res.data.certificateId;
+    //     this.openCentered(content)
+
+    //   }
+    // })
   }
 
 }

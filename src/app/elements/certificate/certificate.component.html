@@ -62,9 +62,12 @@
                   <span class="pm-credits-text block sans">Hands4Heart</span>
                   <span class="pm-empty-space block underline"></span>
                   <span class="bold block">M.S. Anil Kumar</span>
+                  <img class="mt-1" src="assets/images/signature.webp" style="height: 35px; width: auto;" alt="signature">
                 </div>
-                <div class="col-3">
-                  <!-- LEAVE EMPTY -->
+                <div class="col-3 d-flex justify-content-center">
+                  <!-- <app-qr-generator [qrData]="inputData" [size]="75"></app-qr-generator> -->
+                  <qrcode [qrdata]="inputData" [width]="75" [errorCorrectionLevel]="'M'"></qrcode>
+
                 </div>
                 <div class="col-4 pm-certified col-4 text-center">
                   <span class="pm-credits-text block sans">Date Completed</span>
