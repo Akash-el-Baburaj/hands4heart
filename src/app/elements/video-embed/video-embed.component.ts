@@ -20,14 +20,16 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['VideoURL']) {
-      this.videoEmbedUrl = this.VideoURL;
-      this.videoEmbedType = this.VideoType
+    // if (changes['VideoURL']) {
+    //   this.videoEmbedUrl = this.VideoURL;
+    //   this.videoEmbedType = this.VideoType
      
-    }
+    // }
   }
 
   ngOnInit(): void {
+    this.videoEmbedUrl = this.VideoURL;
+    this.videoEmbedType = this.VideoType;
     // this.isLoading = true;
     setTimeout(() => {
       this.isLoading = false;
