@@ -71,6 +71,8 @@ export class CourcesDetailsComponent implements OnInit {
         this.userProfile.createdBy = data.createdBy;
         this.courserDescription =data.CourseDetails.description
         this.courseObjective =data.CourseDetails.course_objective
+      } else {
+        this.navigateToCoursetList()
       }
     });
   }
@@ -167,6 +169,12 @@ export class CourcesDetailsComponent implements OnInit {
   navigateToTestList(id: string) {
     this.router.navigate(['/test-list'], {queryParams: {id: id}})
   }
+
+  navigateToCoursetList() {
+    this.router.navigate(['/courses'])
+  }
+
+
   getEnroll(id: string) {
     const formData = new FormData()
     formData.append('course_id', id)
