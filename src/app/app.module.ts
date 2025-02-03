@@ -218,6 +218,7 @@ import { VideoEmbedComponent } from './elements/video-embed/video-embed.componen
 import { CertificateComponent } from './elements/certificate/certificate.component';
 import { QrGeneratorComponent } from './elements/qr-generator/qr-generator.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ToastrComponent } from './elements/toastr/toastr.component';
 
 @NgModule({
   declarations: [
@@ -425,6 +426,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     VideoEmbedComponent,
     CertificateComponent,
     QrGeneratorComponent,
+    ToastrComponent,
   ],
   imports: [
     BrowserModule,
@@ -454,7 +456,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     RegistrationForm1Component,
     VideoEmbedComponent,
     CertificateComponent,
-    QrGeneratorComponent
+    QrGeneratorComponent,
+    ToastrComponent
   ],
   providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

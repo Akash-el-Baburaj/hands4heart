@@ -125,8 +125,8 @@
 
 <ng-template #staticBackdropModal let-modal>
     <div>
-        <div class="modal-header d-flex justify-content-center w-100 text-center" style="border: none !important;">
-            <h4 class="modal-title pull-left "><span class="mdi mdi-alert-outline text-warning"></span> Are
+        <div class="modal-header d-flex justify-content-center w-100 text-center" style="border: none !important; background-color: #fff !important;">
+            <h4 class="modal-title pull-left text-dark"><i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Are
                 you sure? </h4>
             <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
 
@@ -136,10 +136,10 @@
             <p class="m-0">Are you sure you want to logout ?</p>
         </div>
         <div class="modal-footer d-flex justify-content-center" style="border: none !important;">
-            <button type="button" class="btn btn-outline-theme rounded-pill p-0"
+            <button type="button" class="btn btn-danger w-100 p-0"
                 style="width: 116px !important; height: 32px !important;"
                 (click)="modal.close('Close click')">No</button>
-            <button type="button" class="btn btn-theme rounded-pill p-0"
+            <button type="button" class="btn btn-success w-100 p-0"
                 style="width: 116px !important; height: 32px !important;"
                 (click)="logOUt()">Yes</button>
         </div>

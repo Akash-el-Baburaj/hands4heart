@@ -585,9 +585,9 @@ export class HeaderLight4Component {
 
     this.modalRef = this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
-      size: 'md',
-      backdrop: false,
-      centered: false,
+      size: 'sm',
+      backdrop: true,
+      centered: true,
       windowClass: 'custom-modal'
     });
 
