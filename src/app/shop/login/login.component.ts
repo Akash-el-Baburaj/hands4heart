@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('userId', res.data.user_id);
             localStorage.setItem('token', res.data.key);
             this.getUserDetails();
-            this.router.navigate(['/home-coaching']);
+            this.router.navigate(['/program']);
             this.isInValidOtp = false;
           } else {
             this.toastr.error(res.message);

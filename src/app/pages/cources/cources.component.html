@@ -40,7 +40,7 @@
                                         </div>
                                         <div class="dlab-info">
                                             <h6 class="dlab-title">
-                                                <a [routerLink]="['/courses-details/']">{{ rowdata.name }}</a>
+                                                <a [routerLink]="['/courses-details/']" [queryParams]="{ data: dataStringify(rowdata)}">{{ rowdata.name }}</a>
                                             </h6>
                                             <p>{{ rowdata.description }}</p>
                                             <div class="courses-info">
@@ -54,7 +54,7 @@
 													</ul>
 													<span>10 Review</span>
 												</div>
-                                                <button class="btn btn-sm btn-outline-warning" (click)="getEnroll(rowdata.id)">Enroll</button>
+                                                <button class="btn btn-sm btn-warning" (click)="getEnroll(rowdata.id)">Enroll</button>
                                             </div>
                                         </div>
                                     </div>

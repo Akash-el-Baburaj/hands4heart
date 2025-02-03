@@ -61,7 +61,9 @@ export class CourcesDetailsComponent implements OnInit {
       const DATA = params['data']; 
       if (DATA) {
         data = JSON.parse(DATA)
-        const course_Id = data.CourseDetails.id;
+        console.log('details data =>> ', data)
+        const course_Id = data?.CourseDetails?.id ? data?.CourseDetails?.id : data.id;
+        console.log('course_Id => ', course_Id)
         this.courseId = course_Id;
         this.getCourseDetailsByCourseId(course_Id);
         this.paymentStatus = data.paymentStatus
@@ -75,6 +77,9 @@ export class CourcesDetailsComponent implements OnInit {
         this.navigateToCoursetList()
       }
     });
+  }
+  showSuccess() {
+    this.toastr.success('Operation Successful!', 'Success');
   }
 
 

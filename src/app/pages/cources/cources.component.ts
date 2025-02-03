@@ -66,4 +66,8 @@ export class CourcesComponent implements OnInit {
       this.getCourses();
     }
   }
+
+  dataStringify(data: any) {
+    return JSON.stringify(data)
+  }
 }
