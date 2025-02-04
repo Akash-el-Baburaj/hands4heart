@@ -20,11 +20,11 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    // if (changes['VideoURL']) {
-    //   this.videoEmbedUrl = this.VideoURL;
-    //   this.videoEmbedType = this.VideoType
+    if (changes['VideoURL']) {
+      this.videoEmbedUrl = this.VideoURL;
+      this.videoEmbedType = this.VideoType
      
-    // }
+    }
   }
 
   ngOnInit(): void {

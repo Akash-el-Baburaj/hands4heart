@@ -13,12 +13,14 @@ export class Courses6Component implements OnChanges {
   @Output() courseSelected = new EventEmitter<any>(); // Emits selected course to parent
 
   courseDetails: any[] = [];
-
+  course: any;
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
-      this.courseDetails = this.data.details.details
+      const Data = this.data 
+      this.course = this.data;     
+      this.courseDetails = Data?.details?.details
     }
   }
 

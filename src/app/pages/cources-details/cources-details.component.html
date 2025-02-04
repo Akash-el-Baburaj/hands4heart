@@ -83,8 +83,9 @@
                     [VideoURL]="getSafeUrl(courseVideo)"
                     [VideoType]="VideoType"
                   ></app-video-embed>
-                  <iframe
-                    *ngIf="!courseVideo"
+                  <div class="w-100" *ngIf="!courseVideo">
+					<iframe
+                    
                     [src]="
                     getSafeUrl('https://www.youtube.com/watch?v=s9xk77X4m5c')
                     "
@@ -95,6 +96,7 @@
                     allowfullscreen
                   >
                   </iframe>
+				  </div>
                 </div>
               </div>
               <div class="col-lg-12 mb-3 d-flex justify-content-end">

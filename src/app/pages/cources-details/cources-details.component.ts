@@ -97,8 +97,8 @@ export class CourcesDetailsComponent implements OnInit {
         this.userProfile.user_Phone = data.user_phone;
         this.userProfile.paymentStatus = data.paymentStatus;
         this.userProfile.createdBy = data.createdBy;
-        this.courserDescription =data.CourseDetails.description
-        this.courseObjective =data.CourseDetails.course_objective
+        this.courserDescription =data.CourseDetails?.description
+        this.courseObjective =data.CourseDetails?.course_objective
       } else {
         this.navigateToCoursetList()
       }
@@ -137,7 +137,13 @@ export class CourcesDetailsComponent implements OnInit {
   }
 
   getCourseVideo(event: any) {
-    this.courseVideo = event
+    this.courseVideo = null
+    if (event) {
+      setTimeout(() => {
+        this.courseVideo = event
+      }, 30);
+      
+    }
   }
 
   // getSafeUrl(videoUrl: string): SafeResourceUrl {

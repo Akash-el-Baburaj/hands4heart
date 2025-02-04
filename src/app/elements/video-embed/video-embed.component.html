@@ -13,10 +13,11 @@
     width="100%"
     height="auto"
     #videoPlayer
-    (ended)="onVideoEnded(videoPlayer)"
-    (loadedmetadata)="onMetadataLoaded(videoPlayer)"
-    (timeupdate)="onTimeUpdate(videoPlayer)"
+  
   >
+  <!-- (ended)="onVideoEnded(videoPlayer)"
+  (loadedmetadata)="onMetadataLoaded(videoPlayer)"
+  (timeupdate)="onTimeUpdate(videoPlayer)" -->
     <source
       [src]="videoEmbedUrl"
       type="video/mp4"

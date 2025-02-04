@@ -13,8 +13,8 @@ export class RecentPosts1Component implements OnInit {
   
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['data']) {
-          this.courseDetails = this.data.details.details
-          console.log(this.data, '<<1>>>')
+          const Data = this.data
+          this.courseDetails = Data?.details?.details
         }
       }
 
