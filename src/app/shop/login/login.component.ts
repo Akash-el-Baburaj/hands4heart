@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 		bg_image: "assets/images/banner/bnr4.jpg",
 		title: "Login",
   }
-
+  showRegisterForm: boolean = false;
   loginForm!: FormGroup;
   otpForm!: FormGroup;
   userID: any;
@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit {
       otp: data.otp,
     });
   }
+  
 
   verifyOTP() {
     if (this.otpForm.valid) {

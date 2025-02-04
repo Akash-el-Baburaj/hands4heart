@@ -1,142 +1,542 @@
-
 <div class="page-wraper">
-
-    <!-- header -->
-    <app-header-light4></app-header-light4>
-    <!-- header END -->
-    <!-- Content -->
-    <div class="page-content bg-gray">
-        <!-- inner page banner -->
-        <app-banner1 [data] = "banner"></app-banner1>
-        <!-- inner page banner END -->
-		<div class="section-full content-inner">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 m-b30">
-						<div class="course-view text-center">
-							<h2 class="m-t0 m-b10 font-28 title text-black">{{courseTitle}}</h2>
-							<ul class="course-info">
-								<li> 
-									<i class="fa fa-user"></i> <span> 65</span> 
-									<div class="course-info-dec">Student</div>
-								</li>
-								<li> 
-									<i class="fa fa-star"></i> <span> 4.3</span> 
-									<div class="course-info-dec">Reviews (23)</div>
-								</li>
-								<li> 
-									<i class="fa fa-clock-o"></i> <span> 2.0</span> 
-									<div class="course-info-dec">Learning Hours</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<!-- Side bar start -->
-					<div class="col-xl-3 col-lg-4 col-md-12 m-b30">
-						<aside class="side-bar sticky-top">
-							<div class="widget" class="d-none d-md-block" >
-								<div class="teacher-info text-center">
-									<div class="top-info">
-										<span class="price text-primary">Free</span>
-										<a href="javascript: void(0)" class="site-button button-sm">{{ userProfile.paymentStatus }}</a>
-									</div>
-									<div class="teacher-pic"> 
-										<a href="#"><img src="assets/images/testimonials/pic2.jpg" alt=""></a> 
-									</div>
-									<h4 class="name">{{ userProfile.user_name }}</h4>
-									<span class="position">{{ userProfile.user_Phone }}</span>
-									<div class="clearfix m-b20">
-										<a href="" class="site-button button-sm">{{ userProfile.createdBy }}<i class="fa fa-envelope-o m-l5"></i></a>
-									</div>
-									<button (click)="showSuccess()">click</button>
-									
-								</div>
-							</div>
-							<!-- <app-category-list1></app-category-list1> -->
-							<app-recent-posts1 class="d-none d-md-block" [ngClass]="{'disabled-link': paymentStatus === 'unpaid'}" [data]="CourseDetailsData" (courseSelected)="getCourseVideo($event)"></app-recent-posts1>
-						</aside>
-					</div>
-					<!-- Side bar END -->
-					<!-- left part start -->
-					<div class="col-xl-9 col-lg-8 col-md-12 m-b30">
-						<div class="row">
-							<div class="col-lg-12">
-
-							</div>
-							<div class="col-lg-12">
-								<div class="media m-b30">
-									<img *ngIf="!courseVideo" src="assets/images/blog/default/thum1.jpg" alt="">
-									<app-video-embed class="w-100" *ngIf="courseVideo" [VideoURL]="getSafeUrl(courseVideo)" [VideoType]="VideoType"></app-video-embed>
-									<!-- <iframe 
-											*ngIf="courseVideo" 
-											[src]="getSafeUrl(courseVideo)" 
-											width="100%" 
-											height="300" 
-											frameborder="0" 
-											allow="autoplay; encrypted-media" 
-											allowfullscreen>
-										</iframe> -->
-								</div>
-							</div>
-							<div class="col-lg-12 mb-3 d-flex justify-content-end">
-								<div class="site-button  me-2" *ngIf="paymentStatus === 'paid'" style="
+  <!-- header -->
+  <app-header-light4></app-header-light4>
+  <!-- header END -->
+  <!-- Content -->
+  <div class="page-content bg-gray">
+    <!-- inner page banner -->
+    <app-banner1 [data]="banner"></app-banner1>
+    <!-- inner page banner END -->
+    <div class="section-full content-inner">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 m-b30">
+            <div class="course-view text-center">
+              <h2 class="m-t0 m-b10 font-28 title text-black">
+                {{ courseTitle }}
+              </h2>
+              <ul class="course-info">
+                <li>
+                  <i class="fa fa-user"></i> <span> 65</span>
+                  <div class="course-info-dec">Student</div>
+                </li>
+                <li>
+                  <i class="fa fa-star"></i> <span> 4.3</span>
+                  <div class="course-info-dec">Reviews (23)</div>
+                </li>
+                <li>
+                  <i class="fa fa-clock-o"></i> <span> 2.0</span>
+                  <div class="course-info-dec">Learning Hours</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Side bar start -->
+          <div class="col-xl-3 col-lg-4 col-md-12 m-b30">
+            <aside class="side-bar sticky-top">
+              <div class="widget" class="d-none d-md-block">
+                <div class="teacher-info text-center">
+                  <div class="top-info">
+                    <span class="price text-primary">Free</span>
+                    <a
+                      href="javascript: void(0)"
+                      class="site-button button-sm"
+                      >{{ userProfile.paymentStatus }}</a
+                    >
+                  </div>
+                  <div class="teacher-pic">
+                    <a href="#"
+                      ><img src="assets/images/testimonials/pic2.jpg" alt=""
+                    /></a>
+                  </div>
+                  <h4 class="name">{{ userProfile.user_name }}</h4>
+                  <span class="position">{{ userProfile.user_Phone }}</span>
+                  <div class="clearfix m-b20">
+                    <a href="" class="site-button button-sm"
+                      >{{ userProfile.createdBy
+                      }}<i class="fa fa-envelope-o m-l5"></i
+                    ></a>
+                  </div>
+                  <button (click)="showSuccess()">click</button>
+                </div>
+              </div>
+              <!-- <app-category-list1></app-category-list1> -->
+              <app-recent-posts1
+                class="d-none d-md-block"
+                [ngClass]="{ 'disabled-link': paymentStatus === 'unpaid' }"
+                [data]="CourseDetailsData"
+                (courseSelected)="getCourseVideo($event)"
+              ></app-recent-posts1>
+            </aside>
+          </div>
+          <!-- Side bar END -->
+          <!-- left part start -->
+          <div class="col-xl-9 col-lg-8 col-md-12 m-b30">
+            <div class="row">
+              <div class="col-lg-12"></div>
+              <div class="col-lg-12">
+                <div class="media m-b30">
+                  <!-- <img *ngIf="!courseVideo" src="assets/images/blog/default/thum1.jpg" alt=""> -->
+                  <app-video-embed
+                    class="w-100"
+                    *ngIf="courseVideo"
+                    [VideoURL]="getSafeUrl(courseVideo)"
+                    [VideoType]="VideoType"
+                  ></app-video-embed>
+                  <iframe
+                    *ngIf="!courseVideo"
+                    [src]="
+                    getSafeUrl('https://www.youtube.com/watch?v=s9xk77X4m5c')
+                    "
+                    width="100%"
+                    height="300"
+                    frameborder="0"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                  >
+                  </iframe>
+                </div>
+              </div>
+              <div class="col-lg-12 mb-3 d-flex justify-content-end">
+                <!-- <div class="site-button  me-2" *ngIf="enrolled === 'true'" style="
 															background-color: #fff !important;
 															color: #000;
 															border: 2px solid #000;">ENROLLED <i class="fa fa-check-circle" ></i>
-								</div>
-								<button class="site-button btnhover10  w-25" *ngIf="paymentStatus === 'unpaid'"  (click)="getEnroll(courseId)">ENROLL</button>
-								<button class="site-button btnhover14  w-25 ms-3" (click)="navigateToTestList(courseId)">Test</button>
-								<!-- <button class="site-button btnhover14 w-25 ms-3" (click)="getCertificate(certificate, courseId)">Certificate</button> -->
-								<button class="site-button btnhover14 w-25 ms-3" (click)="getCertificate(certificate, courseId)">Certificate</button>
-							</div>
-							<div class="col-lg-12 d-sm-block d-md-none mt-2">
-								<app-recent-posts1 class="d-block d-md-none" [ngClass]="{'disabled-link': paymentStatus === 'unpaid'}"  [data]="CourseDetailsData" (courseSelected)="getCourseVideo($event)"></app-recent-posts1>
-							</div>
-							<div class="col-lg-12">
-								
-								<!-- Tabs -->
-								<app-courses6 [data]="CourseDetailsData" [ngClass]="{'disabled-link': paymentStatus === 'unpaid'}" [PaymentStatus]="paymentStatus" (courseSelected)="getCourseVideo($event)"></app-courses6>
-								<!-- Tabs End-->
+								</div> -->
+                <button
+                  class="site-button btnhover18 w-25 mr-3"
+                  (click)="open(profileUpdateModal)"
+                >
+                  Generate
+                </button>
 
-							</div>
-							<div class="col-lg-12 " class="d-block d-md-none">
-								<div class="widget" class="d-block d-md-none" >
-									<div class="teacher-info text-center">
-										<div class="top-info">
-											<span class="price text-primary">Free</span>
-											<a href="javascript: void(0)" class="site-button button-sm">{{ userProfile.paymentStatus }}</a>
-										</div>
-										<div class="teacher-pic"> 
-											<a href="#"><img src="assets/images/testimonials/pic2.jpg" alt=""></a> 
-										</div>
-										<h4 class="name">{{ userProfile.user_name }}</h4>
-										<span class="position">{{ userProfile.user_Phone }}</span>
-										<div class="clearfix m-b20">
-											<a href="" class="site-button button-sm">{{ userProfile.createdBy }}<i class="fa fa-envelope-o m-l5"></i></a>
-										</div>
-										
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- left part start -->
-				</div>
+                <button
+                  class="site-button btnhover10 w-25 ms-3"
+                  *ngIf="enrolled === 'true'"
+                >
+                  ENROLLED
+                </button>
+
+                <button
+                  class="site-button btnhover10 w-25"
+                  *ngIf="enrolled === 'false'"
+                  (click)="getEnroll(courseId)"
+                >
+                  ENROLL
+                </button>
+
+                <button
+                  class="site-button btnhover14 w-25 ms-3"
+                  (click)="navigateToTestList(courseId)"
+                >
+                  Test
+                </button>
+                <!-- <button class="site-button btnhover14 w-25 ms-3" (click)="getCertificate(certificate, courseId)">Certificate</button> -->
+                <button
+                  class="site-button btnhover14 w-25 ms-3"
+                  (click)="getCertificate(certificate, courseId)"
+                >
+                  Certificate
+                </button>
+              </div>
+              <div class="col-lg-12 d-sm-block d-md-none mt-2">
+                <app-recent-posts1
+                  class="d-block d-md-none"
+                  [ngClass]="{ 'disabled-link': paymentStatus === 'unpaid' }"
+                  [data]="CourseDetailsData"
+                  (courseSelected)="getCourseVideo($event)"
+                ></app-recent-posts1>
+              </div>
+              <div class="col-lg-12">
+                <!-- Tabs -->
+                <app-courses6
+                  [data]="CourseDetailsData"
+                  [ngClass]="{ 'disabled-link': paymentStatus === 'unpaid' }"
+                  [PaymentStatus]="paymentStatus"
+                  (courseSelected)="getCourseVideo($event)"
+                ></app-courses6>
+                <!-- Tabs End-->
+              </div>
+              <div class="col-lg-12" class="d-block d-md-none">
+                <div class="widget" class="d-block d-md-none">
+                  <div class="teacher-info text-center">
+                    <div class="top-info">
+                      <span class="price text-primary">Free</span>
+                      <a
+                        href="javascript: void(0)"
+                        class="site-button button-sm"
+                        >{{ userProfile.paymentStatus }}</a
+                      >
+                    </div>
+                    <div class="teacher-pic">
+                      <a href="#"
+                        ><img src="assets/images/testimonials/pic2.jpg" alt=""
+                      /></a>
+                    </div>
+                    <h4 class="name">{{ userProfile.user_name }}</h4>
+                    <span class="position">{{ userProfile.user_Phone }}</span>
+                    <div class="clearfix m-b20">
+                      <a href="" class="site-button button-sm"
+                        >{{ userProfile.createdBy
+                        }}<i class="fa fa-envelope-o m-l5"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <!-- left part start -->
         </div>
-	</div>
-    <!-- Content END-->
-    <!-- Footer -->
-   <!-- Newsletter -->
-	<app-newsletter2></app-newsletter2>
-   <!-- Footer -->
-    <app-footer4></app-footer4>
-    <!-- Footer END-->
-    <!-- scroll top button -->
-    <!-- scroltop -->
-    <app-scroltop></app-scroltop>
+      </div>
+    </div>
+  </div>
+  <!-- Content END-->
+  <!-- Footer -->
+  <!-- Newsletter -->
+  <app-newsletter2></app-newsletter2>
+  <!-- Footer -->
+  <app-footer4></app-footer4>
+  <!-- Footer END-->
+  <!-- scroll top button -->
+  <!-- scroltop -->
+  <app-scroltop></app-scroltop>
 </div>
 
-<ng-template  #certificate let-modal>
-	<app-certificate [Data]="userProfile" [qrData]="qrData"></app-certificate>
+<ng-template #certificate let-modal>
+  <app-certificate [Data]="userProfile" [qrData]="qrData"></app-certificate>
+</ng-template>
+
+<ng-template #profileUpdateModal let-modal>
+  <div class="modal-body">
+    <form
+      class="ps-3 pe-3"
+      [formGroup]="updateProfileForm"
+      (ngSubmit)="updateProfile()"
+    >
+      <br /><br />
+      <div class="mb-2">
+        <label for="username" class="form-label">Full Name</label>
+        <input
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          type="email"
+          id="name"
+          required
+          formControlName="name"
+          placeholder="Enter your name "
+        />
+      </div>
+      <div class="mb-2" style="display: flex; gap: 10px; align-items: center">
+        <div style="flex: 1">
+          <label for="countryCode" class="form-label">Country Code</label>
+          <input
+            style="
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              padding: 8px;
+              width: 100%;
+              box-sizing: border-box;
+              font-size: 14px;
+              color: #333;
+            "
+            class="form-control"
+            type="text"
+            id="countryCode"
+            required
+            formControlName="countryCode"
+            value="+91"
+          />
+        </div>
+        <div style="flex: 3">
+          <label for="phone" class="form-label">Phone</label>
+          <input
+            style="
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              padding: 8px;
+              width: 100%;
+              box-sizing: border-box;
+              font-size: 14px;
+              color: #333;
+            "
+            class="form-control"
+            type="text"
+            id="phone"
+            required
+            formControlName="phone"
+            placeholder="Enter phone number"
+          />
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <label for="email" class="form-label">Email</label>
+        <input
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          type="email"
+          id="email"
+          required
+          formControlName="email"
+          placeholder="Enter email"
+        />
+      </div>
+
+      <div class="mb-2">
+        <label for="age" class="form-label">Age</label>
+        <input
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          type="number"
+          id="age"
+          required
+          formControlName="age"
+          placeholder="Enter age"
+        />
+      </div>
+
+      <div class="mb-2">
+        <label for="blood_group" class="form-label">Blood Group</label>
+        <input
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          type="text"
+          id="blood_group"
+          required
+          formControlName="blood_group"
+          placeholder="Enter blood group"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Education</label>
+        <select
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          formControlName="education"
+        >
+          <option value="" disabled selected>Select Education</option>
+          <option value="HIGHER_SECONDARY">Higher Secondary</option>
+          <option value="GRADUATE">Graduate</option>
+          <option value="POST_GRADUATE">Post Graduate</option>
+          <option value="PHD">PhD</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+
+      <div class="mb-2">
+        <label for="pincode" class="form-label">Pincode</label>
+        <input
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          type="text"
+          id="pincode"
+          required
+          formControlName="pincode"
+          placeholder="Enter pincode"
+        />
+      </div>
+
+      <div class="mb-2">
+        <label for="thaluk" class="form-label">Thaluk</label>
+        <input
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          type="text"
+          id="thaluk"
+          required
+          formControlName="thaluk"
+          placeholder="Enter thaluk"
+        />
+      </div>
+
+      <div class="mb-2">
+        <label for="district" class="form-label">District</label>
+        <input
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          type="text"
+          id="district"
+          required
+          formControlName="district"
+          placeholder="Enter district"
+        />
+      </div>
+
+      <div class="mb-2">
+        <label for="state" class="form-label">State</label>
+        <input
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          type="text"
+          id="state"
+          required
+          formControlName="state"
+          placeholder="Enter state"
+        />
+      </div>
+
+      <div class="mb-2">
+        <label for="country" class="form-label">Country</label>
+        <input
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          type="text"
+          id="country"
+          required
+          formControlName="country"
+          placeholder="Enter country"
+        />
+      </div>
+
+      <div class="mb-2">
+        <label for="address" class="form-label">Address</label>
+        <textarea
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          id="address"
+          required
+          formControlName="address"
+          placeholder="Enter address"
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Gender</label>
+        <select
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          formControlName="gender"
+        >
+          <option value="" disabled selected>Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="mb-2">
+        <label for="date_of_birth" class="form-label">Date of Birth</label>
+        <input
+          style="
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+          "
+          class="form-control"
+          type="date"
+          id="date_of_birth"
+          required
+          formControlName="date_of_birth"
+        />
+      </div>
+
+      <div class="mb-3 text-center">
+        <button class="btn btn-primary" type="submit" onclick="updateProfile()">
+          Update Details
+        </button>
+      </div>
+    </form>
+  </div>
 </ng-template>

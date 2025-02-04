@@ -7,66 +7,112 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-my-courses',
   templateUrl: './my-courses.component.html',
-  styleUrls: ['./my-courses.component.css']
+  styleUrls: ['./my-courses.component.css'],
 })
 export class MyCoursesComponent implements OnInit {
+  banner: any = {
+    pagetitle: 'My Courses',
+    bg_image: 'assets/images/banner/bnr1.jpg',
+    title: 'My Courses',
+  };
+  page: number = 1;
+  courseLIst: any[] = [];
+  enrolledList: any[] = [];
 
+  loading: boolean = false; // For loading state
 
-    banner: any = {
-      pagetitle: "My Courses",
-      bg_image: "assets/images/banner/bnr1.jpg",
-      title: "My Courses",
-    };
-    page: number = 1;
-    courseLIst: any[] = [];
-    loading: boolean = false; // For loading state
-  
-    constructor(private courseService: CourseService, private toastr: ToastrService, private router: Router) {}
-  
-    ngOnInit(): void {
-      this.getCourses();
-    }
-  
-    getCourses(): void {
-      this.loading = true; // Start loading
-      this.courseService.getMyCourseList(this.page).subscribe({
-        next: (res: any) => {
-          if (res.success) {
-            this.courseLIst = res.data.enrolled;
-            this.navigateToCourseDetails(this.courseLIst[0])
+  constructor(
+    private courseService: CourseService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.getCourses();
+  }
+
+  getCourses(): void {
+    this.loading = true; // Start loading
+    this.courseService.getMyCourseList(this.page).subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.enrolledList = res.data.enrolled;
+
+          if (this.enrolledList && this.enrolledList.length > 0) {
+            localStorage.setItem('enrolled', 'true');
           } else {
-            this.courseLIst = [];
+            localStorage.setItem('enrolled', 'false');
+            console.log(
+              ':::::::::::::::::::::::no enrolled courses found:::::::::::::::'
+            );
           }
-          this.loading = false; // Stop loading
-        },
-        error: () => {
-          this.courseLIst = [];
-          this.loading = false; // Stop loading on error
+          // this.navigateToCourseDetails(this.courseLIst[0]);
+          this.courseService.getCourseList(this.page).subscribe({
+            next: (res) => {
+              if (res.success) {
+                this.courseLIst = res.data.courses;
+                this.navigateToCourseDetails(this.courseLIst[0]);
+              } else {
+                this.courseLIst = [];
+              }
+              this.loading = false; // Stop loading
+            },
+            error: () => {
+              this.courseLIst = [];
+              this.loading = false; // Stop loading on error
+            },
+          });
+        } else {
+          localStorage.setItem('enrolled', 'false');
+          this.courseService.getCourseList(this.page).subscribe({
+            next: (res) => {
+              if (res.success) {
+                this.courseLIst = res.data.courses;
+                this.navigateToCourseDetails(this.courseLIst[0]);
+              } else {
+                this.courseLIst = [];
+              }
+              this.loading = false; // Stop loading
+            },
+            error: () => {
+              this.courseLIst = [];
+              this.loading = false; // Stop loading on error
+            },
+          });
+          // this.courseLIst = [];
         }
-      });
-    }
-  
-    loadNextPage(): void {
-      this.page++;
+        this.loading = false; // Stop loading
+      },
+      error: () => {
+        this.courseLIst = [];
+        this.loading = false; // Stop loading on error
+      },
+    });
+  }
+
+  loadNextPage(): void {
+    this.page++;
+    this.getCourses();
+  }
+
+  loadPreviousPage(): void {
+    if (this.page > 1) {
+      this.page--;
       this.getCourses();
     }
-  
-    loadPreviousPage(): void {
-      if (this.page > 1) {
-        this.page--;
-        this.getCourses();
-      }
-    }
+  }
 
-    showNoCoursesToast() {
-      this.toastr.info(
-        'No courses available. Click here to browse all courses.',
-        'No Data');
-        this.router.navigate(['/courses'])
-    }
+  showNoCoursesToast() {
+    this.toastr.info(
+      'No courses available. Click here to browse all courses.',
+      'No Data'
+    );
+    this.router.navigate(['/courses']);
+  }
 
-    navigateToCourseDetails(data: any) {
-      this.router.navigate(['/courses-details/'],{queryParams: {data: JSON.stringify(data)}})
-    }
-
+  navigateToCourseDetails(data: any) {
+    this.router.navigate(['/courses-details/'], {
+      queryParams: { data: JSON.stringify(data) },
+    });
+  }
 }

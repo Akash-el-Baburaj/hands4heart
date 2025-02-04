@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { CourseService } from 'src/app/core/service/course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cources-details',
@@ -11,6 +12,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./cources-details.component.css']
 })
 export class CourcesDetailsComponent implements OnInit {
+
+  updateProfileForm!: FormGroup;
 
   banner : any = {
 		pagetitle: "Program", //rename to course details
@@ -22,6 +25,7 @@ export class CourcesDetailsComponent implements OnInit {
   courseVideo: any;
   courseDetails: any;
   paymentStatus: string = 'unpaid';
+  enrolled: any ;
   courseTitle: string = '';
   userProfile: {
     user_name: string;
@@ -46,12 +50,34 @@ export class CourcesDetailsComponent implements OnInit {
     private sanitizer: DomSanitizer, 
     private router: Router, 
     private toastr: ToastrService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private fb: FormBuilder,
+
   ) {
     this.getCourseId();
   }
 
   ngOnInit(): void {
+
+    this.enrolled=localStorage.getItem('enrolled')
+
+    this.updateProfileForm = this.fb.group({
+      name: ['', Validators.required],
+      countryCode: ['+91', Validators.required], // Default to +91
+      phone: ['', Validators.required],  // 10-digit phone number validation
+      email: ['', [Validators.required, Validators.email]],
+      age: ['', [Validators.required, Validators.min(1), Validators.max(120)]],
+      blood_group: ['', Validators.required],
+      education: ['', Validators.required],
+      pincode: ['', Validators.required], // 6-digit pincode
+      thaluk: ['', Validators.required],
+      district: ['', Validators.required],
+      state: ['', Validators.required],
+      country: ['', Validators.required],
+      address: ['', Validators.required],
+      gender: ['', Validators.required],
+      date_of_birth: ['', Validators.required],
+    });
     
   }
 
@@ -186,6 +212,7 @@ export class CourcesDetailsComponent implements OnInit {
     this.courseService.courseEnroll(formData).subscribe({
       next: (res: any) => {
         if (res.success) {
+          this.enrolled='true';
           this.toastr.success(res.message, 'SUCCESS')
         }
       }
@@ -210,5 +237,73 @@ export class CourcesDetailsComponent implements OnInit {
     //   }
     // })
   }
+
+  // open(content: TemplateRef<NgbModal>): void {
+  //   this.modalService.open(content, { scrollable: true });
+  // }
+
+  open(content: any) {
+
+    this.modalService.open(content, {windowClass: 'custom-modal', centered: true });
+  }
+  
+
+  updateProfile() {
+    if (this.updateProfileForm.valid) {
+      const formData = new FormData();
+
+      formData.append("name", this.updateProfileForm.value.name);
+      formData.append("phone", this.updateProfileForm.value.phone);
+      formData.append("countryCode", this.updateProfileForm.value.countryCode);
+      formData.append("email", this.updateProfileForm.value.email);
+      formData.append("age", this.updateProfileForm.value.age);
+      formData.append("blood_group", this.updateProfileForm.value.blood_group);
+      formData.append("education", this.updateProfileForm.value.education);
+      formData.append("pincode", this.updateProfileForm.value.pincode);
+      formData.append("thaluk", this.updateProfileForm.value.thaluk);
+      formData.append("district", this.updateProfileForm.value.district);
+      formData.append("state", this.updateProfileForm.value.state);
+      formData.append("country", this.updateProfileForm.value.country);
+      formData.append("address", this.updateProfileForm.value.address);
+      formData.append("gender", this.updateProfileForm.value.gender);
+      formData.append("date_of_birth", this.updateProfileForm.value.date_of_birth);
+      
+
+        this.courseService.updateProfile(formData).subscribe({
+          next: (response) => {
+            console.log("response of profile update- ", response);
+            if (response.success) {
+            
+            this.resetForm();
+             
+            } else {
+              console.error("Failed to update profile:", response.message);
+            }
+          },
+          error: (error) => {
+            console.error("Error creating profile:", error);
+          },
+          complete: () => {
+         
+            console.log("Profile updated successfully!...");
+          },
+        });
+
+    }
+  }
+  resetForm() {
+    this.updateProfileForm.reset();
+   
+  }
+  // getEmbedUrl(videoUrl: string): SafeResourceUrl {
+  //   const videoId = this.getYouTubeVideoId(videoUrl);
+  //   const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+  //   return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  // }
+
+  // private getYouTubeVideoId(url: string): string {
+  //   const match = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+  //   return match ? match[1] : ""; // return video ID or empty string
+  // }
 
 }

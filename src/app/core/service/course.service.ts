@@ -34,4 +34,8 @@ export class CourseService {
     return this.http.post<any>(`${this.baseURL}/user/course/generate_certificate`, id)
   }
 
+  updateProfile(form: FormData) {
+    return this.http.post<any>(`${this.baseURL}/user/profile_update`, form)
+  }
+
 }
