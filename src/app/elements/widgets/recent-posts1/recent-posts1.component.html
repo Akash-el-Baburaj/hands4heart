@@ -1,51 +1,56 @@
-<div class="widget recent-posts-entry">
+<!-- <div class="widget recent-posts-entry">
     <h5 class="widget-title style-1">Program</h5>
     <div class="widget-post-bx">
         <div class="widget-post clearfix" *ngFor="let course of courseDetails">
-            <div class="dlab-post-media"  (click)="getCourseVideo(course.video_url)" style="border: 2px solid #9ac92f;"> 
-                <img [src]="course.img  || 'assets/images/images.png'" style="width: 100%; height: 100%; object-fit: cover;"  alt="">
+            <div 
+                class="dlab-post-media"  
+                (click)="getCourseVideo(course)" 
+                [ngClass]="{'highlighted': isSelected(course)}"
+                style="border: 2px solid #9ac92f; cursor: pointer;"> 
+                <img [src]="course.img || 'assets/images/images.png'" 
+                    style="width: 100%; height: 100%; object-fit: cover;"  
+                    alt="">
             </div>
-            <div class="dlab-post-info"  (click)="getCourseVideo(course.video_url)" >
+            <div class="dlab-post-info" (click)="getCourseVideo(course)">
                 <div class="dlab-post-meta">
                     <td style="cursor: pointer;">{{ course.name }}</td>
-                    <!-- <ul>
-                        <li class="post-date"> <i class="la la-clock"></i> <strong>01 June</strong> <span> 2024</span> </li>
-                    </ul> -->
                 </div>
                 <div class="dlab-post-header">
                     <h6 class="post-title"><a href="javascript:void(0)">{{ course.description }}</a></h6>
                 </div>
             </div>
         </div>
-        <!-- <div class="widget-post clearfix">
-            <div class="dlab-post-media"> 
-                <img src="assets/images/blog/recent-blog/pic2.jpg" width="200" height="160" alt=""> 
+    </div>
+</div> -->
+<div class="widget recent-posts-entry">
+    <h5 class="widget-title style-1">Program</h5>
+    <div class="widget-post-bx">
+        <div class="widget-post clearfix" *ngFor="let course of courseDetails">
+            <div 
+                class="dlab-post-media"  
+                (click)="getCourseVideo(course)" 
+                [ngClass]="{'playing': isSelected(course), 'highlighted': isSelected(course)}"
+                style="border: 2px solid #9ac92f; cursor: pointer; position: relative;"> 
+
+                <!-- Image with blur effect on selection -->
+                <img [src]="course.img || 'assets/images/images.png'" 
+                    class="course-image"
+                    [ngClass]="{'blurred': isSelected(course)}"
+                    alt="">
+
+                <!-- "Playing" Label -->
+                <div class="playing-label" *ngIf="isSelected(course)">Playing</div>
             </div>
-            <div class="dlab-post-info">
+
+            <div class="dlab-post-info" (click)="getCourseVideo(course)">
                 <div class="dlab-post-meta">
-                    <ul>
-                        <li class="post-date"> <i class="la la-clock"></i> <strong>01 June</strong> <span> 2024</span> </li>
-                    </ul>
+                    <td style="cursor: pointer;">{{ course.name }}</td>
                 </div>
                 <div class="dlab-post-header">
-                    <h6 class="post-title"><a [routerLink]="['/blog-single-left-sidebar']">Here's What People Are Saying About</a></h6>
+                    <h6 class="post-title"><a href="javascript:void(0)">{{ course.description }}</a></h6>
                 </div>
             </div>
-        </div> -->
-        <!-- <div class="widget-post clearfix">
-            <div class="dlab-post-media"> 
-                <img src="assets/images/blog/recent-blog/pic3.jpg" width="200" height="160" alt=""> 
-            </div>
-            <div class="dlab-post-info">
-                <div class="dlab-post-meta">
-                    <ul>
-                        <li class="post-date"> <i class="la la-clock"></i> <strong>01 June</strong> <span> 2024</span> </li>
-                    </ul>
-                </div>
-                <div class="dlab-post-header">
-                    <h6 class="post-title"><a [routerLink]="['/blog-single-left-sidebar']">Five Things Nobody Told You About</a></h6>
-                </div>
-            </div>
-        </div> -->
+        </div>
     </div>
 </div>
+
