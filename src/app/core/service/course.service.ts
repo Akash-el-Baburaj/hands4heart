@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CourseList } from '../model/course.model';
 
 import { environment } from 'src/environment/environment';
+import { EnrollmentResponse } from 'src/app/pages/cources-details/model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class CourseService {
   }
 
   getMyCourseList(page: number) {
-    return this.http.get<CourseList>(`${this.baseURL}/user/course/get_course_list/${page}`)
+    return this.http.get<EnrollmentResponse>(`${this.baseURL}/user/course/get_course_list/${page}`)
   }
 
   courseEnroll(id: any) {

@@ -47,38 +47,11 @@ export class MyCoursesComponent implements OnInit {
             );
           }
           // this.navigateToCourseDetails(this.courseLIst[0]);
-          this.courseService.getCourseList(this.page).subscribe({
-            next: (res) => {
-              if (res.success) {
-                this.courseLIst = res.data.courses;
-                this.navigateToCourseDetails(this.courseLIst[0]);
-              } else {
-                this.courseLIst = [];
-              }
-              this.loading = false; // Stop loading
-            },
-            error: () => {
-              this.courseLIst = [];
-              this.loading = false; // Stop loading on error
-            },
-          });
+          this.getCourseList();
         } else {
           localStorage.setItem('enrolled', 'false');
-          this.courseService.getCourseList(this.page).subscribe({
-            next: (res) => {
-              if (res.success) {
-                this.courseLIst = res.data.courses;
-                this.navigateToCourseDetails(this.courseLIst[0]);
-              } else {
-                this.courseLIst = [];
-              }
-              this.loading = false; // Stop loading
-            },
-            error: () => {
-              this.courseLIst = [];
-              this.loading = false; // Stop loading on error
-            },
-          });
+          this.getCourseList();
+
           // this.courseLIst = [];
         }
         this.loading = false; // Stop loading
@@ -113,6 +86,23 @@ export class MyCoursesComponent implements OnInit {
   navigateToCourseDetails(data: any) {
     this.router.navigate(['/courses-details/'], {
       queryParams: { data: JSON.stringify(data) },
+    });
+  }
+  getCourseList() {
+    this.courseService.getCourseList(this.page).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.courseLIst = res.data.courses;
+          this.navigateToCourseDetails(this.courseLIst[0]);
+        } else {
+          this.courseLIst = [];
+        }
+        this.loading = false; // Stop loading
+      },
+      error: () => {
+        this.courseLIst = [];
+        this.loading = false; // Stop loading on error
+      },
     });
   }
 }

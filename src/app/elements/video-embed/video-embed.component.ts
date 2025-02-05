@@ -19,6 +19,7 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
   isVideoWatched: boolean = false;
 
 
+  
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['VideoURL']) {
       this.videoEmbedUrl = this.VideoURL;

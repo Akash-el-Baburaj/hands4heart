@@ -76,7 +76,11 @@
               <div class="col-lg-12"></div>
               <div class="col-lg-12">
                 <div class="media m-b30">
-                  <!-- <img *ngIf="!courseVideo" src="assets/images/blog/default/thum1.jpg" alt=""> -->
+                  <img
+                    *ngIf="!courseVideo"
+                    src="assets/images/blog/default/thum1.jpg"
+                    alt=""
+                  />
                   <app-video-embed
                     class="w-100"
                     *ngIf="courseVideo"
@@ -84,7 +88,7 @@
                     [VideoType]="VideoType"
                   ></app-video-embed>
                   <div class="w-100" *ngIf="!courseVideo">
-					<iframe
+                    <!-- <iframe
                     
                     [src]="
                     getSafeUrl('https://www.youtube.com/watch?v=s9xk77X4m5c')
@@ -95,8 +99,8 @@
                     allow="autoplay; encrypted-media"
                     allowfullscreen
                   >
-                  </iframe>
-				  </div>
+                  </iframe> -->
+                  </div>
                 </div>
               </div>
               <div class="col-lg-12 mb-3 d-flex justify-content-end">
@@ -105,12 +109,12 @@
 															color: #000;
 															border: 2px solid #000;">ENROLLED <i class="fa fa-check-circle" ></i>
 								</div> -->
-                <button
+                <!-- <button
                   class="site-button btnhover18 w-25 mr-3"
                   (click)="open(profileUpdateModal)"
                 >
                   Generate
-                </button>
+                </button> -->
 
                 <button
                   class="site-button btnhover10 w-25 ms-3"
@@ -133,12 +137,42 @@
                 >
                   Test
                 </button>
-                <!-- <button class="site-button btnhover14 w-25 ms-3" (click)="getCertificate(certificate, courseId)">Certificate</button> -->
-                <button
+
+                <!-- <button
+                  class="site-button btnhover14 w-25 ms-3"
+                  (click)="open(profileUpdateModal)"
+                  *ngIf="certificateReady && certificatePayment==='unpaid' && !profileUpdated"
+                >
+                  Get Certificate
+                </button> -->
+                
+                <!-- <button
+                class="btn-danger w-25 ms-3"
+                  *ngIf="certificateReady && certificatePayment==='unpaid' && profileUpdated"
+                >
+                  Payment pending
+                </button> -->
+
+                <!-- <button
                   class="site-button btnhover14 w-25 ms-3"
                   (click)="getCertificate(certificate, courseId)"
+                  *ngIf="certificateReady && certificatePayment==='paid' && profileUpdated"
                 >
-                  Certificate
+                  Downlaod Certificate
+                </button> -->
+               
+                <button
+                  class="site-button btnhover14 w-25 ms-3"
+                  (click)="
+                    onCertificateButtonClick(
+                      profileUpdateModal,
+                      certificate,
+                      courseId
+                    )
+                  "
+                  *ngIf="!certificateReady"
+                >
+                Get Certificate
                 </button>
               </div>
               <div class="col-lg-12 d-sm-block d-md-none mt-2">
@@ -252,10 +286,9 @@
             "
             class="form-control"
             type="text"
-            id="countryCode"
+            id="code"
             required
-            formControlName="countryCode"
-            value="+91"
+            formControlName="code"
           />
         </div>
         <div style="flex: 3">
@@ -535,10 +568,14 @@
       </div>
 
       <div class="mb-3 text-center">
-        <button class="btn btn-primary" type="submit" onclick="updateProfile()">
-          Update Details
-        </button>
+        <button class="btn btn-primary" type="submit">Update Details</button>
       </div>
     </form>
   </div>
 </ng-template>
+<div
+  *ngIf="updateProfileForm.invalid && updateProfileForm.touched"
+  class="text-danger"
+>
+  Please fill out all required fields correctly.
+</div>
