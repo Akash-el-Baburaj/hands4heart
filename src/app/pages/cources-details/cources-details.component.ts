@@ -75,6 +75,11 @@ export class CourcesDetailsComponent implements OnInit {
     const userString = localStorage.getItem('user');
     this.user = userString ? JSON.parse(userString) : null;
 
+    const hasEmptyFields = this.checkForEmptyFields(this.user);
+    if (hasEmptyFields) {
+      this.profileUpdated = true;
+    }
+
     this.updateProfileForm = this.fb.group({
       name: [this.user?.name || '', Validators.required],
       code: [this.user?.code, Validators.required],
@@ -104,7 +109,7 @@ export class CourcesDetailsComponent implements OnInit {
           this.enrolledList = res.data.enrolled;
           this.certificateReady= res.data.enrolled[0].certificateReady;
           this.certificatePayment= res.data.enrolled[0].certificate.paymentStatus;
-          this.profileUpdated= res.data.enrolled[0].userEnteredData;
+          // this.profileUpdated= res.data.enrolled[0].userEnteredData;
 
         } else {
           console.log(
@@ -205,7 +210,7 @@ export class CourcesDetailsComponent implements OnInit {
     }
   }
 
-  getSafeUrl(videoUrl: string, CourseDetailsData:any): SafeResourceUrl {
+  getSafeUrl(videoUrl: string): SafeResourceUrl {
 // console.log('CourseDetailsData',CourseDetailsData)
     if (this.isYouTubeUrl(videoUrl)) {
       const videoId = this.getYouTubeVideoId(videoUrl);
@@ -332,6 +337,10 @@ export class CourcesDetailsComponent implements OnInit {
       next: (response) => {
         console.log('response of profile update- ', response);
         if (response.success) {
+          const hasEmptyFields = this.checkForEmptyFields(this.user);
+          if (hasEmptyFields) {
+            this.profileUpdated = true;
+          }
           this.getUserProfile();
           this.resetForm();
         } else {

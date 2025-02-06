@@ -84,7 +84,7 @@
                   <app-video-embed
                     class="w-100"
                     *ngIf="courseVideo"
-                    [VideoURL]="getSafeUrl(courseVideo,CourseDetailsData)"
+                    [VideoURL]="getSafeUrl(courseVideo)"
                     [VideoType]="VideoType"
                     [videoId]="videoId"
                   ></app-video-embed>
@@ -92,7 +92,7 @@
                     <!-- <iframe
                     
                     [src]="
-                    getSafeUrl('https://www.youtube.com/watch?v=s9xk77X4m5c')
+                    getSafeUrl('https://lms.zaap.life/img/test/banner/87419c56724f81fa86bc052721f928ab.mp4')
                     "
                     width="100%"
                     height="300"

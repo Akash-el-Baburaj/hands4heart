@@ -19,6 +19,7 @@ export class TestEvaluationComponent {
 
   quizes: any[] = [];
   quiz: any;
+  quiz_id: any;
 
   // quiz: Quiz = new Quiz(null);
   mode = 'quiz';
@@ -38,7 +39,6 @@ export class TestEvaluationComponent {
     theme: 'none',
   };
   courseList: any[] = [];
-
 
   pager = {
     index: 0,
@@ -71,6 +71,7 @@ export class TestEvaluationComponent {
     let id: any;
     this.route.queryParams.subscribe((params: any) => {
       const ID = params['id'];
+      this.quiz_id = ID;
       if (ID) {
         id = ID;
         this.getQuiz(id, this.page);
@@ -217,6 +218,25 @@ export class TestEvaluationComponent {
     this.mode = 'result';
     this.quiz.questions.forEach((q: any) => {
       q.isCorrect = q.options.every((o: any) => o.selected === !!o.isCorrect);
+    });    
+
+    const formData = new FormData();
+
+    formData.append('quizId', this.quiz_id);
+
+    this.quizService.markCompleted(formData).subscribe({
+      next: (res) => {
+        if (res.success) {
+          console.log('quiz marked as completed');
+        } else {
+          console.log(
+            '::::::::::::;failed::::::::::quiz marked as completed:::::::::::'
+          );
+        }
+      },
+      error: () => {
+        console.log('::::::::failed to update the quiz completion::::::');
+      },
     });
   }
 
@@ -224,12 +244,11 @@ export class TestEvaluationComponent {
     this.router.navigate([url]);
   }
 
-
   goToDetails() {
     if (this.courseList.length > 0) {
       this.navigateToCourseDetails(this.courseList[0]); // Pass the first course
     } else {
-      console.warn("No course available!");
+      console.warn('No course available!');
     }
   }
 
