@@ -30,8 +30,8 @@ export class Courses6Component implements OnChanges {
     return this.sanitizer.bypassSecurityTrustResourceUrl(urlWithParams);
   }
 
-  getCourseVideo(videoUrl: string) {
-    const data = videoUrl;
+  getCourseVideo(course: any) {
+    const data = course;
     this.courseSelected.emit(data)
   }
 

@@ -66,14 +66,14 @@
                     <td>
                       <span><i class="fa fa-file-o m-r10"></i>Lecture {{ i + 1 }}</span>
                     </td>
-                    <td style="cursor: pointer;" (click)="getCourseVideo(course.video_url)">{{ course.name }}</td>
+                    <td style="cursor: pointer;" (click)="getCourseVideo(course)">{{ course.name }}</td>
                     <td class="text-right">
                       <span><i class="fa fa-clock-o m-r10"></i> 00 : 10 : 00</span>
                     </td>
                   </tr>
                   <tr>
                     <td colspan="3" class="text-center">
-                        <img [src]="course.img  || 'assets/images/images.png'" (click)="getCourseVideo(course.video_url)" style="width: 100%; height: 250px;" alt="">
+                        <img [src]="course.img  || 'assets/images/images.png'" (click)="getCourseVideo(course)" style="width: 100%; height: 250px;" alt="">
                       <!-- <iframe
                         *ngIf="course.video_url"
                         [src]="getSafeUrl(course.video_url)"

@@ -38,5 +38,8 @@ export class CourseService {
   updateProfile(form: FormData) {
     return this.http.post<any>(`${this.baseURL}/user/profile_update`, form)
   }
+  markVideo(form: FormData) {
+    return this.http.post<any>(`${this.baseURL}/user/course/mark-completed-courses`, form)
+  }
 
 }

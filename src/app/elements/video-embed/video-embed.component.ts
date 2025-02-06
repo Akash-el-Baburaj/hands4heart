@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { CourseService } from 'src/app/core/service/course.service';
 
 @Component({
   selector: 'app-video-embed',
@@ -10,6 +11,7 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
 
   @Input() VideoURL: SafeResourceUrl | null = '';
   @Input() VideoType: string = '';
+  @Input() videoId: any ;
   @Output() VideoCompleted = new EventEmitter<any>(); 
 
   videoEmbedUrl: SafeResourceUrl | null = '';
@@ -17,6 +19,8 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
   duration: number | null = null;
   isLoading: boolean = true;
   isVideoWatched: boolean = false;
+  enrolled_id:any;
+  video_id:any;
 
 
   
@@ -24,11 +28,14 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
     if (changes['VideoURL']) {
       this.videoEmbedUrl = this.VideoURL;
       this.videoEmbedType = this.VideoType
+      this.video_id = this.videoId
+
      
     }
   }
 
   ngOnInit(): void {
+    this.enrolled_id=localStorage.getItem('enrolled_id')
     this.videoEmbedUrl = this.VideoURL;
     this.videoEmbedType = this.VideoType;
     // this.isLoading = true;
@@ -36,6 +43,13 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
       this.isLoading = false;
     }, 3000);
   }
+  constructor(
+      private courseService: CourseService,
+      
+      
+    ) {
+
+    }
 
   onMetadataLoaded(video: HTMLVideoElement): void {
     this.duration = video.duration; // Get video duration in seconds
@@ -50,10 +64,10 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
     );
   }
   
-
   onVideoEnded(video: HTMLVideoElement): void {
     video.autoplay = false; // Stop autoplay after the first play
     console.log('Video ended. Autoplay disabled.');
+
   }
 
   onVideoCanPlay(): void {
@@ -68,6 +82,29 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
     if (watchedPercentage >= threshold && !this.isVideoWatched) {
       this.isVideoWatched = true;
       console.log('Video is completely watched');
+
+      const formData = new FormData();
+
+      formData.append('enrollId', this.enrolled_id);
+      formData.append('subCourseId', this.video_id);
+      
+      this.courseService.markVideo(formData).subscribe({
+        next: (response) => {
+          console.log('response of mark video as completed- ', response);
+          if (response.success) {
+            console.log('video marked as completed')
+       
+          } else {
+            console.error('Failed to mark video as completed:', response.message);
+          }
+        },
+        error: (error) => {
+          console.error('Error mark video as completed:', error);
+        },
+        complete: () => {
+          console.log('mark video  completed successfully!...');
+        },
+      });
     }
   }
 

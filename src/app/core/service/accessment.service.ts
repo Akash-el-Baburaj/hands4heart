@@ -19,4 +19,20 @@ export class AccessmentService {
   getQuiz(id: string, page: number) {
     return this.http.get<any>(`${this.baseURL}/user/question/question_list/${page}?quizId=${id}&status&search`)
   }
+
+  getQuizResult(id: string) {
+    return this.http.get<any>(`${this.baseURL}/user/question/getQuizResults??quizId=${id}`)
+  }
+
+  startResume(form: FormData) {
+    return this.http.post<any>(`${this.baseURL}/user/question/status_quiz`, form)
+  }
+
+  submitAnswer(form: FormData) {
+    return this.http.post<any>(`${this.baseURL}/user/question/submit_answer`, form)
+  }
+
+  markCompleted(form: FormData) {
+    return this.http.post<any>(`${this.baseURL}/user/question/mark_completed`, form)
+  }
 }

@@ -3,43 +3,47 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AccessmentService } from 'src/app/core/service/accessment.service';
+import { CourseService } from 'src/app/core/service/course.service';
 
 @Component({
   selector: 'app-test-evaluation',
   templateUrl: './test-evaluation.component.html',
-  styleUrls: ['./test-evaluation.component.css']
+  styleUrls: ['./test-evaluation.component.css'],
 })
 export class TestEvaluationComponent {
   banner: any = {
-    pagetitle: "Assessment",
-    bg_image: "assets/images/banner/bnr1.jpg",
-    title: "Assessment",
+    pagetitle: 'Assessment',
+    bg_image: 'assets/images/banner/bnr1.jpg',
+    title: 'Assessment',
   };
 
   quizes: any[] = [];
-  quiz: any ;
+  quiz: any;
+
   // quiz: Quiz = new Quiz(null);
   mode = 'quiz';
   quizName: string = '';
   config: any = {
-    'allowBack': true,
-    'allowReview': true,
-    'autoMove': false,
-    'duration': 300,
-    'pageSize': 1,
-    'requiredAll': false,
-    'richText': false,
-    'shuffleQuestions': false,
-    'shuffleOptions': false,
-    'showClock': false,
-    'showPager': true,
-    'theme': 'none'
+    allowBack: true,
+    allowReview: true,
+    autoMove: false,
+    duration: 300,
+    pageSize: 1,
+    requiredAll: false,
+    richText: false,
+    shuffleQuestions: false,
+    shuffleOptions: false,
+    showClock: false,
+    showPager: true,
+    theme: 'none',
   };
+  courseList: any[] = [];
+
 
   pager = {
     index: 0,
     size: 1,
-    count: 1
+    count: 1,
   };
   timer: any = null;
   startTime!: Date;
@@ -48,24 +52,30 @@ export class TestEvaluationComponent {
   duration = '';
   page: number = 1;
 
-  constructor(private quizService: AccessmentService, private route: ActivatedRoute, private router: Router) { 
+  constructor(
+    private quizService: AccessmentService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private courseService: CourseService
+  ) {
     this.getCourseId();
-   }
+  }
 
   ngOnInit() {
     // this.quizes = this.quizService.getAll();
     // this.quizName = this.quizes[0].id;'307477b1-087d-460d-9bad-635f70b0ed0d'
+    this.getCourseList();
   }
 
   getCourseId() {
     let id: any;
     this.route.queryParams.subscribe((params: any) => {
-      const ID = params['id']; 
+      const ID = params['id'];
       if (ID) {
         id = ID;
-        this.getQuiz(id, this.page)
+        this.getQuiz(id, this.page);
       }
-    })
+    });
   }
 
   loadQuiz(quizName: string) {
@@ -113,7 +123,6 @@ export class TestEvaluationComponent {
       },
     });
   }
-  
 
   tick() {
     const now = new Date();
@@ -133,8 +142,12 @@ export class TestEvaluationComponent {
   }
 
   get filteredQuestions() {
-    return (this.quiz.questions) ?
-      this.quiz.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
+    return this.quiz.questions
+      ? this.quiz.questions.slice(
+          this.pager.index,
+          this.pager.index + this.pager.size
+        )
+      : [];
   }
 
   // onSelect(question: any, option: any) {
@@ -154,16 +167,15 @@ export class TestEvaluationComponent {
       question.options.forEach((x: any) => (x.selected = false));
     }
     option.selected = !option.selected; // Toggle selection
-  
+
     if (this.config.autoMove && option.selected) {
       this.goTo(this.pager.index + 1);
     }
   }
-  
+
   isOptionSelected(question: any): boolean {
     return question.options.some((option: any) => option.selected);
   }
-  
 
   goTo(index: number) {
     if (index >= 0 && index < this.pager.count) {
@@ -173,12 +185,16 @@ export class TestEvaluationComponent {
   }
 
   isAnswered(question: any) {
-    return question.options.find((x :any) => x.selected) ? 'Answered' : 'Not Answered';
-  };
+    return question.options.find((x: any) => x.selected)
+      ? 'Answered'
+      : 'Not Answered';
+  }
 
   isCorrect(question: any) {
-    return question.options.every((x :any) => x.selected === x.isAnswer) ? 'correct' : 'wrong';
-  };
+    return question.options.every((x: any) => x.selected === x.isAnswer)
+      ? 'correct'
+      : 'wrong';
+  }
 
   // onSubmit() {
   //   let answers = [];
@@ -194,18 +210,41 @@ export class TestEvaluationComponent {
       questionId: q.id,
       selectedOption: q.options.find((o: any) => o.selected)?.id || null,
     }));
-  
+
     console.log('Submitted Answers:', answers);
-  
+
     // After submitting, calculate results
     this.mode = 'result';
     this.quiz.questions.forEach((q: any) => {
       q.isCorrect = q.options.every((o: any) => o.selected === !!o.isCorrect);
     });
   }
-  
+
   navigateTo(url: string) {
-    this.router.navigate([url])
+    this.router.navigate([url]);
   }
 
+
+  goToDetails() {
+    if (this.courseList.length > 0) {
+      this.navigateToCourseDetails(this.courseList[0]); // Pass the first course
+    } else {
+      console.warn("No course available!");
+    }
+  }
+
+  navigateToCourseDetails(data: any) {
+    this.router.navigate(['/courses-details/'], {
+      queryParams: { data: JSON.stringify(data) },
+    });
+  }
+  getCourseList() {
+    this.courseService.getCourseList(this.page).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.courseList = res.data.courses;
+        }
+      },
+    });
+  }
 }

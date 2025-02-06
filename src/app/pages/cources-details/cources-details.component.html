@@ -84,8 +84,9 @@
                   <app-video-embed
                     class="w-100"
                     *ngIf="courseVideo"
-                    [VideoURL]="getSafeUrl(courseVideo)"
+                    [VideoURL]="getSafeUrl(courseVideo,CourseDetailsData)"
                     [VideoType]="VideoType"
+                    [videoId]="videoId"
                   ></app-video-embed>
                   <div class="w-100" *ngIf="!courseVideo">
                     <!-- <iframe
@@ -144,16 +145,16 @@
                   *ngIf="certificateReady && certificatePayment==='unpaid' && !profileUpdated"
                 >
                   Get Certificate
-                </button> -->
+                </button>
                 
-                <!-- <button
+                <button
                 class="btn-danger w-25 ms-3"
                   *ngIf="certificateReady && certificatePayment==='unpaid' && profileUpdated"
                 >
                   Payment pending
-                </button> -->
+                </button>
 
-                <!-- <button
+               <button
                   class="site-button btnhover14 w-25 ms-3"
                   (click)="getCertificate(certificate, courseId)"
                   *ngIf="certificateReady && certificatePayment==='paid' && profileUpdated"

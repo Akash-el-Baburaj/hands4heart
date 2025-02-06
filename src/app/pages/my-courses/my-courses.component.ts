@@ -18,6 +18,7 @@ export class MyCoursesComponent implements OnInit {
   page: number = 1;
   courseLIst: any[] = [];
   enrolledList: any[] = [];
+  enrolled_id:any;
 
   loading: boolean = false; // For loading state
 
@@ -37,9 +38,11 @@ export class MyCoursesComponent implements OnInit {
       next: (res: any) => {
         if (res.success) {
           this.enrolledList = res.data.enrolled;
+          this.enrolled_id = res.data.enrolled[0].id;
 
           if (this.enrolledList && this.enrolledList.length > 0) {
             localStorage.setItem('enrolled', 'true');
+            localStorage.setItem('enrolled_id',this.enrolled_id);
           } else {
             localStorage.setItem('enrolled', 'false');
             console.log(

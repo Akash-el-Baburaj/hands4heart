@@ -48,6 +48,7 @@ export class CourcesDetailsComponent implements OnInit {
   certificateReady: boolean=false;
   certificatePayment:string= 'unpaid';
   profileUpdated: boolean=false;
+  videoId: any;
 
 
 
@@ -194,31 +195,18 @@ export class CourcesDetailsComponent implements OnInit {
   }
 
   getCourseVideo(event: any) {
+    console.log('event event',event)
+    this.videoId=event.id;
     this.courseVideo = null;
     if (event) {
       setTimeout(() => {
-        this.courseVideo = event;
+        this.courseVideo = event.video_url;
       }, 30);
     }
   }
 
-  // getSafeUrl(videoUrl: string): SafeResourceUrl {
-  //   // Sanitize the video URL to make it safe for Angular
-  //   console.log('video url => ', videoUrl)
-  //   const videoId = this.getYouTubeVideoId(videoUrl);
-  //   const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
-
-  //   return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
-  // }
-
-  // private getYouTubeVideoId(url: string): string | null {
-  //   const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|.+\?v=))([\w-]{11})/);
-  //   return match ? match[1] : null; // Return the video ID or null if not found
-  // }
-
-  getSafeUrl(videoUrl: string): SafeResourceUrl {
-    console.log('Video URL => ', videoUrl);
-
+  getSafeUrl(videoUrl: string, CourseDetailsData:any): SafeResourceUrl {
+// console.log('CourseDetailsData',CourseDetailsData)
     if (this.isYouTubeUrl(videoUrl)) {
       const videoId = this.getYouTubeVideoId(videoUrl);
       const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
@@ -340,7 +328,6 @@ export class CourcesDetailsComponent implements OnInit {
       'date_of_birth',
       this.updateProfileForm.value.date_of_birth
     );
-
     this.courseService.updateProfile(formData).subscribe({
       next: (response) => {
         console.log('response of profile update- ', response);
@@ -375,6 +362,7 @@ export class CourcesDetailsComponent implements OnInit {
       this.open(profileupdateModal);
     }
     else {
+      console.log('user profile updated with all data')
       // this.openCentered(certificate);
     }
   }

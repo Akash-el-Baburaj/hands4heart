@@ -53,8 +53,9 @@ export class RecentPosts1Component implements OnInit {
     ngOnInit(): void {}
 
     getCourseVideo(course: any) {
+        
         this.selectedCourse = course;  // Set selected course
-        this.courseSelected.emit(course.video_url);
+        this.courseSelected.emit(course);
     }
 
     isSelected(course: any): boolean {

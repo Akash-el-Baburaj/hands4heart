@@ -19,7 +19,7 @@
                         <option *ngFor="let quiz of quizes" [value]="quiz.id">{{quiz.name}}</option>
                       </select> -->
 
-                      <button *ngIf="quizes.length === 0" (click)="navigateTo('/my-courses')" class="site-button btnhover13">Go To My Courses</button>
+                      <button *ngIf="quizes.length === 0" (click)="goToDetails()" class="site-button btnhover13">Go To My Courses</button>
                     </div>
                   </div>
                   <div id="quiz">
@@ -64,9 +64,14 @@
                           <!-- <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.count - 1)">Last</button> -->
                         </div>
                       </div>
-                      <div *ngIf="quizes.length === 0" class="text-center">
+                      <!-- <div *ngIf="filteredQuestions.length === 0" class="text-center">
                         No data found, Please go to <a class="btn btn-link btn-primary px-0" [routerLink]="['/my-courses']">My Course</a> page.
+                      </div> -->
+                      <div *ngIf="filteredQuestions.length === 0" class="text-center">
+                        No data found, Please go to 
+                        <a class="btn btn-link btn-primary px-0" (click)="goToDetails()">My Course</a> page.
                       </div>
+                      
                     </div>
                     
                   

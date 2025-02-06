@@ -4,7 +4,7 @@
         Loading...
       </div>
     </div>
-  <video
+  <!-- <video
   *ngIf="VideoType === 'server'"
     controls
     autoplay
@@ -23,7 +23,27 @@
       type="video/mp4"
     />
     Your browser does not support the video tag.
-  </video>
+  </video> -->
+  <video
+  *ngIf="VideoType === 'server'"
+  controls
+  autoplay
+  playsinline
+  width="100%"
+  height="auto"
+  #videoPlayer
+  (ended)="onVideoEnded(videoPlayer)" 
+  (loadedmetadata)="onMetadataLoaded(videoPlayer)"
+  (timeupdate)="onTimeUpdate(videoPlayer)"
+>
+  <source
+    [src]="videoEmbedUrl"
+    type="video/mp4"
+  />
+  Your browser does not support the video tag.
+</video>
+
+  
   <iframe
         *ngIf="VideoType !== 'server'"
         [src]="videoEmbedUrl"
