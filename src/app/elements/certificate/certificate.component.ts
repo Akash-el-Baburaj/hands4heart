@@ -15,7 +15,10 @@ export class CertificateComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['Data']) {
+      console.log('this.Data',this.Data)
       this.userProfile = this.Data
+      console.log('this.userProfile',this.userProfile)
+
     }
 
     if (changes['qrData']) {

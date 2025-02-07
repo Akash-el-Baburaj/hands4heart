@@ -14,6 +14,7 @@ export class Courses6Component implements OnChanges {
 
   courseDetails: any[] = [];
   course: any;
+  payment: any;
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -21,6 +22,10 @@ export class Courses6Component implements OnChanges {
       const Data = this.data 
       this.course = this.data;     
       this.courseDetails = Data?.details?.details
+    }
+    if (changes['PaymentStatus']) {
+      const payment = this.PaymentStatus 
+      this.payment = payment;     
     }
   }
 

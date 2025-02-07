@@ -1,4 +1,4 @@
-<div class="course-details dlab-tabs border-top bg-tabs">
+<div class="course-details dlab-tabs border-top bg-tabs" *ngIf="payment === 'paid'">
     <ul class="nav nav-tabs ">
         <li>
             <a data-toggle="tab" href="#description" class="active">
@@ -469,4 +469,9 @@
             </div>
         </div>
     </div>
+</div>
+<div class="dlab-tabs border-top bg-tabs d-flex justify-content-center align-items-center text-center" 
+     style="height: 30vh;" 
+     *ngIf="payment === 'unpaid'">
+    <p>Enrolled course payment is pending, Please contact admin</p>
 </div>

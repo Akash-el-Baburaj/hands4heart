@@ -51,6 +51,7 @@ export class TestEvaluationComponent {
   ellapsedTime = '00:00';
   duration = '';
   page: number = 1;
+  courseId:any;
 
   constructor(
     private quizService: AccessmentService,
@@ -64,6 +65,7 @@ export class TestEvaluationComponent {
   ngOnInit() {
     // this.quizes = this.quizService.getAll();
     // this.quizName = this.quizes[0].id;'307477b1-087d-460d-9bad-635f70b0ed0d'
+    this.courseId=localStorage.getItem('courseId')
     this.getCourseList();
   }
 
@@ -205,33 +207,44 @@ export class TestEvaluationComponent {
   //   console.log(this.quiz.questions);
   //   this.mode = 'result';
   // }
-
   onSubmit() {
     const answers = this.quiz.questions.map((q: any) => ({
       questionId: q.id,
       selectedOption: q.options.find((o: any) => o.selected)?.id || null,
     }));
-
+  
     console.log('Submitted Answers:', answers);
-
+  
     // After submitting, calculate results
     this.mode = 'result';
+    let correctAnswersCount = 0;
+  
     this.quiz.questions.forEach((q: any) => {
       q.isCorrect = q.options.every((o: any) => o.selected === !!o.isCorrect);
-    });    
-
+      if (q.isCorrect) {
+        correctAnswersCount++;
+      }
+    });
+  
     const formData = new FormData();
-
+  
     formData.append('quizId', this.quiz_id);
-
+    formData.append('course_id', this.courseId);
+    
+    // Set total questions as score (total number of questions)
+    formData.append('score', this.quiz.questions.length.toString());
+  
+    // Set correct answers count as score_get
+    formData.append('score_get', correctAnswersCount.toString());
+  
+    formData.append('isCompleted', 'true'); 
+  
     this.quizService.markCompleted(formData).subscribe({
       next: (res) => {
         if (res.success) {
-          console.log('quiz marked as completed');
+          console.log('Quiz marked as completed');
         } else {
-          console.log(
-            '::::::::::::;failed::::::::::quiz marked as completed:::::::::::'
-          );
+          console.log('::::::::::::;failed::::::::::quiz marked as completed:::::::::::');
         }
       },
       error: () => {
@@ -239,6 +252,7 @@ export class TestEvaluationComponent {
       },
     });
   }
+  
 
   navigateTo(url: string) {
     this.router.navigate([url]);

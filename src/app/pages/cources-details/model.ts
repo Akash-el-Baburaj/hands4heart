@@ -74,8 +74,15 @@ export interface CourseObjective {
     certificateReady: boolean;
     userEnteredData:boolean;
     certificate: Certificate;
+    certificateValid:boolean;
+    quizProgress:Progress;
+
   }
-  
+  export interface Progress{
+    score:number;
+    score_get:number;
+    completedAt:string;
+  }
   export interface EnrollmentResponse {
     success: boolean;
     message: string;

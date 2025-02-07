@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CourseService } from 'src/app/core/service/course.service';
+import { EnrolledUser, SubCourse } from 'src/app/pages/cources-details/model';
 
 @Component({
   selector: 'app-video-embed',
@@ -21,6 +22,8 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
   isVideoWatched: boolean = false;
   enrolled_id:any;
   video_id:any;
+  subCourseList: SubCourse[] = [];
+  
 
 
   
@@ -82,30 +85,65 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
     if (watchedPercentage >= threshold && !this.isVideoWatched) {
       this.isVideoWatched = true;
       console.log('Video is completely watched');
-
-      const formData = new FormData();
-
-      formData.append('enrollId', this.enrolled_id);
-      formData.append('subCourseId', this.video_id);
-      
-      this.courseService.markVideo(formData).subscribe({
-        next: (response) => {
-          console.log('response of mark video as completed- ', response);
-          if (response.success) {
-            console.log('video marked as completed')
-       
-          } else {
-            console.error('Failed to mark video as completed:', response.message);
-          }
-        },
-        error: (error) => {
-          console.error('Error mark video as completed:', error);
-        },
-        complete: () => {
-          console.log('mark video  completed successfully!...');
-        },
-      });
+      this.getSubscribedCourse()
+   
     }
   }
+
+  updateVideoMarked(): void {
+    const formData = new FormData();
+
+    formData.append('enrollId', this.enrolled_id);
+    formData.append('subCourseId', this.video_id);
+    
+    this.courseService.markVideo(formData).subscribe({
+      next: (response) => {
+        console.log('response of mark video as completed- ', response);
+        if (response.success) {
+          console.log('video marked as completed')
+     
+        } else {
+          console.error('Failed to mark video as completed:', response.message);
+        }
+      },
+      error: (error) => {
+        console.error('Error mark video as completed:', error);
+      },
+      complete: () => {
+        console.log('mark video  completed successfully!...');
+      },
+    });
+  }
+
+  getSubscribedCourse() {
+    this.courseService.getMyCourseList(1).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.subCourseList = res.data.enrolled[0].subCourses;
+  
+          // Check if the current video is completed
+          const currentVideo = this.subCourseList.find(course => course.id === this.video_id);
+  
+          if (currentVideo) {
+            if (currentVideo.completed) {
+              console.log('Video already marked as completed, no need to update.');
+            } else {
+              console.log('Video not marked as completed, updating now.');
+              this.updateVideoMarked();
+            }
+          } else {
+            console.log('Current video not found in the subscribed list.');
+          }
+  
+        } else {
+          console.log(':::::::::::::failed fetching the subscribed course:::::::::::');
+        }
+      },
+      error: () => {
+        console.log(':::::::::::::something went wrong fetching subscribed course:::::::::::');
+      }
+    });
+  }
+  
 
 }

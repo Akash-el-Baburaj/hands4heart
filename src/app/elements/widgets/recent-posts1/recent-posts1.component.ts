@@ -10,7 +10,7 @@
 //     @Input()  data: any;
 //     @Output() courseSelected = new EventEmitter<any>(); // Emits selected course to parent
 //     courseDetails: any[] = [];
-  
+
 //     ngOnChanges(changes: SimpleChanges): void {
 //         if (changes['data']) {
 //           const Data = this.data
@@ -27,38 +27,59 @@
 //       this.courseSelected.emit(data)
 //     }
 
-    
 // }
 
-import { Component, EventEmitter, Input, Output, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  SimpleChanges,
+  ChangeDetectorRef,
+} from '@angular/core';
 
 @Component({
   selector: 'app-recent-posts1',
   templateUrl: './recent-posts1.component.html',
-  styleUrls: ['./recent-posts1.component.css']
+  styleUrls: ['./recent-posts1.component.css'],
 })
 export class RecentPosts1Component implements OnInit {
+  @Input() data: any;
+  @Input() PaymentStatus: any;
 
-    @Input() data: any;
-    @Output() courseSelected = new EventEmitter<any>(); // Emits selected course to parent
-    courseDetails: any[] = [];
-    selectedCourse: any = null;  // Stores selected course
+  @Output() courseSelected = new EventEmitter<any>(); // Emits selected course to parent
+  courseDetails: any[] = [];
+  selectedCourse: any = null; // Stores selected course
+  payment: any;
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes['data']) {
-            this.courseDetails = this.data?.details?.details || [];
-        }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data']) {
+      this.courseDetails = this.data?.details?.details || [];
     }
 
-    ngOnInit(): void {}
-
-    getCourseVideo(course: any) {
-        
-        this.selectedCourse = course;  // Set selected course
-        this.courseSelected.emit(course);
+    if (changes['PaymentStatus']) {
+      const payment = this.PaymentStatus;
+      this.payment = payment;
+      console.log(
+        ':::::::::::::::::::::::::::PaymentStatus:::::::::::::::',
+        this.payment
+      );
     }
+  }
 
-    isSelected(course: any): boolean {
-        return this.selectedCourse === course;
-    }
+  ngOnInit(): void {}
+
+  getCourseVideo(course: any) {
+    this.selectedCourse = course; // Set selected course
+    this.courseSelected.emit(course);
+  }
+
+  isSelected(course: any): boolean {
+    return this.selectedCourse === course;
+  }
+
+  constructor(private cdRef: ChangeDetectorRef) {}
+
+
 }

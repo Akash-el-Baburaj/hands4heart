@@ -38,20 +38,25 @@ export class MyCoursesComponent implements OnInit {
       next: (res: any) => {
         if (res.success) {
           this.enrolledList = res.data.enrolled;
-          this.enrolled_id = res.data.enrolled[0].id;
-
           if (this.enrolledList && this.enrolledList.length > 0) {
+
+            this.enrolled_id = res.data.enrolled[0].id;
+
             localStorage.setItem('enrolled', 'true');
             localStorage.setItem('enrolled_id',this.enrolled_id);
+            this.navigateToCourseDetails(this.enrolledList[0])
+
           } else {
             localStorage.setItem('enrolled', 'false');
             console.log(
               ':::::::::::::::::::::::no enrolled courses found:::::::::::::::'
             );
+
+            this.getCourseList();
           }
           // this.navigateToCourseDetails(this.courseLIst[0]);
-          this.getCourseList();
         } else {
+
           localStorage.setItem('enrolled', 'false');
           this.getCourseList();
 
@@ -108,4 +113,5 @@ export class MyCoursesComponent implements OnInit {
       },
     });
   }
+
 }

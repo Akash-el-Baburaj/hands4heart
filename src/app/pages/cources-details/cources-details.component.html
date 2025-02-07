@@ -135,34 +135,47 @@
                 <button
                   class="site-button btnhover14 w-25 ms-3"
                   (click)="navigateToTestList(courseId)"
+                  *ngIf="certificateReady && !quizCompleted"
                 >
                   Test
                 </button>
 
-                <!-- <button
+                <button
                   class="site-button btnhover14 w-25 ms-3"
                   (click)="open(profileUpdateModal)"
-                  *ngIf="certificateReady && certificatePayment==='unpaid' && !profileUpdated"
+                  *ngIf="
+                    certificateReady && quizCompleted &&
+                    certificatePayment === 'unpaid' &&
+                    !profileUpdated
+                  "
                 >
-                  Get Certificate
-                </button>
-                
-                <button
-                class="btn-danger w-25 ms-3"
-                  *ngIf="certificateReady && certificatePayment==='unpaid' && profileUpdated"
-                >
-                  Payment pending
+                  Apply Certificate
                 </button>
 
-               <button
+                <button
+                  class="btn-danger w-25 ms-3"
+                  *ngIf="
+                    certificateReady && quizCompleted &&
+                    certificatePayment === 'unpaid' &&
+                    profileUpdated
+                  "
+                >
+                  Certificate Payment pending
+                </button>
+
+                <button
                   class="site-button btnhover14 w-25 ms-3"
                   (click)="getCertificate(certificate, courseId)"
-                  *ngIf="certificateReady && certificatePayment==='paid' && profileUpdated"
+                  *ngIf="
+                  certificateReady && quizCompleted &&
+                  certificatePayment === 'paid' &&
+                  profileUpdated
+                "
                 >
                   Downlaod Certificate
-                </button> -->
-               
-                <button
+                </button>
+
+                <!-- <button
                   class="site-button btnhover14 w-25 ms-3"
                   (click)="
                     onCertificateButtonClick(
@@ -174,13 +187,14 @@
                   *ngIf="!certificateReady"
                 >
                 Get Certificate
-                </button>
+                </button> -->
               </div>
               <div class="col-lg-12 d-sm-block d-md-none mt-2">
                 <app-recent-posts1
                   class="d-block d-md-none"
                   [ngClass]="{ 'disabled-link': paymentStatus === 'unpaid' }"
                   [data]="CourseDetailsData"
+                  [PaymentStatus]="paymentStatus"
                   (courseSelected)="getCourseVideo($event)"
                 ></app-recent-posts1>
               </div>
@@ -189,8 +203,8 @@
                 <app-courses6
                   [data]="CourseDetailsData"
                   [ngClass]="{ 'disabled-link': paymentStatus === 'unpaid' }"
-                  [PaymentStatus]="paymentStatus"
                   (courseSelected)="getCourseVideo($event)"
+                  [PaymentStatus]="paymentStatus"
                 ></app-courses6>
                 <!-- Tabs End-->
               </div>
@@ -241,7 +255,7 @@
 </div>
 
 <ng-template #certificate let-modal>
-  <app-certificate [Data]="userProfile" [qrData]="qrData"></app-certificate>
+  <app-certificate [Data]="this.user" [qrData]="qrData"></app-certificate>
 </ng-template>
 
 <ng-template #profileUpdateModal let-modal>

@@ -31,7 +31,7 @@ export class CourseService {
     return this.http.get<any>(`${this.baseURL}/user/course/view?id=${id}`)
   }
 
-  getCertificate(id: FormData) {
+  generateCertificate(id: FormData) {
     return this.http.post<any>(`${this.baseURL}/user/course/generate_certificate`, id)
   }
 

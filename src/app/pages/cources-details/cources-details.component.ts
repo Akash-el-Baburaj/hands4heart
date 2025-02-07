@@ -45,11 +45,11 @@ export class CourcesDetailsComponent implements OnInit {
   user: any;
   enrolledList: EnrolledUser[] = [];
   page: number = 1;
-  certificateReady: boolean=false;
-  certificatePayment:string= 'unpaid';
-  profileUpdated: boolean=false;
+  certificateReady: boolean = false;
+  certificatePayment: string = 'unpaid';
+  profileUpdated: boolean = false;
   videoId: any;
-
+  quizCompleted: boolean = false;
 
 
   VideoType: string = '';
@@ -63,10 +63,10 @@ export class CourcesDetailsComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: NgbModal,
     private fb: FormBuilder,
-        private authService: AuthenticationService
-    
+    private authService: AuthenticationService
   ) {
     this.getCourseId();
+    
   }
 
   ngOnInit(): void {
@@ -74,11 +74,11 @@ export class CourcesDetailsComponent implements OnInit {
 
     const userString = localStorage.getItem('user');
     this.user = userString ? JSON.parse(userString) : null;
-
-    const hasEmptyFields = this.checkForEmptyFields(this.user);
-    if (hasEmptyFields) {
-      this.profileUpdated = true;
-    }
+    this.getSubscribedCourse();
+    // const hasEmptyFields = this.checkForEmptyFields(this.user);
+    // if (hasEmptyFields) {
+    //   this.profileUpdated = true;
+    // }
 
     this.updateProfileForm = this.fb.group({
       name: [this.user?.name || '', Validators.required],
@@ -107,10 +107,23 @@ export class CourcesDetailsComponent implements OnInit {
       next: (res) => {
         if (res.success) {
           this.enrolledList = res.data.enrolled;
-          this.certificateReady= res.data.enrolled[0].certificateReady;
-          this.certificatePayment= res.data.enrolled[0].certificate.paymentStatus;
-          // this.profileUpdated= res.data.enrolled[0].userEnteredData;
+          if (this.enrolledList && this.enrolledList.length > 0) {
+            this.paymentStatus = res.data.enrolled[0].paymentStatus;
+             this.enrolled = this.paymentStatus == 'paid' ? 'true':'false';
+            this.certificateReady = res.data.enrolled[0].certificateReady;
+            if(res.data.enrolled[0].certificate === null){
+              this.certificatePayment='unpaid';
+            }else{
+              this.certificatePayment =res.data.enrolled[0].certificate.paymentStatus;
+            }
 
+            console.log('::::::::::::this.certificatePayment::::::::',this.certificatePayment);
+
+            this.profileUpdated = res.data.enrolled[0].userEnteredData;
+            this.quizCompleted = res.data.enrolled[0].quizProgress.score_get > 0 ? true :false;
+          } else {
+            console.log('::::::::::::enrolled listt is empty::::::::::');
+          }
         } else {
           console.log(
             ':::::::::::::failed fetching the subscribed course:::::::::::'
@@ -147,14 +160,18 @@ export class CourcesDetailsComponent implements OnInit {
           : data.id;
         console.log('course_Id => ', course_Id);
         this.courseId = course_Id;
+        localStorage.setItem('courseId', this.courseId)
         this.getCourseDetailsByCourseId(course_Id);
-        this.paymentStatus = data.paymentStatus;
+        this.paymentStatus = data?.paymentStatus
+          ? data.paymentStatus
+          : 'unpaid';
         this.userProfile.user_name = data.user_name;
         this.userProfile.user_Phone = data.user_phone;
         this.userProfile.paymentStatus = data.paymentStatus;
         this.userProfile.createdBy = data.createdBy;
         this.courserDescription = data.CourseDetails?.description;
         this.courseObjective = data.CourseDetails?.course_objective;
+        // this.getSubscribedCourse();
       } else {
         this.navigateToCoursetList();
       }
@@ -200,8 +217,8 @@ export class CourcesDetailsComponent implements OnInit {
   }
 
   getCourseVideo(event: any) {
-    console.log('event event',event)
-    this.videoId=event.id;
+    console.log('event event', event);
+    this.videoId = event.id;
     this.courseVideo = null;
     if (event) {
       setTimeout(() => {
@@ -211,7 +228,7 @@ export class CourcesDetailsComponent implements OnInit {
   }
 
   getSafeUrl(videoUrl: string): SafeResourceUrl {
-// console.log('CourseDetailsData',CourseDetailsData)
+    // console.log('CourseDetailsData',CourseDetailsData)
     if (this.isYouTubeUrl(videoUrl)) {
       const videoId = this.getYouTubeVideoId(videoUrl);
       const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
@@ -268,6 +285,7 @@ export class CourcesDetailsComponent implements OnInit {
         if (res.success) {
           this.enrolled = 'true';
           this.toastr.success(res.message, 'SUCCESS');
+          this.getSubscribedCourse();
         }
       },
     });
@@ -292,16 +310,20 @@ export class CourcesDetailsComponent implements OnInit {
     // })
   }
 
-  // open(content: TemplateRef<NgbModal>): void {
-  //   this.modalService.open(content, { scrollable: true });
-  // }
-
   open(content: any) {
-    this.setUserDataToForm();
-    this.modalService.open(content, {
-      windowClass: 'custom-modal',
-      centered: true,
-    });
+
+    // this.getSubscribedCourse();
+    // const hasEmptyFields = this.checkForEmptyFields(this.user);
+
+
+      this.setUserDataToForm();
+      this.modalService.open(content, {
+        windowClass: 'custom-modal',
+        centered: true,
+      });
+      
+
+   
   }
 
   updateProfile() {
@@ -337,10 +359,11 @@ export class CourcesDetailsComponent implements OnInit {
       next: (response) => {
         console.log('response of profile update- ', response);
         if (response.success) {
-          const hasEmptyFields = this.checkForEmptyFields(this.user);
-          if (hasEmptyFields) {
-            this.profileUpdated = true;
-          }
+          // const hasEmptyFields = this.checkForEmptyFields(this.user);
+          // if (hasEmptyFields) {
+          //   this.profileUpdated = true;
+          // }
+          this.getSubscribedCourse();
           this.getUserProfile();
           this.resetForm();
         } else {
@@ -352,6 +375,7 @@ export class CourcesDetailsComponent implements OnInit {
       },
       complete: () => {
         console.log('Profile updated successfully!...');
+        this.generateCertificate();
       },
     });
   }
@@ -364,16 +388,16 @@ export class CourcesDetailsComponent implements OnInit {
     certificate: any,
     courseId: any
   ) {
-    const hasEmptyFields = this.checkForEmptyFields(this.user);
+    this.getSubscribedCourse();
+    // const hasEmptyFields = this.checkForEmptyFields(this.user);
 
-    if (hasEmptyFields) {
-      this.setUserDataToForm();
+    // if (this.profileUpdated) {
+       this.setUserDataToForm();
       this.open(profileupdateModal);
-    }
-    else {
-      console.log('user profile updated with all data')
+    // } else {
+    //   console.log('user profile updated with all data');
       // this.openCentered(certificate);
-    }
+    //}
   }
 
   checkForEmptyFields(user: any): boolean {
@@ -403,9 +427,32 @@ export class CourcesDetailsComponent implements OnInit {
     this.authService.getUserProfile().subscribe({
       next: (res: any) => {
         if (res.success) {
-          this.user  = res.data
+          this.user = res.data;
         }
-      }
-    })
+      },
+    });
+  }
+
+  generateCertificate() {
+    const formData = new FormData();
+
+    formData.append('courseId', this.courseId);
+
+    this.courseService.generateCertificate(formData).subscribe({
+      next: (response:any) => {
+        if (response.success) {
+         this.getSubscribedCourse();
+        } else {
+          console.error('Failed to genearte certicate:', response.message);
+        }
+      },
+      error: (error:any) => {
+        console.error('Error genearte certicate', error);
+      },
+      complete: () => {
+        console.log('certicate genearte successfully!...');
+        
+      },
+    });
   }
 }
