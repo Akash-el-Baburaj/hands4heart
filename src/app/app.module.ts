@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LightgalleryModule } from 'lightgallery/angular';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgbCarouselModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbModalModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -452,7 +452,8 @@ import { VideoBannerComponent } from './elements/video-banner/video-banner.compo
       registrationStrategy: 'registerWhenStable:30000'
     }),
     NgbModalModule,
-    QRCodeModule
+    QRCodeModule,
+    NgbToastModule
   ],
   exports: [
     RegistrationForm1Component,
