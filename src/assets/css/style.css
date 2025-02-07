@@ -2666,7 +2666,7 @@ blockquote:before {
 
 .site-header {
     position: relative;
-    z-index: 99999;
+    z-index: 9999;
 }
 .site-header ul,
 .site-header ol {
@@ -3486,6 +3486,9 @@ blockquote:before {
     z-index: 2;
 	object-fit: contain;
 }
+.swal2-container {
+    z-index: 9999999 !important; /* Higher than header's z-index */
+  }
 .site-header.center  .logo-header:after{
     background-position: center top;
     background-repeat: no-repeat;
