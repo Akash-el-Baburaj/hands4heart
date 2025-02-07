@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~sweetalert2/dist/sweetalert2.min.css';
+
+/* Optional: Custom styles */
+.swal2-popup {
+  font-family: 'Arial', sans-serif;
+}
+
+/* Custom Toast Styling */
+.swal2-toast {
+  border: 1px solid #ddd !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  border-radius: 8px !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.swal2-container {
+  z-index: 9999999 !important; /* Higher than header's z-index */
+}
+
+/* Success Toast Specific */
+.swal2-success {
+  border-left: 4px solid #4CAF50 !important;
+}
+
+/* Error Toast Specific */
+.swal2-error {
+  border-left: 4px solid #f44336 !important;
+}
+
+/* Warning Toast Specific */
+.swal2-warning {
+  border-left: 4px solid #FF9800 !important;
+}
+
+/* Info Toast Specific */
+.swal2-info {
+  border-left: 4px solid #2196F3 !important;
+}

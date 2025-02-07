@@ -220,6 +220,7 @@ import { QrGeneratorComponent } from './elements/qr-generator/qr-generator.compo
 import { QRCodeModule } from 'angularx-qrcode';
 import { ToastrComponent } from './elements/toastr/toastr.component';
 import { VideoBannerComponent } from './elements/video-banner/video-banner.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -453,7 +454,8 @@ import { VideoBannerComponent } from './elements/video-banner/video-banner.compo
     }),
     NgbModalModule,
     QRCodeModule,
-    NgbToastModule
+    NgbToastModule,
+    SweetAlert2Module.forRoot()
   ],
   exports: [
     RegistrationForm1Component,

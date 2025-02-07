@@ -4,7 +4,8 @@ import { AuthenticationService } from 'src/app/core/service/authentication.servi
 import { Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
-
+import { AlertService } from 'src/app/core/service/services/alert.service';
+import { ToastService } from 'src/app/core/service/services/toast.service';
 import { login, otpVarification } from 'src/app/core/model/auth.model';
 
 
@@ -38,7 +39,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private authService: AuthenticationService
+    private alertService: AlertService,
+    private authService: AuthenticationService,
+    private toast: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -71,10 +74,13 @@ export class LoginComponent implements OnInit {
             this.otpKey = DATA.otpKey;
             this.pathOTPForm(this.otp)
             this._initOtpForm();
+            // this.alertService.success('Success!', res.message);
+            this.toast.success('Success!', res.message);
             this.showOtpForm = true;
             this.isInValidUser = false;
           } else {
             this.toastr.error(res.message);
+            this.alertService.error('Error!', res.message);
             this.isInValidUser = true;
             this.inValidMessage = res.message;
           }
@@ -104,16 +110,19 @@ export class LoginComponent implements OnInit {
             this.getUserDetails();
             this.router.navigate(['/program']);
             this.isInValidOtp = false;
+            this.alertService.success('Success!', res.message);
           } else {
             this.toastr.error(res.message);
             this.isInValidOtp = true;
             this.inValidOtpMessage = res.message;
+            this.alertService.error('Error!', res.message);
           }
         },
         error: (err: any) => {
           console.error(err);
           console.error(err.error.message);
           this.toastr.success(err.error.message);
+          this.alertService.error('Error!', err.error.message);
 
         }
       })
