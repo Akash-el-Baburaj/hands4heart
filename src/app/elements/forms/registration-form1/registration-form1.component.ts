@@ -36,6 +36,7 @@ export class RegistrationForm1Component implements OnInit {
     this._initForm();
     this._initSignInForm();
     this._initSignInForm();
+    this._initOtpForm();
   }
 
   _initForm() {
@@ -113,7 +114,7 @@ export class RegistrationForm1Component implements OnInit {
 
   pathOTPForm(data: any) {
     this.otpValidateForm.patchValue({
-      otp: data.otp,
+      otp: data,
     });
   }
 
