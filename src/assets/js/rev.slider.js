@@ -340,7 +340,7 @@ function dz_rev_slider_4(){
 				levels:[5,10,15,20,25,30,35,40,45,46,47,48,49,50,51,55],
 			},
 			shadow:0,
-			spinner:"spinner2",
+			spinner:"spinner9",
 			stopLoop:"on",
 			stopAfterLoops:0,
 			stopAtSlide:1,

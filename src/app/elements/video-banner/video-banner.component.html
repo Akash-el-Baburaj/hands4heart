@@ -1,0 +1,42 @@
+<!-- slider4.component.html -->
+<div class="banner-container">
+    <div class="banner-wrapper" [style.aspect-ratio]="'16/9'">
+      <div class="banner-item" *ngFor="let banner of banners; let i = index" [class.active]="i === activeIndex">
+        <!-- Image Banner -->
+        <img *ngIf="banner.bannerType === 'IMAGE'" 
+             [src]="banner.videoUrl" 
+             alt="Banner image"
+             class="banner-media">
+        
+        <!-- Video Banner -->
+        <div *ngIf="banner.bannerType === 'VIDEO'" class="video-container">
+          <!-- YouTube Video -->
+          <iframe *ngIf="isYouTubeUrl(banner.videoUrl)" id="youtube-video"
+                  [src]="getSafeYouTubeUrl(banner.videoUrl)"
+                  frameborder="0"
+                  allow="autoplay"
+                  allowfullscreen></iframe>
+  
+          <!-- Vimeo Video -->
+          <iframe *ngIf="isVimeoUrl(banner.videoUrl)"
+                  [src]="getSafeVimeoUrl(banner.videoUrl)"
+                  frameborder="0"
+                  allow="autoplay"
+                  allowfullscreen></iframe>
+  
+          <!-- Server Video -->
+          <video *ngIf="isServerVideoUrl(banner.videoUrl)"
+                [src]="banner.videoUrl"
+                autoplay
+                loop
+                muted 
+                playsinline
+                class="banner-media"></video>
+        </div>
+      </div>
+  
+      <!-- Navigation Arrows -->
+      <button class="nav-arrow prev" (click)="prevBanner()">❮</button>
+      <button class="nav-arrow next" (click)="nextBanner()">❯</button>
+    </div>
+  </div>

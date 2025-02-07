@@ -1,0 +1,57 @@
+/* slider4.component.css */
+.banner-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .banner-wrapper {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  }
+  
+  .banner-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .banner-item.active {
+    opacity: 1;
+  }
+  
+  .banner-media, .video-container iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .nav-arrow.prev { left: 0; }
+  .nav-arrow.next { right: 0; }
+
+  /* slider4.component.css */
+video::-webkit-media-controls {
+    display: none !important;
+  }
+  
+  /* Hide controls for all video elements */
+  .banner-media {
+    -webkit-media-controls: none;
+    controls: none;
+  }
