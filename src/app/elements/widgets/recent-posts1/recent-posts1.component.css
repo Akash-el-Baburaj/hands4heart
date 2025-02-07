@@ -1,41 +1,75 @@
-.dlab-post-media {
-    transition: border 0.3s ease-in-out, background-color 0.3s ease-in-out;
-    position: relative;
+
+
+
+
+.card {
+    
+    height: 85px;
+    border: 2px solid #9ac92f;
+    transition: all 0.3s ease-in-out;
+    background: #fff;
+
+    
+}
+.card:hover {
+    background-color: #9ac92f !important;
+    color: #ffffff !important
 }
 
-.dlab-post-media.highlighted {
-    border: 3px solid #ec2127 !important;
-    background-color: rgba(255, 102, 0, 0.1);
+.course-image-container {
+    width: 85px;
+    height: 65px;
+    overflow: hidden;
+    border-radius: 10px;
+    flex-shrink: 0; 
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: filter 0.3s;
+    }
 }
 
-/* Default Image */
-.course-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: filter 0.3s ease-in-out;
-}
-
-/* Blur effect when selected */
 .blurred {
     filter: blur(4px);
 }
 
-/* "Playing" label styling */
+.course-info {
+    flex: 1;
+    padding-left: 10px;
+    overflow: hidden;
+}
+
+.post-meta {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.post-title {
+    font-size: 12px;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; 
+}
+
+.playing {
+    background-color: #9ac92f; /* Red background */
+    color: white;
+    width: 100%;
+    font-size: 12px;
+}
+
 .playing-label {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #9ac92f; /* Red background */
-    color: white;
-    padding: 8px 16px;
-    width: 100%;
-    height: fit-content !important;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 5px;
-    text-transform: uppercase;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    color: #f1f1f1 !important;
+    padding: 2px 5px;
+    font-size: 14px;
+    font-weight: 900 !important;
+    background-color: #9ac92f;
 }
-
