@@ -6,25 +6,26 @@
         </div>
         <div class="blog-carousel owl-btn-center-lr owl-carousel owl-btn-3">
         <div class="items">
-            <div class="event-post post-grid shadow radius">
+            <div class="event-post post-grid shadow radius me-2 p-1" *ngFor="let event of eventList" style="width: 450px !important;height: 365px !important;">
                 <div class="dlab-post-media">
-                    <a [routerLink]="['/event-details']"><img src="assets/images/events/grid/coaching/pic1.jpg" alt=""></a>
+                    <a [routerLink]="['/event-details']" [queryParams]="{ id: event.id}"><img [src]="event.img" alt="{{event.name}}"></a>
                 </div>
                 <div class="dlab-post-info">
-                    <div class="dlab-post-meta">
-                        <ul>
-                            <li class="post-date"> <strong>10 June</strong> <span> 2024</span> </li>
-                            <li class="post-author"> <i class="la la-clock"></i> 05:00 PM </li>
-                            <li class="post-tag"> <i class="ti-location-pin"></i> Marmora Road </li>
+                    <div class="dlab-post-meta px-0 w-100">
+                        <ul class="w-100 px-0">
+                            <li class="post-date"> <strong>{{event.date | date: 'dd MMM'}}</strong> <span> {{event.date | date: 'yyyy'}}</span> </li>
+                            <li class="post-author"> <i class="la la-clock"></i> {{ event.time | timeFormate}} </li>
+                            <li class="post-tag"> <i class="ti-location-pin"></i> {{event.location || 'Not Disclosed'}} </li>
+                            <li class="post-author"> <i class="fa fa-phone"></i> +919563011126 </li>
                         </ul>
                     </div>
                     <div class="dlab-post-title">
-                        <h4 class="post-title"><a [routerLink]="['/event-details']">Why is Early Education Essential?</a></h4>
+                        <h4 class="post-title"><a [routerLink]="['/event-details']">{{event.name}}</a></h4>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="items">
+        <!-- <div class="items">
             <div class="event-post post-grid shadow radius">
                 <div class="dlab-post-media">
                     <a [routerLink]="['/event-details']"><img src="assets/images/events/grid/coaching/pic2.jpg" alt=""></a>
@@ -42,8 +43,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="items">
+        </div> -->
+        <!-- <div class="items">
             <div class="event-post post-grid shadow radius">
                 <div class="dlab-post-media">
                     <a [routerLink]="['/event-details']"><img src="assets/images/events/grid/coaching/pic3.jpg" alt=""></a>
@@ -61,7 +62,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     </div>
 </div>

@@ -70,6 +70,7 @@
 
 }
 .styleswitcher .switcher-btn-bx {
+    display: none;
     box-shadow: 7px 0 5px rgba(0, 0, 0, 0.1);
     position: absolute;
     right: -40px;

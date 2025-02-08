@@ -1,57 +1,179 @@
-/* slider4.component.css */
+/* banner.component.css */
 .banner-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.banner-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.banner-media video, 
+.banner-media img, 
+.banner-media iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mask-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.content-layer {
+  position: absolute;
+  top: 50%;
+  left: 10%; /* Adjust this value based on your design */
+  transform: translateY(-50%);
+  text-align: left; /* Changed from center */
+  color: white;
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.button-group {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: start;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  width: 150px;
+}
+
+/* .about-btn { background: #007bff; }
+.register-btn { background: #28a745; } */
+
+.banner-controls {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 3;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  color: white;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.parallax-effect {
+  transform: scale(1.1);
+  transition: transform 0.5s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .content-layer {
+    width: 90%;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .btn {
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+/* Add these media queries to your existing CSS */
+
+@media (max-width: 768px) {
+  .banner-container {
+    height: auto;
+    min-height: 30vh; /* Adjust based on your needs */
+  }
+
+  .banner-media {
     position: relative;
-    width: 100%;
-    overflow: hidden;
+    height: auto;
+    min-height: 30vh;
   }
-  
-  .banner-wrapper {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  }
-  
-  .banner-item {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-  }
-  
-  .banner-item.active {
-    opacity: 1;
-  }
-  
-  .banner-media, .video-container iframe {
-    width: 100%;
-    height: 100%;
+
+  .banner-media video,
+  .banner-media img,
+  .banner-media iframe {
     object-fit: cover;
+    object-position: center center;
+    width: 100%;
+    height: auto;
+    min-height: 30vh;
   }
-  
-  .nav-arrow {
+
+  /* For external video iframes */
+  .banner-media iframe {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0,0,0,0.5);
-    color: white;
-    border: none;
-    padding: 1rem;
-    cursor: pointer;
-    z-index: 10;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100% !important;
+    height: 56.25vw !important; /* 16:9 aspect ratio */
+    min-height: 100%;
+    min-width: 100%;
   }
-  
-  .nav-arrow.prev { left: 0; }
-  .nav-arrow.next { right: 0; }
 
-  /* slider4.component.css */
-video::-webkit-media-controls {
-    display: none !important;
+  .content-layer {
+    top: 45%;
+    width: 95%;
   }
-  
-  /* Hide controls for all video elements */
+}
+
+@media (max-width: 480px) {
   .banner-media {
-    -webkit-media-controls: none;
-    controls: none;
+    height: auto;
+    min-height: 30vh;
   }
+
+  .content-layer h1 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .content-layer p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+.banner-media {
+  background: #000; /* Fallback color */
+  position: relative;
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
