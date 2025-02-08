@@ -1,12 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EventService } from 'src/app/core/service/event.service';
+import { TimeFormatePipe } from 'src/app/core/pipes/time-formate.pipe';
 declare  var jQuery:  any;
 @Component({
   selector: 'app-events1',
   templateUrl: './events1.component.html',
   styleUrls: ['./events1.component.css']
 })
-export class Events1Component {
+export class Events1Component implements OnInit {
+
+	eventList: any[] = [];
+	page: number = 1;
+
+  constructor (private eventService: EventService) {}
+
   ngOnInit(): void {
+	this.fetchEventList(this.page);
 		(function ($) {
 			jQuery('.blog-carousel').owlCarousel({
 				loop:true,
@@ -37,4 +46,15 @@ export class Events1Component {
 			});
 		})(jQuery);
 	}
+
+	fetchEventList(page: number) {
+		this.eventService.getEventList(page).subscribe({
+			next: (res: any) => {
+				if (res.success) {
+					this.eventList = res.data.event_list;
+				}
+			}
+		})
+	}
+
 }

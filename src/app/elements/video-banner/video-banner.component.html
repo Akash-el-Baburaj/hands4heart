@@ -1,42 +1,40 @@
-<!-- slider4.component.html -->
+<!-- banner.component.html -->
 <div class="banner-container">
-    <div class="banner-wrapper" [style.aspect-ratio]="'16/9'">
-      <div class="banner-item" *ngFor="let banner of banners; let i = index" [class.active]="i === activeIndex">
-        <!-- Image Banner -->
-        <img *ngIf="banner.bannerType === 'IMAGE'" 
-             [src]="banner.videoUrl" 
-             alt="Banner image"
-             class="banner-media">
-        
-        <!-- Video Banner -->
-        <div *ngIf="banner.bannerType === 'VIDEO'" class="video-container">
-          <!-- YouTube Video -->
-          <iframe *ngIf="isYouTubeUrl(banner.videoUrl)" id="youtube-video"
-                  [src]="getSafeYouTubeUrl(banner.videoUrl)"
-                  frameborder="0"
-                  allow="autoplay"
-                  allowfullscreen></iframe>
-  
-          <!-- Vimeo Video -->
-          <iframe *ngIf="isVimeoUrl(banner.videoUrl)"
-                  [src]="getSafeVimeoUrl(banner.videoUrl)"
-                  frameborder="0"
-                  allow="autoplay"
-                  allowfullscreen></iframe>
-  
-          <!-- Server Video -->
-          <video *ngIf="isServerVideoUrl(banner.videoUrl)"
-                [src]="banner.videoUrl"
-                autoplay
-                loop
-                muted 
-                playsinline
-                class="banner-media"></video>
-        </div>
-      </div>
-  
-      <!-- Navigation Arrows -->
-      <button class="nav-arrow prev" (click)="prevBanner()">❮</button>
-      <button class="nav-arrow next" (click)="nextBanner()">❯</button>
+  <div class="banner-media">
+    <!-- Video Banner -->
+    <video *ngIf="currentBanner?.bannerType === 'VIDEO' && !isExternalVideo(currentBanner.videoUrl)" 
+           [muted]="true" autoplay loop playsinline>
+      <source [src]="currentBanner?.videoUrl" type="video/mp4">
+    </video>
+    
+    <!-- External Video (YouTube/Vimeo) -->
+    <iframe *ngIf="currentBanner?.bannerType === 'VIDEO' && isExternalVideo(currentBanner.videoUrl)"
+            [src]="getSafeVideoUrl(currentBanner.videoUrl)" 
+            frameborder="0" allow="autoplay; encrypted-media" 
+            allowfullscreen muted playsinline>
+    </iframe>
+    
+    <!-- Image Banner -->
+    <img *ngIf="currentBanner?.bannerType === 'IMAGE'" 
+         [src]="currentBanner?.videoUrl" 
+         alt="Banner Image">
+  </div>
+
+  <div class="mask-layer"></div>
+
+  <div class="content-layer">
+    <div class="banner-text">
+      <h1 class="tp-caption" style="z-index: 6; min-width: 800px; max-width: 800px; font-weight: 600; white-space: normal; color: #fff; font-family:'Merriweather', serif;">{{currentBanner?.headline}}</h1>
+      <p style="z-index: 7; min-width: 640px; max-width: 640px; font-weight: 700; font-size: 18px; line-height: 30px; font-weight: 400; color: #fff; font-family: 'Roboto',sans-serif;">{{currentBanner?.paragraph}}</p>
+    </div>
+    <div class="button-group d-flex align-item-center">
+      <button class="btn" style="z-index: 8;background-color: #9ac92f !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">About</button>
+      <button class="btn " style="z-index: 8;background-color: #9ac92f !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">Register</button>
     </div>
   </div>
+
+  <div class="banner-controls">
+    <button class="control-btn prev" (click)="changeBanner(-1)">‹</button>
+    <button class="control-btn next" (click)="changeBanner(1)">›</button>
+  </div>
+</div>

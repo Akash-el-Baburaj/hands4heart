@@ -221,6 +221,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { ToastrComponent } from './elements/toastr/toastr.component';
 import { VideoBannerComponent } from './elements/video-banner/video-banner.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { TimeFormatePipe } from './core/pipes/time-formate.pipe';
 
 @NgModule({
   declarations: [
@@ -430,6 +431,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     QrGeneratorComponent,
     ToastrComponent,
     VideoBannerComponent,
+    TimeFormatePipe
   ],
   imports: [
     BrowserModule,

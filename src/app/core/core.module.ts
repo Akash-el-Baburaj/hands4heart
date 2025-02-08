@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TimeFormatePipe } from './pipes/time-formate.pipe';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    TimeFormatePipe
+  ],
   imports: [
     CommonModule
   ]

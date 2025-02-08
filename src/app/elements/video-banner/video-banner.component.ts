@@ -11,6 +11,8 @@ export class VideoBannerComponent implements OnInit {
   activeIndex = 0;
   banners: Banner[] = [];
   page: number = 1;
+  currentIndex = 0;
+
   constructor(private sanitizer: DomSanitizer, private userService: UsersService) {}
 
   ngOnInit(): void {
@@ -28,53 +30,50 @@ export class VideoBannerComponent implements OnInit {
     });
   }
 
-  // Navigation controls
-  nextBanner() {
-    this.activeIndex = (this.activeIndex + 1) % this.banners.length;
+
+  get currentBanner() {
+    return this.banners[this.currentIndex];
   }
 
-  prevBanner() {
-    this.activeIndex = (this.activeIndex - 1 + this.banners.length) % this.banners.length;
+  isExternalVideo(url: string): boolean {
+    return url.includes('youtube') || url.includes('vimeo');
   }
 
-  // URL type checkers
-  isYouTubeUrl(url: string): boolean {
-    return url?.includes('youtube.com') ;
+  getSafeVideoUrl(url: string): SafeResourceUrl {
+    if(url.includes('youtube')) {
+      const videoId = url.split('v=')[1];
+      return this.sanitizer.bypassSecurityTrustResourceUrl(
+        `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}`
+      );
+    }
+    if(url.includes('vimeo')) {
+      const videoId = url.split('/').pop();
+      return this.sanitizer.bypassSecurityTrustResourceUrl(
+        `https://player.vimeo.com/video/${videoId}?autoplay=1&muted=1&loop=1`
+      );
+    }
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
-  isVimeoUrl(url: string): boolean {
-    return url?.includes('vimeo.com');
+  changeBanner(direction: number) {
+    this.currentIndex = (this.currentIndex + direction + this.banners.length) % this.banners.length;
+    this.animateBannerChange();
   }
 
-  isServerVideoUrl(url: string): boolean {
-    return url?.match(/\.(mp4|webm|ogg)$/) !== null;
-  }
-
-  // Safe URL generators
-  getSafeYouTubeUrl(url: string): SafeResourceUrl {
-    const videoId = this.extractYouTubeVideoId(url);
-    // mute=1 parameter ensures video starts muted
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
-  }
-
-  getSafeVimeoUrl(url: string): SafeResourceUrl {
-    const videoId = this.extractVimeoVideoId(url);
-    // muted=1 parameter ensures video starts muted
-    const embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&muted=1&loop=1`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
-  }
-
-  // Extraction helpers
-  private extractYouTubeVideoId(url: string): string {
-    const regExp = /(?:youtube\.com.*(?:\?|&)v=|youtu\.be\/)([^&?/\s]+)/;
-    const match = url.match(regExp);
-    return match ? match[1] : '';
-  }
-
-  private extractVimeoVideoId(url: string): string {
-    const regExp = /vimeo\.com\/(\d+)/;
-    const match = url.match(regExp);
-    return match ? match[1] : '';
+  animateBannerChange() {
+    // Add your animation logic here
+    const container = document.querySelector('.banner-media');
+    container?.classList.add('parallax-effect');
+    setTimeout(() => {
+      container?.classList.remove('parallax-effect');
+    }, 500);
   }
 }
+declare var $: any;
+
+// In animateBannerChange()
+$('.banner-media').animate({
+  opacity: 0.5
+}, 300).animate({
+  opacity: 1
+}, 300);
