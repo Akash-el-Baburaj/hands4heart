@@ -429,123 +429,137 @@ export class HeaderLight4Component {
     //     }
     //   ]
     // },
-    {
-      title: 'Blog',
-      menuClass: 'has-mega-menu',
-      subMenuClass: 'mega-menu',
-      subMenu: [
-        {
-          title: 'Blog',
-          subSubMenu: [
-            {
-              title: 'Half image',
-              // route: '/blog-half-img',
-            },
-            {
-              title: 'Half image sidebar',
-              // route: '/blog-half-img-sidebar',
-            },
-            {
-              title: 'Half image sidebar',
-              // route: '/blog-half-img-left-sidebar',
-            },
-            {
-              title: 'Large image',
-              // route: '/blog-large-img',
-            }
-          ]
-        },
-        {
-          title: 'Blog',
-          subSubMenu: [
-            {
-              title: 'Large image sideba',
-              // route: '/blog-large-img-sidebar',
-            },
-            {
-              title: 'Large image sidebar left',
-              // route: '/blog-large-img-left-sidebar',
-            },
-            {
-              title: 'Grid 2',
-              // route: '/blog-grid-2',
-            },
-            {
-              title: 'Grid 2 sidebar',
-              // route: '/blog-grid-2-sidebar',
-            }
-          ]
-        },
-        {
-          title: 'Blog',
-          subSubMenu: [
-            {
-              title: 'Grid 2 sidebar left',
-              // route: '/blog-grid-2-sidebar-left',
-            },
-            {
-              title: 'Grid 3',
-              // route: '/blog-grid-3',
-            },
-            {
-              title: 'Grid 3 sidebar',
-              // route: '/blog-grid-3-sidebar',
-            },
-            {
-              title: 'Grid 3 sidebar left',
-              // route: '/blog-grid-3-sidebar-left',
-            }
-          ]
-        },
-        {
-          title: 'Blog',
-          subSubMenu: [
-            {
-              title: 'Grid 4',
-              // route: '/blog-grid-4',
-            },
-            {
-              title: 'Single',
-              // route: '/blog-single',
-            },
-            {
-              title: 'Single sidebar',
-              // route: '/blog-single-sidebar',
-            },
-            {
-              title: 'Single sidebar right',
-              // route: '/blog-single-left-sidebar',
-            }
-          ]
-        }
-      ]
-    },
+    // {
+    //   title: 'Blog',
+    //   menuClass: 'has-mega-menu',
+    //   subMenuClass: 'mega-menu',
+    //   subMenu: [
+    //     {
+    //       title: 'Blog',
+    //       subSubMenu: [
+    //         {
+    //           title: 'Half image',
+    //           // route: '/blog-half-img',
+    //         },
+    //         {
+    //           title: 'Half image sidebar',
+    //           // route: '/blog-half-img-sidebar',
+    //         },
+    //         {
+    //           title: 'Half image sidebar',
+    //           // route: '/blog-half-img-left-sidebar',
+    //         },
+    //         {
+    //           title: 'Large image',
+    //           // route: '/blog-large-img',
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       title: 'Blog',
+    //       subSubMenu: [
+    //         {
+    //           title: 'Large image sideba',
+    //           // route: '/blog-large-img-sidebar',
+    //         },
+    //         {
+    //           title: 'Large image sidebar left',
+    //           // route: '/blog-large-img-left-sidebar',
+    //         },
+    //         {
+    //           title: 'Grid 2',
+    //           // route: '/blog-grid-2',
+    //         },
+    //         {
+    //           title: 'Grid 2 sidebar',
+    //           // route: '/blog-grid-2-sidebar',
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       title: 'Blog',
+    //       subSubMenu: [
+    //         {
+    //           title: 'Grid 2 sidebar left',
+    //           // route: '/blog-grid-2-sidebar-left',
+    //         },
+    //         {
+    //           title: 'Grid 3',
+    //           // route: '/blog-grid-3',
+    //         },
+    //         {
+    //           title: 'Grid 3 sidebar',
+    //           // route: '/blog-grid-3-sidebar',
+    //         },
+    //         {
+    //           title: 'Grid 3 sidebar left',
+    //           // route: '/blog-grid-3-sidebar-left',
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       title: 'Blog',
+    //       subSubMenu: [
+    //         {
+    //           title: 'Grid 4',
+    //           // route: '/blog-grid-4',
+    //         },
+    //         {
+    //           title: 'Single',
+    //           // route: '/blog-single',
+    //         },
+    //         {
+    //           title: 'Single sidebar',
+    //           // route: '/blog-single-sidebar',
+    //         },
+    //         {
+    //           title: 'Single sidebar right',
+    //           // route: '/blog-single-left-sidebar',
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // },
     {
       title: 'Contact Us',
-      subMenuClass: 'sub-menu right',
-      subMenu: [
-        {
-          title: 'Contact us 1',
-          // route: '/contact-1',
-        },
-        {
-          title: 'Contact us 2',
-          // route: '/contact-2',
-        },
-        {
-          title: 'Contact us 3',
-          // route: '/contact-3',
-        },
-        {
-          title: 'Contact us 4',
-          // route: '/contact-4',
-        }
-      ]
+      route: '/contact-1',
+      // subMenu: [
+      //   {
+      //     title: 'Contact us 1',
+      //     // route: '/contact-1',
+      //   },
+      //   {
+      //     title: 'Contact us 2',
+      //     // route: '/contact-2',
+      //   },
+      //   {
+      //     title: 'Contact us 3',
+      //     // route: '/contact-3',
+      //   },
+      //   {
+      //     title: 'Contact us 4',
+      //     // route: '/contact-4',
+      //   }
+      // ]
     }
     ]
   
   navigateToLogin() {
     this.router.navigate(['/user/login']);
+  }
+
+  navigateToAbout(url: string): void {
+    if (url.includes('#')) {
+      const [path, hash] = url.split('#');
+      this.router.navigate([path]).then(() => {
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      });
+    } else {
+      this.router.navigate([url]);
+    }
   }
   
   openVerticallyCentered(content: TemplateRef<NgbModal>): void {

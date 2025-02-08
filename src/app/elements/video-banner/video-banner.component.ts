@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { Banner, Banners } from 'src/app/core/model/banners.model';
 import { UsersService } from 'src/app/core/service/users.service';
 @Component({
@@ -13,7 +14,7 @@ export class VideoBannerComponent implements OnInit {
   page: number = 1;
   currentIndex = 0;
 
-  constructor(private sanitizer: DomSanitizer, private userService: UsersService) {}
+  constructor(private sanitizer: DomSanitizer, private userService: UsersService, private router: Router) {}
 
   ngOnInit(): void {
     this.getBanner();
@@ -67,6 +68,19 @@ export class VideoBannerComponent implements OnInit {
     setTimeout(() => {
       container?.classList.remove('parallax-effect');
     }, 500);
+  }
+  navigateTo(url: string): void {
+    if (url.includes('#')) {
+      const [path, hash] = url.split('#');
+      this.router.navigate([path]).then(() => {
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      });
+    } else {
+      this.router.navigate([url]);
+    }
   }
 }
 declare var $: any;

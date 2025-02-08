@@ -92,9 +92,7 @@
     width: 90%;
   }
   
-  .button-group {
-    flex-direction: column;
-  }
+
   
   .btn {
     padding: 0.8rem 1.5rem;
@@ -141,6 +139,20 @@
     top: 45%;
     width: 95%;
   }
+
+  .banner-text h1 {
+    font-size: larger !important;
+  }
+
+  .banner-text p {
+    font-size: medium !important;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: start;
+  }
+
 }
 
 @media (max-width: 480px) {
