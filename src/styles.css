@@ -12,10 +12,13 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
   border-radius: 8px !important;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden !important;
 }
 
 .swal2-container {
   z-index: 9999999 !important; /* Higher than header's z-index */
+  width: 100%;
+  overflow: hidden;
 }
 
 /* Success Toast Specific */

@@ -75,6 +75,7 @@ export class RegistrationForm1Component implements OnInit {
         next: (res: any) => {
           console.log(res);
           if (res.success) {
+            this.toast.success('Success!', res.message);
             this.otpForm = true;
             this.regForm = false;
             const DATA = res.data;
@@ -82,8 +83,9 @@ export class RegistrationForm1Component implements OnInit {
             this.otp = DATA.otp;
             this.otpKey = DATA.otpKey;
             this.pathOTPForm(this.otp);
-            this.toast.success('Success!', res.message);
 
+          } else {
+            this.toast.error('Error!', res.message);
           }
         },
         error: (err: any) => {
@@ -102,6 +104,7 @@ export class RegistrationForm1Component implements OnInit {
       this.authService.login(formData).subscribe({
         next: (res: any) => {
           if (res.success) {
+            this.toast.success('Success!', res.message);
             const DATA = res.data;
             this.userID - DATA.user_id;
             this.otp = DATA.otp;
@@ -110,7 +113,6 @@ export class RegistrationForm1Component implements OnInit {
             this._initOtpForm();
             this.otpForm = true;
             this.regForm = false;
-            this.toast.success('Success!', res.message);
 
           } else {
             this.toast.error('ERROR!', res.message);
@@ -143,6 +145,8 @@ export class RegistrationForm1Component implements OnInit {
       this.authService.otpVerification(formData).subscribe({
         next: (res: any) => {
           if (res.success) {
+            this.alertService.success('Success!', res.message);
+
             // this.toastr.success(res.message);
             localStorage.setItem('userId', res.data.user_id);
             localStorage.setItem('token', res.data.key);
@@ -150,7 +154,6 @@ export class RegistrationForm1Component implements OnInit {
             this.router.navigate(['/program']);
             this.otpForm = false;
             this.regForm = true;
-            this.toast.success('Success!', res.message);
 
           } else {
             this.toast.error('Error!', res.message);

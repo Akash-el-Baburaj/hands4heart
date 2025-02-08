@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/service/authentication.service';
 import { Router } from '@angular/router';
 
-import { ToastrService } from 'ngx-toastr';
 import { AlertService } from 'src/app/core/service/services/alert.service';
 import { ToastService } from 'src/app/core/service/services/toast.service';
 import { login, otpVarification } from 'src/app/core/model/auth.model';
@@ -38,7 +37,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private toastr: ToastrService,
     private alertService: AlertService,
     private authService: AuthenticationService,
     private toast: ToastService
@@ -79,7 +77,6 @@ export class LoginComponent implements OnInit {
             this.showOtpForm = true;
             this.isInValidUser = false;
           } else {
-            this.toastr.error(res.message);
             this.alertService.error('Error!', res.message);
             this.isInValidUser = true;
             this.inValidMessage = res.message;
@@ -104,7 +101,6 @@ export class LoginComponent implements OnInit {
       this.authService.otpVerification(formData).subscribe({
         next: (res: any) => {
           if (res.success) {
-            this.toastr.success(res.message);
             localStorage.setItem('userId', res.data.user_id);
             localStorage.setItem('token', res.data.key);
             this.getUserDetails();
@@ -112,7 +108,6 @@ export class LoginComponent implements OnInit {
             this.isInValidOtp = false;
             this.alertService.success('Success!', res.message);
           } else {
-            this.toastr.error(res.message);
             this.isInValidOtp = true;
             this.inValidOtpMessage = res.message;
             this.alertService.error('Error!', res.message);
@@ -121,7 +116,6 @@ export class LoginComponent implements OnInit {
         error: (err: any) => {
           console.error(err);
           console.error(err.error.message);
-          this.toastr.success(err.error.message);
           this.alertService.error('Error!', err.error.message);
 
         }
