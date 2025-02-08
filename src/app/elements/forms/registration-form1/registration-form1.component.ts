@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/service/authentication.service';
+import { AlertService } from 'src/app/core/service/services/alert.service';
+import { ToastService } from 'src/app/core/service/services/toast.service';
 
 @Component({
   selector: 'app-registration-form1',
@@ -29,7 +31,9 @@ export class RegistrationForm1Component implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private toast: ToastService,
+    private alertService: AlertService,
   ) {}
 
   ngOnInit(): void {
@@ -78,10 +82,14 @@ export class RegistrationForm1Component implements OnInit {
             this.otp = DATA.otp;
             this.otpKey = DATA.otpKey;
             this.pathOTPForm(this.otp);
+            this.toast.success('Success!', res.message);
+
           }
         },
         error: (err: any) => {
           console.log(err);
+          this.alertService.error('Error!', err.error.message);
+
         }
       })
     }
@@ -102,11 +110,20 @@ export class RegistrationForm1Component implements OnInit {
             this._initOtpForm();
             this.otpForm = true;
             this.regForm = false;
+            this.toast.success('Success!', res.message);
+
           } else {
+            this.toast.error('ERROR!', res.message);
+
             // this.toastr.error(res.message);
             // this.isInValidUser = true;
             // this.inValidMessage = res.message;
           }
+        },
+        error: (err: any) => {
+          console.log(err);
+          this.alertService.error('Error!', err.error.message);
+
         }
       })
     }
@@ -133,7 +150,11 @@ export class RegistrationForm1Component implements OnInit {
             this.router.navigate(['/program']);
             this.otpForm = false;
             this.regForm = true;
+            this.toast.success('Success!', res.message);
+
           } else {
+            this.toast.error('Error!', res.message);
+
             // this.toastr.error(res.message);
             // this.isInValidOtp = true;
             // this.inValidOtpMessage = res.message;
@@ -143,6 +164,7 @@ export class RegistrationForm1Component implements OnInit {
           console.error(err);
           console.error(err.error.message);
           // this.toastr.success(err.error.message);
+          this.alertService.error('Error!', err.error.message);
 
         }
       })
