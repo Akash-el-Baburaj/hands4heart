@@ -133,8 +133,11 @@ export class VideoBannerComponent implements OnInit {
       this.router.navigate([url]);
     }
   }
-  navigateToLogin() {
+  navigateToLogin(from?: string) {
     this.router.navigate(['/user/login']);
+    if (from === 'fromSignUp') {
+      this.modalRef?.close()
+    }
   }
 
   openLogoutModal(content: TemplateRef<NgbModal>): void {
