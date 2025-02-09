@@ -40,6 +40,7 @@
                     <span class="price text-primary">&nbsp;</span>
                     <a
                       href="javascript: void(0)"
+                      style="background: #007bff !important; font-size: 14px !important"
                       class="site-button button-sm"
                       >{{ userProfile.paymentStatus }}</a
                     >
@@ -73,7 +74,13 @@
           <!-- left part start -->
           <div class="col-xl-9 col-lg-8 col-md-12 m-b30">
             <div class="row">
-              <div class="col-lg-12"></div>
+              <div class="col-lg-12">
+                <button
+                class="mobile-btn site-button btnhover10 w-auto d-block d-md-none"
+                *ngIf="enrolled === 'false'"
+                (click)="getEnroll(courseId)"
+              >Enroll</button>
+              </div>
               <div class="col-lg-12">
                 <div class="media m-b30">
                   <img
@@ -118,14 +125,14 @@
                 </button> -->
 
                 <button
-                  class="mobile-btn site-button btnhover10 w-auto ms-3"
+                  class="mobile-btn site-button btnhover10 w-auto ms-3 "
                   *ngIf="enrolled === 'true'"
                 >
                   ENROLLED
                 </button>
 
                 <button
-                  class="mobile-btn site-button btnhover10 w-auto"
+                  class="mobile-btn site-button btnhover10 w-auto d-none d-md-block"
                   *ngIf="enrolled === 'false'"
                   (click)="getEnroll(courseId)"
                 >
@@ -213,9 +220,10 @@
                 <div class="widget" class="d-block d-lg-none">
                   <div class="teacher-info text-center">
                     <div class="top-info">
-                      <span class="price text-primary">Free</span>
+                      <span class="price text-primary">&nbsp;</span>
                       <a
                         href="javascript: void(0)"
+                        style="background: #007bff !important; font-size: 14px !important"
                         class="site-button button-sm"
                         >{{ userProfile.paymentStatus }}</a
                       >

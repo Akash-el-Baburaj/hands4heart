@@ -54,9 +54,17 @@
 <div class="container mt-4">
     <h5 class="mb-3">Program</h5>
     <div class="row">
-        <div class="col-12 mb-2" *ngFor="let course of courseDetails">
-            <div class="card" (click)="getCourseVideo(course)" 
-                 [ngClass]="{'playing': isSelected(course), 'highlighted': isSelected(course)}">
+        <div class="col-12 mb-2" *ngFor="let course of courseDetails; let i = index;">
+            <!-- <div class="card" (click)="getCourseVideo(course)" 
+                 [ngClass]="{'playing': isSelected(course), 'highlighted': isSelected(course)}"> -->
+            <div class="card" 
+                 (click)="getCourseVideo(course)" 
+                 [ngClass]="{
+                     'even': i % 2 === 0,
+                     'odd': i % 2 !== 0,
+                     'playing': isSelected(course),
+                     'highlighted': isSelected(course)
+                 }">
                  <div class="card-body d-flex justify-content-between align-items-center py-0">
                     <!-- Image (Left-Aligned) -->
                 <div class="course-image-container px-0" style="position: relative;">

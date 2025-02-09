@@ -604,7 +604,7 @@ export class HeaderLight4Component {
       centered: true,
       windowClass: 'custom-modal'
     });
-
+    // this.collapseToggle = false;
     this.modalRef.result
       .then(
         () => {

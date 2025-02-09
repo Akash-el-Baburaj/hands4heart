@@ -9,8 +9,8 @@
                     </a>
                     <a class="ms-1 mt-1" href="index.html" style="line-height: 1.6;  text-decoration: none !important;">
                         <h3 style="color: #ec2127; margin: 0; padding: 0; font-weight: 800; line-height: 0.7;font-family: 'Roboto', sans-serif;">HANDS4HEART</h3>
-                        <h5 class="d-none d-md-block" style="color: #ec2127; margin: 0; padding: 0; font-family: 'Roboto', sans-serif;">CPR training program</h5>
-                        <h6 class="d-block d-md-none" style="color: #ec2127; margin: 0; padding: 0; font-family: 'Roboto', sans-serif;">CPR training program</h6>
+                        <h5 class="d-none d-md-block" style="color: #0e61bd; margin: 0; padding: 0; font-family: 'Roboto', sans-serif;">CPR training program</h5>
+                        <h6 class="d-block d-md-none" style="color: #0e61bd; margin: 0; padding: 0; font-family: 'Roboto', sans-serif;">CPR training program</h6>
                       </a>
                 </div>
                 <!-- nav toggle button -->
@@ -23,7 +23,7 @@
                 <!-- extra nav -->
                 <div class="extra-nav">
                     <div class="extra-cell">
-                        <button id="quik-search-btn" type="button" class="site-button-link" (click)="searchOpen()"><i class="la la-search"></i></button>
+                        <!-- <button id="quik-search-btn" type="button" class="site-button-link" (click)="searchOpen()"><i class="la la-search"></i></button> -->
                         <a href="javascript:void(0);" *ngIf="user === null" class="site-button btnhover14" (click)="navigateToLogin()">Login</a>
                         <a href="javascript:void(0);" *ngIf="user !== null" class="site-button btnhover14" (click)="openLogoutModal(staticBackdropModal)">LogOut</a>
                         <!-- <button class="btn btn-primary" (click)="openModal(content)">Open Modal</button> -->
@@ -84,8 +84,8 @@
                         </li>
                     </ul>
                     <div class="dlab-social-icon">
-                        <a href="javascript:void(0);" *ngIf="user === null" class="site-button btnhover14" (click)="navigateToLogin()">Login</a>
-                        <a href="javascript:void(0);" *ngIf="user !== null" class="site-button btnhover14" (click)="openLogoutModal(staticBackdropModal)">LogOut</a>
+                        <a href="javascript:void(0);" *ngIf="user === null" style="background-color: #0e61bd !important;" class="site-button red btnhover22" (click)="navigateToLogin()">Login</a>
+                        <a href="javascript:void(0);" *ngIf="user !== null" style="background-color: #0e61bd !important;" class="site-button red btnhover22" (click)="openLogoutModal(staticBackdropModal)">LogOut</a>
 
                         <!-- <ul>
                             <li><a class="site-button circle fa fa-facebook" href="javascript:void(0);"></a></li>
@@ -130,7 +130,7 @@
 </ng-template>
 
 <ng-template #staticBackdropModal let-modal>
-    <div>
+    <div style="z-index: 999999 !important;">
         <div class="modal-header d-flex justify-content-center w-100 text-center" style="border: none !important; background-color: #fff !important;">
             <h4 class="modal-title pull-left text-dark"><i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Are
                 you sure? </h4>

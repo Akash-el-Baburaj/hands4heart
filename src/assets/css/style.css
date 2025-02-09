@@ -8572,8 +8572,18 @@ ul[class*="list-"]{
     line-height: 32px;
     text-align: center;
 }
-.list-check.circle.primary li:before {
+/* .list-check.circle.primary li:before {
     background: var(--color-primary);
+    color: #fff;
+} */
+
+.list-check.circle.primary li:nth-child(odd)::before {
+    background: #0e61bd;
+    color: #fff;
+}
+
+.list-check.circle.primary li:nth-child(even)::before {
+    background: #ec2127;
     color: #fff;
 }
 .list-check.circle.white li:before {
