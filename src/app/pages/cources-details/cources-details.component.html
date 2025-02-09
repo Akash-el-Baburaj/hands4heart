@@ -34,7 +34,7 @@
           <!-- Side bar start -->
           <div class="col-xl-3 col-lg-4 col-md-12 m-b30">
             <aside class="side-bar sticky-top">
-              <div class="widget" class="d-none d-md-block">
+              <div class="widget" class="d-none d-lg-block">
                 <div class="teacher-info text-center">
                   <div class="top-info">
                     <span class="price text-primary">&nbsp;</span>
@@ -62,7 +62,7 @@
               </div>
               <!-- <app-category-list1></app-category-list1> -->
               <app-recent-posts1
-                class="d-none d-md-block"
+                class="d-none d-lg-block"
                 [ngClass]="{ 'disabled-link': paymentStatus === 'unpaid' }"
                 [data]="CourseDetailsData"
                 (courseSelected)="getCourseVideo($event)"
@@ -104,7 +104,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-12 mb-3 d-flex justify-content-end">
+              <div class="col-lg-12 mb-3 d-flex justify-content-end flex-wrap gap-2">
                 <!-- <div class="site-button  me-2" *ngIf="enrolled === 'true'" style="
 															background-color: #fff !important;
 															color: #000;
@@ -118,14 +118,14 @@
                 </button> -->
 
                 <button
-                  class="site-button btnhover10 w-25 ms-3"
+                  class="mobile-btn site-button btnhover10 w-auto ms-3"
                   *ngIf="enrolled === 'true'"
                 >
                   ENROLLED
                 </button>
 
                 <button
-                  class="site-button btnhover10 w-25"
+                  class="mobile-btn site-button btnhover10 w-auto"
                   *ngIf="enrolled === 'false'"
                   (click)="getEnroll(courseId)"
                 >
@@ -133,7 +133,7 @@
                 </button>
 
                 <button
-                  class="site-button btnhover14 w-25 ms-3"
+                  class="mobile-btn site-button btnhover14 w-auto ms-3"
                   (click)="navigateToTestList(courseId)"
                   *ngIf="certificateReady && !quizCompleted"
                 >
@@ -141,7 +141,7 @@
                 </button>
 
                 <button
-                  class="site-button btnhover14 w-25 ms-3"
+                  class="mobile-btn site-button btnhover14 w-auto ms-3"
                   (click)="open(profileUpdateModal)"
                   *ngIf="
                     certificateReady && quizCompleted &&
@@ -153,18 +153,19 @@
                 </button>
 
                 <button
-                  class="btn-danger w-25 ms-3"
+                  class="btn-danger site-button bg-danger w-auto ms-3"
                   *ngIf="
                     certificateReady && quizCompleted &&
                     certificatePayment === 'unpaid' &&
                     profileUpdated
                   "
+                  style="font-size: smaller;"
                 >
                   Certificate Payment pending
                 </button>
 
                 <button
-                  class="site-button btnhover14 w-25 ms-3"
+                  class="mobile-btn site-button btnhover14 w-auto ms-3"
                   (click)="getCertificate(certificate, courseId)"
                   *ngIf="
                   certificateReady && quizCompleted &&
@@ -189,9 +190,9 @@
                 Get Certificate
                 </button> -->
               </div>
-              <div class="col-lg-12 d-sm-block d-md-none mt-2">
+              <div class="col-lg-12 d-md-block d-lg-none mt-2">
                 <app-recent-posts1
-                  class="d-block d-md-none"
+                  class="d-block d-lg-none"
                   [ngClass]="{ 'disabled-link': paymentStatus === 'unpaid' }"
                   [data]="CourseDetailsData"
                   [PaymentStatus]="paymentStatus"
@@ -208,8 +209,8 @@
                 ></app-courses6>
                 <!-- Tabs End-->
               </div>
-              <div class="col-lg-12" class="d-block d-md-none">
-                <div class="widget" class="d-block d-md-none">
+              <div class="col-lg-12" class="d-block d-lg-none">
+                <div class="widget" class="d-block d-lg-none">
                   <div class="teacher-info text-center">
                     <div class="top-info">
                       <span class="price text-primary">Free</span>
@@ -221,7 +222,7 @@
                     </div>
                     <div class="teacher-pic">
                       <a href="#"
-                        ><img src="assets/images/testimonials/pic2.jpg" alt=""
+                        ><img src="assets/images/default-account.png" alt=""
                       /></a>
                     </div>
                     <h4 class="name">{{ userProfile.user_name }}</h4>

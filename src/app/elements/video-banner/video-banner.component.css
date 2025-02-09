@@ -153,6 +153,11 @@
     justify-content: start;
   }
 
+  .btn {
+    width: 95px !important;
+    padding: 10px 5px;
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -173,7 +178,9 @@
 
   .btn {
     padding: 0.7rem 1.2rem;
-    font-size: 0.9rem;
+    /* font-size: 0.9rem; */
+    font-size: 10px !important;
+
   }
 }
 
