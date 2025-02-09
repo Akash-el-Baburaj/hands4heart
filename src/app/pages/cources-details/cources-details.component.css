@@ -10,7 +10,7 @@
 
   @media (max-width: 767px) {
     .mobile-btn {
-      flex: 0 0 40%; /* Two buttons per row accounting for gap */
+      /* flex: 0 0 40%; Two buttons per row accounting for gap */
     }
   }
 

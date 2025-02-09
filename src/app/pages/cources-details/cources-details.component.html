@@ -153,7 +153,7 @@
                 </button>
 
                 <button
-                  class="btn-danger site-button bg-danger w-auto ms-3"
+                  class="btn-danger site-button bg-danger px-auto w-auto ms-3"
                   *ngIf="
                     certificateReady && quizCompleted &&
                     certificatePayment === 'unpaid' &&
@@ -165,7 +165,7 @@
                 </button>
 
                 <button
-                  class="mobile-btn site-button btnhover14 w-auto ms-3"
+                  class="mobile-btn site-button btnhover14 w-auto px-auto ms-3"
                   (click)="getCertificate(certificate, courseId)"
                   *ngIf="
                   certificateReady && quizCompleted &&
