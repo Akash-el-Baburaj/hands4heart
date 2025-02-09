@@ -28,8 +28,11 @@
       <p style="z-index: 7; min-width: 640px; max-width: 640px; font-weight: 700; font-size: 18px; line-height: 30px; font-weight: 400; color: #fff; font-family: 'Roboto',sans-serif;">{{currentBanner?.paragraph}}</p>
     </div>
     <div class="button-group d-flex align-item-center">
-      <button class="btn"  style="z-index: 8;background-color: #9ac92f !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">About</button>
-      <button class="btn "(click)="navigateTo('/home-coaching#register')"	 style="z-index: 8;background-color: #9ac92f !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">Register</button>
+      <!-- <button class="btn"  style="z-index: 8;background-color: #ec2127 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">About</button> -->
+      <a href="javascript:void(0);" *ngIf="user === null" class="site-button btnhover14" (click)="navigateToLogin()" style="z-index: 8;background-color: #ec2127 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">Login</a>
+      <a href="javascript:void(0);" *ngIf="user !== null" class="site-button btnhover14" (click)="openLogoutModal(staticBackdropModal)" style="z-index: 8;background-color: #ec2127 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">LogOut</a>
+
+      <button class="site-button btnhover10"(click)="navigateTo('/home-coaching#register')"	 style="z-index: 8;background-color: #ec2127 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">Register</button>
     </div>
   </div>
 
@@ -38,3 +41,28 @@
     <button class="control-btn next" (click)="changeBanner(1)">›</button>
   </div>
 </div>
+
+
+<ng-template #staticBackdropModal let-modal>
+  <div>
+      <div class="modal-header d-flex justify-content-center w-100 text-center" style="border: none !important; background-color: #fff !important;">
+          <h4 class="modal-title pull-left text-dark"><i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Are
+              you sure? </h4>
+          <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+          </button> -->
+      </div>
+      <div class="modal-body text-center">
+          <p class="m-0">Are you sure you want to logout ?</p>
+      </div>
+      <div class="modal-footer d-flex justify-content-center" style="border: none !important;">
+          <button type="button" class="btn btn-danger w-100 p-0"
+              style="width: 116px !important; height: 32px !important;"
+              (click)="modal.close('Close click')">No</button>
+          <button type="button" class="btn btn-success w-100 p-0"
+              style="width: 116px !important; height: 32px !important;"
+              (click)="logOUt()">Yes</button>
+      </div>
+  </div>
+
+</ng-template>

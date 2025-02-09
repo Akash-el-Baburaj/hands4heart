@@ -176,10 +176,10 @@ button.scroltop,
 .btnhover14::after,
 .btnhover13::after,
 .btnhover15::after {
-	background-color: #207343;
+	background-color: #e92229;
 }
 .about-us .dlab-tabs .nav-tabs li.active {
-	border-right: 4px solid #207343;
+	border-right: 4px solid #e92229;
 }
 
 /* Rgba color */

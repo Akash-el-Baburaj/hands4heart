@@ -6,8 +6,8 @@
                 <span class="title-head">Description</span>
             </a>
         </li>
-        <li>
-            <a data-toggle="tab" href="#curriculum" [ngClass]="{'disabled-link': PaymentStatus === 'unpaid'}" >
+        <li class="disabled-link" >
+            <a data-toggle="tab" href="#curriculum" disabled [ngClass]="{'disabled-link': PaymentStatus === 'unpaid'}" >
                 <i class="fa fa-cube"></i>
                 <span class="title-head">Curriculum</span>
             </a>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/core/service/event.service';
 import { TimeFormatePipe } from 'src/app/core/pipes/time-formate.pipe';
+import { Router } from '@angular/router';
 declare  var jQuery:  any;
 @Component({
   selector: 'app-events1',
@@ -12,7 +13,7 @@ export class Events1Component implements OnInit {
 	eventList: any[] = [];
 	page: number = 1;
 
-  constructor (private eventService: EventService) {}
+  constructor (private eventService: EventService, private router: Router) {}
 
   ngOnInit(): void {
 	this.fetchEventList(this.page);
@@ -55,6 +56,20 @@ export class Events1Component implements OnInit {
 				}
 			}
 		})
+	}
+
+	navigateto(url: string, id: string, page: number){
+		this.router.navigate([url], {queryParams: {data: this.dataStringfy(id,page)}})
+	}
+
+	dataStringfy(id: string, page: any) {
+		let data = {}
+		data = {
+			id: id,
+			page: page
+		}
+
+		return JSON.stringify(data)
 	}
 
 }

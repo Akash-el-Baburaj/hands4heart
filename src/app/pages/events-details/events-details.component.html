@@ -2,7 +2,7 @@
 <div class="page-wraper">
 
     <!-- header -->
-    <app-header-light3></app-header-light3>
+    <app-header-light4></app-header-light4>
     <!-- header END -->
     <!-- Content -->
     <div class="page-content bg-gray">
@@ -21,32 +21,33 @@
 									<li>
 										<i class="la la-user-circle"></i>
 										<span class="title">Organizer:</span>
-										<span class="info">Konne Backfield</span>
+										<span class="info">{{eventDetails.conductor_name}}</span>
 									</li>
 									<li>
 										<i class="la la-calendar"></i>
 										<span class="title">Start Date:</span>
-										<span class="info">04 June 2024</span>
+										<span class="info">{{eventDetails.date | date: 'dd MMM yyyy'}}</span>
 									</li>
 									<li>
 										<i class="la la-clock-o"></i>
 										<span class="title">Time:</span>
-										<span class="info">09:00 Am To 07:00 PM</span>
+										<!-- <span class="info">09:00 Am To 07:00 PM</span> -->
+										<span class="info">{{eventDetails.time | timeFormate}}</span>
 									</li>									
 									<li>
 										<i class="la la-envelope"></i>
 										<span class="title">Email:</span>
-										<span class="info">info@example.com</span>
+										<span class="info">info@hands4heart.com</span>
 									</li>
 									<li>
 										<i class="la la-phone"></i>
 										<span class="title">Phone:</span>
-										<span class="info">+91 987 654 3210</span>
+										<span class="info">{{eventDetails.conductor_phone}}</span>
 									</li>
 									<li>
 										<i class="la la-map-marker"></i>
 										<span class="title">Address:</span>
-										<span class="info">Melbourne </span>
+										<span class="info">{{eventDetails.location || 'Not-Disclosed'}} </span>
 									</li>
 								</ul>
                             </div>
@@ -61,13 +62,13 @@
                         <div class="event-single">
 							<div class="dlab-post-meta">
 								<ul>
-									<li class="post-author"> <i class="la la-clock"></i> 05:00 PM </li>
-									<li class="post-tag"> <i class="ti-location-pin"></i> Marmora Road </li>
+									<li class="post-author"> <i class="la la-clock"></i> {{eventDetails.time | timeFormate}}</li>
+									<li class="post-tag"> <i class="ti-location-pin"></i> {{eventDetails.location || 'Not-Disclosed'}} </li>
 								</ul>
 							</div>
-							<h2 class="dlab-title">Student Exchange Program Sessions</h2>
+							<h2 class="dlab-title">{{eventDetails.name}}</h2>
 							<div class="dlab-media m-b30">
-								<a href="javascript:void(0);"><img src="assets/images/events/default/thum1.jpg" alt=""></a>
+								<a href="javascript:void(0);"><img [src]="eventDetails.img" alt=""></a>
 							</div>
 							<div class="dlab-post-text">
 								<h4>About This Event</h4>
@@ -93,9 +94,9 @@
     <!-- Content END-->
     <!-- Footer -->
    <!-- Newsletter -->
-	<app-newsletter2></app-newsletter2>
+	<!-- <app-newsletter2></app-newsletter2> -->
    <!-- Footer -->
-    <app-footer13></app-footer13>
+    <app-footer4></app-footer4>
     <!-- Footer END-->
      <!-- scroll top button -->
 	 <app-scroltop></app-scroltop>

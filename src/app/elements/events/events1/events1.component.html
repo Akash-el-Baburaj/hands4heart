@@ -8,7 +8,7 @@
         <div class="items">
             <div class="event-post post-grid shadow radius me-2 p-1" *ngFor="let event of eventList" style="width: 450px !important;height: 365px !important;">
                 <div class="dlab-post-media">
-                    <a [routerLink]="['/event-details']" [queryParams]="{ id: event.id}"><img [src]="event.img" alt="{{event.name}}"></a>
+                    <a href="javascript: void(0)" (click)="navigateto('/event-details', event.id, page)"><img [src]="event.img" alt="{{event.name}}"></a>
                 </div>
                 <div class="dlab-post-info">
                     <div class="dlab-post-meta px-0 w-100">

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Banner, Banners } from 'src/app/core/model/banners.model';
+import { AuthenticationService } from 'src/app/core/service/authentication.service';
 import { UsersService } from 'src/app/core/service/users.service';
 @Component({
   selector: 'app-video-banner',
@@ -13,8 +15,19 @@ export class VideoBannerComponent implements OnInit {
   banners: Banner[] = [];
   page: number = 1;
   currentIndex = 0;
+  user: any | null = null;
+  modalRef!: NgbModalRef | null;
 
-  constructor(private sanitizer: DomSanitizer, private userService: UsersService, private router: Router) {}
+
+  constructor(
+    private sanitizer: DomSanitizer, 
+    private userService: UsersService, 
+    private modalService: NgbModal,
+    private router: Router,
+    private authService: AuthenticationService
+  ) {
+    this.user = localStorage.getItem('userId') ? localStorage.getItem('userId') : null;
+  }
 
   ngOnInit(): void {
     this.getBanner();
@@ -82,7 +95,50 @@ export class VideoBannerComponent implements OnInit {
       this.router.navigate([url]);
     }
   }
+  navigateToLogin() {
+    this.router.navigate(['/user/login']);
+  }
+
+  openLogoutModal(content: TemplateRef<NgbModal>): void {
+      if (this.modalRef) {
+        console.log('Modal is already open');
+        return;
+      }
+  
+      this.modalRef = this.modalService.open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        size: 'sm',
+        backdrop: true,
+        centered: true,
+        windowClass: 'custom-modal'
+      });
+  
+      this.modalRef.result
+        .then(
+          () => {
+            // Modal closed
+            this.modalRef = null;
+          },
+          () => {
+            // Modal dismissed
+            this.modalRef = null;
+          }
+        );
+      //  this.modalService.open(content, { centered: true, backdrop: false, keyboard: false, windowClass: 'custom-modal', size: 'sm' });
+      
+    }
+
+    logOUt() {
+      this.user = [];
+      this.authService.logout();
+      localStorage.clear();
+      this.navigateTo('')
+      this.modalRef?.close();
+    }
+
 }
+
+
 declare var $: any;
 
 // In animateBannerChange()
