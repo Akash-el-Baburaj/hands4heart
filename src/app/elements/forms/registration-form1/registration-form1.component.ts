@@ -39,7 +39,6 @@ export class RegistrationForm1Component implements OnInit {
   ngOnInit(): void {
     this._initForm();
     this._initSignInForm();
-    this._initSignInForm();
     this._initOtpForm();
   }
 
@@ -47,7 +46,7 @@ export class RegistrationForm1Component implements OnInit {
     this.signUpForm = this.fb.group({
       full_name: ['' , Validators.required],
       mob: ['', Validators.required],
-      code: [''],
+      code: ['+91'],
       email: [''],
     })
   }
