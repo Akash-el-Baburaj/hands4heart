@@ -1,7 +1,6 @@
 ::ng-deep .custom-modal .modal-content {
     background-color: #fff !important;
     z-index: 9999999 !important;
-    
 }
 ::ng-deep .custom-modal{
     background-color: #ffffff41 !important;

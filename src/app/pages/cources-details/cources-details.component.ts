@@ -2,11 +2,12 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { CourseService } from 'src/app/core/service/course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EnrolledUser } from './model';
 import { AuthenticationService } from 'src/app/core/service/authentication.service';
+import { AlertService } from 'src/app/core/service/services/alert.service';
+import { ToastService } from 'src/app/core/service/services/toast.service';
 
 @Component({
   selector: 'app-cources-details',
@@ -60,13 +61,14 @@ export class CourcesDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private router: Router,
-    private toastr: ToastrService,
+    private toastr: ToastService,
+    private alertService: AlertService,
     private modalService: NgbModal,
     private fb: FormBuilder,
     private authService: AuthenticationService
   ) {
     this.getCourseId();
-    
+    this.getUserProfile()
   }
 
   ngOnInit(): void {
@@ -169,6 +171,7 @@ export class CourcesDetailsComponent implements OnInit {
         this.userProfile.user_Phone = data.user_phone;
         this.userProfile.paymentStatus = data.paymentStatus;
         this.userProfile.createdBy = data.createdBy;
+        console.log('this.userProfile >>',this.userProfile)
         this.courserDescription = data.CourseDetails?.description;
         this.courseObjective = data.CourseDetails?.course_objective;
         // this.getSubscribedCourse();
@@ -179,6 +182,7 @@ export class CourcesDetailsComponent implements OnInit {
   }
   showSuccess() {
     this.toastr.success('Operation Successful!', 'Success');
+
   }
 
   getCourseDetailsByCourseId(id: any) {
@@ -286,6 +290,9 @@ export class CourcesDetailsComponent implements OnInit {
           this.enrolled = 'true';
           this.toastr.success(res.message, 'SUCCESS');
           this.getSubscribedCourse();
+        } else {
+          // this.toastr.error('ERROR!', res.message);
+          this.toastr.error( res.message, 'ERROR!');
         }
       },
     });
@@ -428,6 +435,10 @@ export class CourcesDetailsComponent implements OnInit {
       next: (res: any) => {
         if (res.success) {
           this.user = res.data;
+          this.userProfile.user_name = this.user.name;
+          this.userProfile.user_Phone = this.user.phone;
+          this.userProfile.paymentStatus = this.paymentStatus;
+          this.userProfile.createdBy = this.user.email;
         }
       },
     });

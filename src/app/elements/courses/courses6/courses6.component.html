@@ -470,8 +470,31 @@
         </div>
     </div>
 </div>
-<div class="dlab-tabs border-top bg-tabs d-flex justify-content-center align-items-center text-center" 
+<!-- <div class="dlab-tabs border-top bg-tabs d-flex justify-content-center align-items-center text-center" 
      style="height: 30vh;" 
      *ngIf="payment === 'unpaid'">
-    <p>Enrolled course payment is pending, Please contact admin</p>
+    <p>Payment is pending, Please contact admin</p>
+</div> -->
+
+<div class="card border mb-3 mx-auto shadow" style="border:2px solid #0e61bd !important ; max-width: 500px; margin-top: 2rem; animation: fadeIn 0.5s ease-in;" 
+     *ngIf="payment === 'unpaid'">
+    <div class="card-body text-center py-4">
+        <div class="icon-container mb-3">
+            <i class="fa fa-exclamation-circle fa-3x pulse" style="color: #ec2127 !important;"></i>
+        </div>
+        <h4 class="card-title text-dark mb-3">
+            <i class="fas fa-clock me-2"></i>Payment Pending
+        </h4>
+        <p class="card-text text-muted mb-4">
+            Your enrollment is pending payment verification
+        </p>
+        <div class="d-grid gap-2">
+            <button class="btn btn-lg" style="background-color: #0e61bd !important; color: #fff !important;">
+                <i class="fa fa-credit-card me-2"></i>Complete Enrollment
+            </button>
+        </div>
+        <p class="text-muted mt-3 small mb-0">
+            Need help? <a href="#" class="text-decoration-none" style="color: #ec2127 !important;">Contact Admin</a>
+        </p>
+    </div>
 </div>

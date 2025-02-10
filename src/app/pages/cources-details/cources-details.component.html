@@ -74,9 +74,9 @@
           <!-- left part start -->
           <div class="col-xl-9 col-lg-8 col-md-12 m-b30">
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-12 d-flex justify-content-center align-items-center mb-3">
                 <button
-                class="mobile-btn site-button btnhover10 w-auto d-block d-md-none"
+                class="mobile-btn site-button btnhover10 w-50 d-block d-md-none"
                 *ngIf="enrolled === 'false'"
                 (click)="getEnroll(courseId)"
               >Enroll</button>
@@ -217,7 +217,7 @@
                 <!-- Tabs End-->
               </div>
               <div class="col-lg-12" class="d-block d-lg-none">
-                <div class="widget" class="d-block d-lg-none">
+                <div class="widget" >
                   <div class="teacher-info text-center">
                     <div class="top-info">
                       <span class="price text-primary">&nbsp;</span>
@@ -238,7 +238,7 @@
                     <div class="clearfix m-b20">
                       <a href="" class="site-button button-sm"
                         >{{ userProfile.createdBy
-                        }}<i class="fa fa-envelope-o m-l5"></i
+                        }}<i class="fa fa-envelope-o"></i
                       ></a>
                     </div>
                   </div>

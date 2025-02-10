@@ -142,13 +142,31 @@
             <p class="m-0">Are you sure you want to logout ?</p>
         </div>
         <div class="modal-footer d-flex justify-content-center" style="border: none !important;">
-            <button type="button" class="btn btn-danger w-100 p-0"
-                style="width: 116px !important; height: 32px !important;"
+            <button type="button" class="site-button w-100"
+                style="width: 116px !important; background-color: #0e61bd !important; color: #fff !important;"
                 (click)="modal.close('Close click')">No</button>
-            <button type="button" class="btn btn-success w-100 p-0"
-                style="width: 116px !important; height: 32px !important;"
+            <button type="button" class="site-button w-100"
+                style="width: 116px !important; background-color: #ec2127 !important; color: #fff !important;"
                 (click)="logOUt()">Yes</button>
         </div>
     </div>
 
+</ng-template>
+
+<!-- Add this modal template near the other modals -->
+<ng-template #loginPromptModal let-modal>
+    <div style="z-index: 999999 !important;">
+        <div class="modal-header d-flex justify-content-center w-100 text-center" style="border: none !important; background-color: #fff !important;">
+            <h4 class="modal-title pull-left text-dark">
+                <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Login Required
+            </h4>
+        </div>
+        <div class="modal-body text-center">
+            <p class="m-0">Please login or register to access the Program. Would you like to login now?</p>
+        </div>
+        <div class="modal-footer d-flex justify-content-center" style="border: none !important;">
+            <button type="button" class="site-button" style="background-color: #0e61bd !important; color: #fff !important;" (click)="modal.dismiss('no')">No</button>
+            <button type="button" class="site-button" style="background-color: #ec2127 !important; color: #fff !important;" (click)="modal.close('yes')">Yes</button>
+        </div>
+    </div>
 </ng-template>

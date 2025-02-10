@@ -170,7 +170,7 @@ export class VideoBannerComponent implements OnInit {
     }
 
     logOUt() {
-      this.user = [];
+      this.user = null;
       this.authService.logout();
       localStorage.clear();
       this.navigateTo('')
@@ -296,7 +296,7 @@ export class VideoBannerComponent implements OnInit {
               this.router.navigate(['/program']);
               this.otpForm = false;
               this.regForm = true;
-  
+              this.modalRef?.close();
             } else {
               this.toast.error('Error!', res.message);
   
