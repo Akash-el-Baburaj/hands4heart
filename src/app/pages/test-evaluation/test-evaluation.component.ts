@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AccessmentService } from 'src/app/core/service/accessment.service';
 import { CourseService } from 'src/app/core/service/course.service';
+import { AlertService } from 'src/app/core/service/services/alert.service';
 
 @Component({
   selector: 'app-test-evaluation',
@@ -57,7 +58,8 @@ export class TestEvaluationComponent {
     private quizService: AccessmentService,
     private route: ActivatedRoute,
     private router: Router,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private alertMessage: AlertService
   ) {
     this.getCourseId();
   }

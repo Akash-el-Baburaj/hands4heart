@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CourseService } from 'src/app/core/service/course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -51,6 +51,7 @@ export class CourcesDetailsComponent implements OnInit {
   profileUpdated: boolean = false;
   videoId: any;
   quizCompleted: boolean = false;
+  @ViewChild('mediaDiv') mediaDiv!: ElementRef;
 
 
   VideoType: string = '';
@@ -122,7 +123,7 @@ export class CourcesDetailsComponent implements OnInit {
             console.log('::::::::::::this.certificatePayment::::::::',this.certificatePayment);
 
             this.profileUpdated = res.data.enrolled[0].userEnteredData;
-            this.quizCompleted = res.data.enrolled[0].quizProgress.score_get > 0 ? true :false;
+            this.quizCompleted = res.data.enrolled[0].quizProgress?.score_get > 0 ? true :false;
           } else {
             console.log('::::::::::::enrolled listt is empty::::::::::');
           }
@@ -220,7 +221,7 @@ export class CourcesDetailsComponent implements OnInit {
     return DATA;
   }
 
-  getCourseVideo(event: any) {
+  getCourseVideo(event: any, view?: boolean) {
     console.log('event event', event);
     this.videoId = event.id;
     this.courseVideo = null;
@@ -228,6 +229,24 @@ export class CourcesDetailsComponent implements OnInit {
       setTimeout(() => {
         this.courseVideo = event.video_url;
       }, 30);
+    }
+
+    if(view) {
+      setTimeout(() => {
+        if (this.mediaDiv?.nativeElement) {
+          const element = this.mediaDiv.nativeElement;
+          const elementTop = element.getBoundingClientRect().top + window.scrollY;
+          const offset = 75; 
+          const targetPosition = elementTop - offset;
+  
+          const finalPosition = Math.max(0, targetPosition);
+  
+          window.scrollTo({
+            top: finalPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 0); 
     }
   }
 
