@@ -1,0 +1,14 @@
+.event-container {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    gap: 15px; /* Spacing between event cards */
+}
+
+.event-post {
+    flex: 0 0 auto; /* Ensures each item maintains its width */
+    width: 450px !important;
+    height: 450px !important;
+}

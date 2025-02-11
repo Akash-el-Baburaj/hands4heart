@@ -2,19 +2,25 @@
     <div class="container">
         <div class="section-head text-center">
             <h2 class="title">Our Events</h2>
-            <p>There are many variations of passages of Lorem Ipsum typesetting industry has been the industry's standard dummy text ever since the been when an unknown printer.</p>
+            <p>There are many variations of passages of Lorem Ipsum typesetting industry...</p>
         </div>
-        <div class="blog-carousel owl-btn-center-lr owl-carousel owl-btn-3">
-        <div class="items">
-            <div class="event-post post-grid shadow radius me-2 p-1" *ngFor="let event of eventList" style="width: 450px !important;height: 365px !important;">
+
+        <!-- Scrollable Container -->
+        <div class="event-container">
+            <div class="event-post post-grid shadow radius me-2 p-1" *ngFor="let event of eventList">
                 <div class="dlab-post-media">
-                    <a href="javascript: void(0)" (click)="navigateto('/event-details', event.id, page)"><img [src]="event.img" alt="{{event.name}}"></a>
+                    <a href="javascript:void(0)" (click)="navigateto('/event-details', event.id, page)">
+                        <img [src]="event.img" alt="{{event.name}}">
+                    </a>
                 </div>
                 <div class="dlab-post-info">
                     <div class="dlab-post-meta px-0 w-100">
                         <ul class="w-100 px-0">
-                            <li class="post-date"> <strong>{{event.date | date: 'dd MMM'}}</strong> <span> {{event.date | date: 'yyyy'}}</span> </li>
-                            <li class="post-author"> <i class="la la-clock"></i> {{ event.time | timeFormate}} </li>
+                            <li class="post-date"> 
+                                <strong>{{event.date | date: 'dd MMM'}}</strong> 
+                                <span>{{event.date | date: 'yyyy'}}</span> 
+                            </li>
+                            <li class="post-author"> <i class="la la-clock"></i> {{ event.time | timeFormate }} </li>
                             <li class="post-tag"> <i class="ti-location-pin"></i> {{event.location || 'Not Disclosed'}} </li>
                             <li class="post-author"> <i class="fa fa-phone"></i> +919563011126 </li>
                         </ul>
@@ -25,6 +31,9 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
         <!-- <div class="items">
             <div class="event-post post-grid shadow radius">
                 <div class="dlab-post-media">
@@ -63,6 +72,3 @@
                 </div>
             </div>
         </div> -->
-    </div>
-    </div>
-</div>
