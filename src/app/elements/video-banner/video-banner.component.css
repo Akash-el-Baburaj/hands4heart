@@ -20,6 +20,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none; /* Prevents them from blocking button clicks */
+
 }
 
 .mask-layer {
@@ -29,6 +31,8 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
+  pointer-events: none; /* Ensures clicks go to the content below */
+
 }
 
 .content-layer {
@@ -38,10 +42,11 @@
   transform: translateY(-50%);
   text-align: left; /* Changed from center */
   color: white;
-  z-index: 2;
+  z-index: 10;
   width: 80%;
   padding: 20px;
   box-sizing: border-box;
+  pointer-events: auto;
 }
 
 .button-group {
