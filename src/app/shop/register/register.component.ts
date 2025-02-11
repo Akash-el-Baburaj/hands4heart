@@ -42,7 +42,7 @@ export class RegisterComponent {
       this.signUpForm = this.fb.group({
         full_name: ['' , Validators.required],
         mob: ['', Validators.required],
-        code: [''],
+        code: ['+91'],
         email: [''],
       })
     }
@@ -68,7 +68,7 @@ export class RegisterComponent {
         formData.append('email', this.signUpForm.value.email);
         this.authService.signUp(formData).subscribe({
           next: (res: any) => {
-            console.log(res);
+            console.log('res from reg form',res);
             if (res.success) {
               this.otpForm = true;
               this.regForm = false;

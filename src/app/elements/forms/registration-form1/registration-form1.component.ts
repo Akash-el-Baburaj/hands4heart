@@ -34,7 +34,7 @@ export class RegistrationForm1Component implements OnInit {
     private authService: AuthenticationService,
     private toast: ToastService,
     private alertService: AlertService,
-  ) {}
+  ) { this._initForm();}
 
   ngOnInit(): void {
     this._initForm();

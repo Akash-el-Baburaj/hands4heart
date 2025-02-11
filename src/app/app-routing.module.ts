@@ -133,7 +133,7 @@ const routes: Routes = [
 	{ path: 'footer-12', component: FooterStyle12Component },
 
 	// Pages --
-	{path: 'about-1', component: AboutUs1Component},
+	{path: 'about-us', component: AboutUs1Component},
 	{path: 'about-2', component: AboutUs2Component},
 	{path: 'services-1', component: Services1Component},
 	{path: 'services-2', component: Services2Component},

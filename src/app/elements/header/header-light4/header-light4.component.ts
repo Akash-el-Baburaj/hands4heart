@@ -174,6 +174,8 @@ export class HeaderLight4Component {
     sidebarMenu: any[] = [
     {
       title: 'About Us',
+      route: '/about-us'
+
     },
     {
       title: 'Program',
