@@ -288,11 +288,11 @@ export class CourcesDetailsComponent implements OnInit {
       next: (res: any) => {
         if (res.success) {
           this.enrolled = 'true';
-          this.toastr.success(res.message, 'SUCCESS');
+          this.toastr.success('Your payment verification is pending!!', 'SUCCESS');
           this.getSubscribedCourse();
         } else {
           // this.toastr.error('ERROR!', res.message);
-          this.toastr.error( res.message, 'ERROR!');
+          this.toastr.error( 'Your payment verification is pending!!', 'ERROR!');
         }
       },
     });
