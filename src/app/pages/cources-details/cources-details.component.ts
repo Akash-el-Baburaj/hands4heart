@@ -28,7 +28,7 @@ export class CourcesDetailsComponent implements OnInit {
     bg_image: '',
     title: 'Program',
   };
-
+  assessmentId: string = '';
   courseId: string = '';
   courseVideo: any;
   courseDetails: any;
