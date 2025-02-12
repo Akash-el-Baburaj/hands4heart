@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AccessmentService } from 'src/app/core/service/accessment.service';
 import { CourseService } from 'src/app/core/service/course.service';
+import { AlertService } from 'src/app/core/service/services/alert.service';
 import { ToastService } from 'src/app/core/service/services/toast.service';
 
 @Component({
@@ -59,6 +60,7 @@ export class TestEvaluationComponent {
     private route: ActivatedRoute,
     private router: Router,
     private courseService: CourseService,
+    private alertMessage: AlertService,
     private toastr: ToastService,
 
   ) {

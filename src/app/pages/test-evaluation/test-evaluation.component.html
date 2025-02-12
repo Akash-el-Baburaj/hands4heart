@@ -28,11 +28,11 @@
                   
                     <div id="quiz">
                       <div *ngIf="mode == 'quiz' && quiz">
-                        <div *ngFor="let question of filteredQuestions;">
+                        <div *ngFor="let question of filteredQuestions; let i = index;">
                           <h3 class="font-weight-normal">{{ pager.index + 1 }}. {{ question.name }}</h3>
-                          <div class="row text-left options">
+                          <div class="row text-left options px-1">
                             <div
-                              class="col-6 option"
+                              class="col-md-6 option"
                               *ngFor="let option of question.options"
                               [ngClass]="{'selected': option.selected}"
                               (click)="onSelect(question, option)"
@@ -53,13 +53,14 @@
                         <hr />
                         <div class="text-center">
                           <!-- <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(0)">First</button> -->
-                          <button class="btn btn-default me-2" *ngIf="config.allowBack" (click)="goTo(pager.index - 1)">Prev</button>
-                          <button
-                            class="btn btn-primary"
+                          <button class="site-button btn-default me-2"  style="background-color: #0e61bd !important;" *ngIf="config.allowBack" (click)="goTo(pager.index - 1)"><< Prev</button> 
+                          <button 
+                            class="site-button" 
+                            style="background-color: #0e61bd !important;" 
                             [disabled]="!isOptionSelected(filteredQuestions[0])"
                             (click)="goTo(pager.index + 1)"
                           >
-                            Next
+                            Next >>
                           </button>
                           <!-- <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.count - 1)">Last</button> -->
                         </div>
@@ -77,7 +78,7 @@
                   
                     <div class="row text-center" *ngIf="mode=='review'">
                       <div class="col-4 cursor-pointer" *ngFor="let question of quiz.questions; let index = index;">
-                        <div (click)="goTo(index)" class="p-3 mb-2 {{ isAnswered(question) == 'Answered'? 'bg-info': 'bg-warning' }}">{{index + 1}}. {{ isAnswered(question) }}</div>
+                        <div (click)="goTo(index)" class="p-3 mb-2 {{ isAnswered(question) == 'Answered'? 'answered': 'not-answered' }}">{{index + 1}}. {{ isAnswered(question) }}</div>
                       </div>
                     </div>
                     <div class="result" *ngIf="mode == 'result'">
@@ -113,17 +114,22 @@
                       <h4 class="alert alert-info text-center">You may close this window now.</h4>
                     </div> -->
                     <hr />
-                    <div *ngIf="mode!='result'">
-                      <button class="btn btn-warning" (click)="mode = 'quiz'">Quiz</button>
-                      <button class="btn btn-info" (click)="mode = 'review'">Review</button>
-                      <button class="btn btn-primary" (click)="onSubmit();">Submit Quiz</button>
+                    <div *ngIf="mode!='result'" >
+                      <button class="site-button me-2" (click)="mode = 'quiz'">Quiz</button>
+                      <button class="site-button me-2" style="background-color: #0e61bd !important;" (click)="mode = 'review'">Review</button>
+                      <button class="site-button" (click)="onSubmit();">Submit Quiz</button>
                     </div>
+                    <!-- <div *ngIf="mode!='result'" class="d-flex gap-3 w-100">
+                      <button class="site-button btn-custm flex-fill" (click)="mode = 'quiz'">Quiz</button>
+                      <button class="site-button btn-custm  flex-fill" style="background-color: #0e61bd !important;" (click)="mode = 'review'">Review</button>
+                      <button class="site-button btn-custm  flex-fill" (click)="onSubmit();">Submit Quiz</button>
+                    </div> -->
                   </div>
             </div>
         </div>
     </div>
     <!-- Content END -->
-    <app-newsletter2></app-newsletter2>
-    <app-footer13></app-footer13>
+    <!-- <app-newsletter2></app-newsletter2> -->
+    <app-footer4></app-footer4>
     <app-scroltop></app-scroltop>
 </div>

@@ -81,12 +81,12 @@
                   class="mobile-btn site-button btnhover10 w-50 d-block d-md-none"
                   *ngIf="enrolled === 'false'"
                   (click)="getEnroll(courseId)"
-                  style="background-color: blue !important; color: white !important; display: inline-block;"
+                  style="background-color: #0e61bd !important; color: white !important; display: inline-block;"
                 >
                   Enroll
                 </button>
               </div>
-              <div class="col-lg-12">
+              <div class="col-lg-12" #mediaDiv>
                 <div class="media m-b30">
                   <img
                     *ngIf="!courseVideo"
@@ -205,7 +205,7 @@
                   [ngClass]="{ 'disabled-link': paymentStatus === 'unpaid' }"
                   [data]="CourseDetailsData"
                   [PaymentStatus]="paymentStatus"
-                  (courseSelected)="getCourseVideo($event)"
+                  (courseSelected)="getCourseVideo($event, true)"
                 ></app-recent-posts1>
               </div>
               <div class="col-lg-12">
@@ -213,7 +213,7 @@
                 <app-courses6
                   [data]="CourseDetailsData"
                   [ngClass]="{ 'disabled-link': paymentStatus === 'unpaid' }"
-                  (courseSelected)="getCourseVideo($event)"
+                  (courseSelected)="getCourseVideo($event, true)"
                   [PaymentStatus]="paymentStatus"
                 ></app-courses6>
                 <!-- Tabs End-->

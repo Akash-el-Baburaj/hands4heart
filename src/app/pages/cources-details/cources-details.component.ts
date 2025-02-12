@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, TemplateRef } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CourseService } from 'src/app/core/service/course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -17,7 +17,7 @@ import { AccessmentService } from 'src/app/core/service/accessment.service';
 })
 export class CourcesDetailsComponent implements OnInit {
   updateProfileForm!: FormGroup;
-
+  @ViewChild('mediaDiv') mediaDiv!: ElementRef;
 
   // private inactivityTimeout: any;
   // private inactivityThreshold: number = 30000; // 30 seconds (adjust as needed)
@@ -57,9 +57,6 @@ export class CourcesDetailsComponent implements OnInit {
   profileUpdated: boolean = false;
   videoId: any;
   quizCompleted: boolean = false;
-
-
-  assessmentId: any;
 
 
   VideoType: string = '';
@@ -150,7 +147,7 @@ export class CourcesDetailsComponent implements OnInit {
             console.log('::::::::::::this.certificatePayment::::::::',this.certificatePayment);
 
             this.profileUpdated = res.data.enrolled[0].userEnteredData;
-            this.quizCompleted = res.data.enrolled[0].quizProgress.score > 0 ? true :false;
+            this.quizCompleted = res.data.enrolled[0].quizProgress?.score > 0 ? true :false;
             console.log('::::::::::::this.quizCompleted:::::::',this.quizCompleted);
 
           } else {
@@ -250,7 +247,7 @@ export class CourcesDetailsComponent implements OnInit {
     return DATA;
   }
 
-  getCourseVideo(event: any) {
+  getCourseVideo(event: any, view?: boolean) {
     console.log('event event', event);
     this.videoId = event.id;
     this.courseVideo = null;
@@ -258,6 +255,24 @@ export class CourcesDetailsComponent implements OnInit {
       setTimeout(() => {
         this.courseVideo = event.video_url;
       }, 30);
+    }
+
+    if(view) {
+      setTimeout(() => {
+        if (this.mediaDiv?.nativeElement) {
+          const element = this.mediaDiv.nativeElement;
+          const elementTop = element.getBoundingClientRect().top + window.scrollY;
+          const offset = 75; 
+          const targetPosition = elementTop - offset;
+  
+          const finalPosition = Math.max(0, targetPosition);
+  
+          window.scrollTo({
+            top: finalPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 0); 
     }
   }
 

@@ -46,6 +46,7 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
     setTimeout(() => {
       this.isLoading = false;
     }, 3000);
+    
   }
   constructor(
       private courseService: CourseService,
