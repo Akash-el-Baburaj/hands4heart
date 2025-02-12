@@ -172,7 +172,12 @@ export class HeaderLight4Component {
   }
 
     sidebarMenu: any[] = [
-    {
+      {
+        title: 'Home',
+        route: '/'
+  
+      },
+      {
       title: 'About Us',
       route: '/about-us'
 
@@ -183,7 +188,7 @@ export class HeaderLight4Component {
     },
     {
       title: 'Contact Us',
-      route: '/contact-1',
+      route: '/contact_us',
     }
     ]
   

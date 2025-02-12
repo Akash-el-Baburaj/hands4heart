@@ -185,7 +185,7 @@ const routes: Routes = [
 	{path: 'blog-single-left-sidebar', component: SingleSidebarLeftComponent},
 
 	// Contact --
-	{ path: 'contact-1', component: ContactUs1Component },
+	{ path: 'contact_us', component: ContactUs1Component },
 	{ path: 'contact-2', component: ContactUs2Component },
 	{ path: 'contact-3', component: ContactUs3Component },
 	{ path: 'contact-4', component: ContactUs4Component },

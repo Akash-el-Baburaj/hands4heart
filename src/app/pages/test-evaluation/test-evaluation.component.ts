@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AccessmentService } from 'src/app/core/service/accessment.service';
 import { CourseService } from 'src/app/core/service/course.service';
+import { ToastService } from 'src/app/core/service/services/toast.service';
 
 @Component({
   selector: 'app-test-evaluation',
@@ -57,7 +58,9 @@ export class TestEvaluationComponent {
     private quizService: AccessmentService,
     private route: ActivatedRoute,
     private router: Router,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private toastr: ToastService,
+
   ) {
     this.getCourseId();
   }
@@ -184,6 +187,8 @@ export class TestEvaluationComponent {
     if (index >= 0 && index < this.pager.count) {
       this.pager.index = index;
       this.mode = 'quiz';
+    }else if (index >= this.pager.count) {
+      this.toastr.warning('Press Sumbit quiz for finish!!!', 'Submit quiz');
     }
   }
 

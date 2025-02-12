@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CourseService } from 'src/app/core/service/course.service';
+import { ToastService } from 'src/app/core/service/services/toast.service';
 import { EnrolledUser, SubCourse } from 'src/app/pages/cources-details/model';
 
 @Component({
@@ -48,6 +49,7 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
   }
   constructor(
       private courseService: CourseService,
+          private toastr: ToastService,
       
       
     ) {
@@ -79,7 +81,7 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
   }
 
   onTimeUpdate(video: HTMLVideoElement): void {
-    const threshold = 0.9; // 90% watched threshold
+    const threshold = 0.90; // 90% watched threshold
     const watchedPercentage = video.currentTime / video.duration;
 
     if (watchedPercentage >= threshold && !this.isVideoWatched) {
@@ -110,6 +112,7 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
         console.error('Error mark video as completed:', error);
       },
       complete: () => {
+        this.toastr.success('Course completed..Please watch next video!!', 'SUCCESS');
         console.log('mark video  completed successfully!...');
       },
     });

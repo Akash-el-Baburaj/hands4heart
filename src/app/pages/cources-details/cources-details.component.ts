@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, HostListener, OnInit, TemplateRef } from '@angular/core';
 import { CourseService } from 'src/app/core/service/course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -8,6 +8,7 @@ import { EnrolledUser } from './model';
 import { AuthenticationService } from 'src/app/core/service/authentication.service';
 import { AlertService } from 'src/app/core/service/services/alert.service';
 import { ToastService } from 'src/app/core/service/services/toast.service';
+import { AccessmentService } from 'src/app/core/service/accessment.service';
 
 @Component({
   selector: 'app-cources-details',
@@ -16,6 +17,11 @@ import { ToastService } from 'src/app/core/service/services/toast.service';
 })
 export class CourcesDetailsComponent implements OnInit {
   updateProfileForm!: FormGroup;
+
+
+  // private inactivityTimeout: any;
+  // private inactivityThreshold: number = 30000; // 30 seconds (adjust as needed)
+
 
   banner: any = {
     pagetitle: 'Program', //rename to course details
@@ -53,6 +59,9 @@ export class CourcesDetailsComponent implements OnInit {
   quizCompleted: boolean = false;
 
 
+  assessmentId: any;
+
+
   VideoType: string = '';
   qrData: any | null = null;
 
@@ -65,18 +74,22 @@ export class CourcesDetailsComponent implements OnInit {
     private alertService: AlertService,
     private modalService: NgbModal,
     private fb: FormBuilder,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private assessmentService: AccessmentService
   ) {
+    this.getSubscribedCourse();
     this.getCourseId();
     this.getUserProfile()
   }
 
   ngOnInit(): void {
     this.enrolled = localStorage.getItem('enrolled');
-
     const userString = localStorage.getItem('user');
     this.user = userString ? JSON.parse(userString) : null;
-    this.getSubscribedCourse();
+    // this.resetInactivityTimer();
+
+
+    // this.getSubscribedCourse();
     // const hasEmptyFields = this.checkForEmptyFields(this.user);
     // if (hasEmptyFields) {
     //   this.profileUpdated = true;
@@ -104,6 +117,21 @@ export class CourcesDetailsComponent implements OnInit {
     });
   }
 
+  // @HostListener('window:mousemove') // Detects mouse movement
+  // @HostListener('window:scroll') // Detects scrolling
+  // @HostListener('window:keydown') // Detects keyboard input
+  // resetInactivityTimer() {
+  //   clearTimeout(this.inactivityTimeout);
+  //   this.inactivityTimeout = setTimeout(() => {
+  //     this.showPopup();
+  //   }, this.inactivityThreshold);
+  // }
+
+  // showPopup() {
+  //   // Open modal popup if the user is idle
+  //   this.modalService.open('watchVideosModal', { centered: true });
+  // }
+
   getSubscribedCourse() {
     this.courseService.getMyCourseList(this.page).subscribe({
       next: (res) => {
@@ -122,7 +150,9 @@ export class CourcesDetailsComponent implements OnInit {
             console.log('::::::::::::this.certificatePayment::::::::',this.certificatePayment);
 
             this.profileUpdated = res.data.enrolled[0].userEnteredData;
-            this.quizCompleted = res.data.enrolled[0].quizProgress.score_get > 0 ? true :false;
+            this.quizCompleted = res.data.enrolled[0].quizProgress.score > 0 ? true :false;
+            console.log('::::::::::::this.quizCompleted:::::::',this.quizCompleted);
+
           } else {
             console.log('::::::::::::enrolled listt is empty::::::::::');
           }
@@ -274,7 +304,8 @@ export class CourcesDetailsComponent implements OnInit {
   }
 
   navigateToTestList(id: string) {
-    this.router.navigate(['/test-list'], { queryParams: { id: id } });
+    // this.router.navigate(['/test-list'], { queryParams: { id: id } });
+    this.getAssessmentList(id, this.page);
   }
 
   navigateToCoursetList() {
@@ -335,6 +366,8 @@ export class CourcesDetailsComponent implements OnInit {
 
   updateProfile() {
     if (!this.updateProfileForm.valid) {
+      this.toastr.warning('Please fill all the fields!!!', 'Warning');
+
       console.error('Form is invalid!', this.updateProfileForm.errors);
       this.updateProfileForm.markAllAsTouched(); // Mark all fields as touched
       return;
@@ -366,14 +399,14 @@ export class CourcesDetailsComponent implements OnInit {
       next: (response) => {
         console.log('response of profile update- ', response);
         if (response.success) {
-          // const hasEmptyFields = this.checkForEmptyFields(this.user);
-          // if (hasEmptyFields) {
-          //   this.profileUpdated = true;
-          // }
+          this.toastr.success('Profile updated successfully!', 'Success');
+
           this.getSubscribedCourse();
           this.getUserProfile();
           this.resetForm();
         } else {
+          this.toastr.error(response.message, 'Failed');
+
           console.error('Failed to update profile:', response.message);
         }
       },
@@ -388,6 +421,7 @@ export class CourcesDetailsComponent implements OnInit {
   }
   resetForm() {
     this.updateProfileForm.reset();
+    this.modalService.dismissAll(); // Close the modal
   }
 
   onCertificateButtonClick(
@@ -465,5 +499,21 @@ export class CourcesDetailsComponent implements OnInit {
         
       },
     });
+  }
+  getAssessmentList(id: string, page: number) {
+   
+    this.assessmentService.getQUizList(id, page).subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.assessmentId = res.data.quiz_list[0].id;
+          this.startAssessment(this.assessmentId)
+     
+        }
+      }
+    })
+  }
+  startAssessment(id: string) {
+    console.log('Navigating to quiz question')
+    this.router.navigate(['/assessment'], {queryParams: {id: id}})
   }
 }
