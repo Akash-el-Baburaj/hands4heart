@@ -29,7 +29,7 @@ export class Events1Component implements OnInit {
 				margin:30,
 				nav:true,
 				dots: false,
-				navText: ['<i class="ti-arrow-left"></i>', '<i class="ti-arrow-right"></i>'],
+				navText: ['<i class="ti-arrow-left" style="color: #ec2127 !important"></i>', '<i class="ti-arrow-right" style="color: #ec2127 !important"></i>'],
 				responsive:{
 					0:{
 						items:1
