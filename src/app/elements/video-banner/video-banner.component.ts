@@ -41,6 +41,7 @@ export class VideoBannerComponent implements OnInit {
     private alertService: AlertService,
   ) {
     this.user = localStorage.getItem('userId') ? localStorage.getItem('userId') : null;
+    
   }
 
   ngOnInit(): void {
