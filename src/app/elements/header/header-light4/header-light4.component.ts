@@ -112,8 +112,9 @@ export class HeaderLight4Component {
     this.couserScreenEnable();
     this.authService.logout();
     localStorage.clear();
-    this.navigateTo('')
+    this.navigateTo('/index')
     this.modalRef?.close();
+    localStorage.removeItem('userId')
   }
 
   themeColor(itme: any) {
