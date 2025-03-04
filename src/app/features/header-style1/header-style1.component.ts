@@ -14,7 +14,7 @@ export class HeaderStyle1Component {
 
 	header : any = {
 		header_class: "",
-		logo_image: "assets/images/logo.png",
+		logo_image: "assets/images/logo.svg",
 		title: "Blog grid 2",
 	}
 }

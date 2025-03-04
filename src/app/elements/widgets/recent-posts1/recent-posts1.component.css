@@ -2,14 +2,14 @@
 /* .card {
     
     height: 85px;
-    border: 2px solid #ec2127;
+    border: 2px solid #fba126;
     transition: all 0.3s ease-in-out;
     background: #fff;
 
     
 }
 .card:hover {
-    background-color: #ec2127 !important;
+    background-color: #fba126 !important;
     color: #ffffff !important;
     .post-meta{
         color: #ffffff !important;
@@ -21,21 +21,21 @@
  /* Existing card styles */
 .card {
     height: 85px;
-    /* border: 2px solid #ec2127; */
+    /* border: 2px solid #fba126; */
     transition: all 0.3s ease-in-out;
     background: #fff; /* Default, will be overridden by even/odd */
 }
 
 /* Even cards (0, 2, 4...) - blue */
 .card.even {
-    border: 2px solid #ec2127
+    border: 2px solid #fba126
     /* background-color: #007bff; Example blue */
 }
 
 /* Odd cards (1, 3, 5...) - red */
 .card.odd {
     border: 2px solid #007bff
-    /* background-color: #ec2127; Matches border color */
+    /* background-color: #fba126; Matches border color */
 }
 
 /* Hover state (overrides even/odd background) */
@@ -44,7 +44,7 @@
     color: #ffffff !important;
 }
 .card.even:hover {
-    background-color: #ec2127 !important;
+    background-color: #fba126 !important;
     color: #ffffff !important;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .playing:nth-child(odd) {
-    background-color: #0e61bd; /* Red background */
+    background-color: #060b89; /* Red background */
     color: white;
     width: 100%;
     font-size: 12px;
@@ -114,11 +114,11 @@
     padding: 2px 5px;
     font-size: 14px;
     font-weight: 900 !important;
-    background-color: #0e61bd;
+    background-color: #060b89;
 }
 
 .playing:nth-child(even) {
-    background-color: #ec2127; /* Red background */
+    background-color: #fba126; /* Red background */
     color: white;
     width: 100%;
     font-size: 12px;
@@ -139,5 +139,5 @@
     padding: 2px 5px;
     font-size: 14px;
     font-weight: 900 !important;
-    background-color: #ec2127;
+    background-color: #fba126;
 }

@@ -53,10 +53,10 @@
                         <hr />
                         <div class="text-center">
                           <!-- <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(0)">First</button> -->
-                          <button class="site-button btn-default me-2"  style="background-color: #0e61bd !important;" *ngIf="config.allowBack" (click)="goTo(pager.index - 1)"><< Prev</button> 
+                          <button class="site-button btn-default me-2"  style="background-color: #060b89 !important;" *ngIf="config.allowBack" (click)="goTo(pager.index - 1)"><< Prev</button> 
                           <button 
                             class="site-button" 
-                            style="background-color: #0e61bd !important;" 
+                            style="background-color: #060b89 !important;" 
                             [disabled]="!isOptionSelected(filteredQuestions[0])"
                             (click)="goTo(pager.index + 1)"
                           >
@@ -116,12 +116,12 @@
                     <hr />
                     <div *ngIf="mode!='result'" >
                       <button class="site-button me-2" (click)="mode = 'quiz'">Quiz</button>
-                      <button class="site-button me-2" style="background-color: #0e61bd !important;" (click)="mode = 'review'">Review</button>
+                      <button class="site-button me-2" style="background-color: #060b89 !important;" (click)="mode = 'review'">Review</button>
                       <button class="site-button" (click)="onSubmit();">Submit Quiz</button>
                     </div>
                     <!-- <div *ngIf="mode!='result'" class="d-flex gap-3 w-100">
                       <button class="site-button btn-custm flex-fill" (click)="mode = 'quiz'">Quiz</button>
-                      <button class="site-button btn-custm  flex-fill" style="background-color: #0e61bd !important;" (click)="mode = 'review'">Review</button>
+                      <button class="site-button btn-custm  flex-fill" style="background-color: #060b89 !important;" (click)="mode = 'review'">Review</button>
                       <button class="site-button btn-custm  flex-fill" (click)="onSubmit();">Submit Quiz</button>
                     </div> -->
                   </div>

@@ -6961,7 +6961,7 @@ a,
     vertical-align: middle;	
 }
 .site-button {
-    background-color: #ec2127 !important;
+    background-color: #fba126 !important;
 }
 .site-button:active,
 .site-button:hover,
@@ -8578,12 +8578,12 @@ ul[class*="list-"]{
 } */
 
 .list-check.circle.primary li:nth-child(odd)::before {
-    background: #0e61bd;
+    background: #060b89;
     color: #fff;
 }
 
 .list-check.circle.primary li:nth-child(even)::before {
-    background: #ec2127;
+    background: #fba126;
     color: #fff;
 }
 .list-check.circle.white li:before {

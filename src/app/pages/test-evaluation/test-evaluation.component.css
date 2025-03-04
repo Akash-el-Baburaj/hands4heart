@@ -3,7 +3,7 @@
 }
 
 .option {
-    background-color: #ec2127;
+    background-color: #fba126;
     color: #fff;
     font-size: 20px;
     padding: 10px;
@@ -15,7 +15,7 @@
 
 @media (max-width: 768px) {
     .option {
-        background-color: #ec2127;
+        background-color: #fba126;
         color: #fff;
         /* font-size: 20px;
         padding: 10px;
@@ -29,7 +29,7 @@
 }
 
 .option:hover {
-    background-color: #0e61bd;
+    background-color: #060b89;
     color: #fff;
     /* font-size: 20px;
     padding: 10px;
@@ -40,8 +40,8 @@
 }
 
 .option.selected {
-    border-color: #0e61bd; /* Highlight border color ec2127 */
-    background-color: #0e61bd; /* Slightly darker background ec2127 */
+    border-color: #060b89; /* Highlight border color fba126 */
+    background-color: #060b89; /* Slightly darker background fba126 */
     color: #fff;
 }
 
@@ -94,11 +94,11 @@
   } */
 
   .not-answered {
-    background-color: #0e61bd !important;
+    background-color: #060b89 !important;
     color: #fff !important;
   }
 
   .answered {
-    background-color: #ec2127 !important;
+    background-color: #fba126 !important;
     color: #fff !important;
   }

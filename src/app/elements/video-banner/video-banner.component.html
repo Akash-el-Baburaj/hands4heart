@@ -29,13 +29,13 @@
       <!-- <h3>Login / Register</h3> -->
     </div>
     <div class="button-group d-flex align-item-center">
-      <!-- <button class="btn"  style="z-index: 8;background-color: #ec2127 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">About</button> -->
-      <a href="javascript:void(0);" *ngIf="user === null" class="site-button btnhover14" (click)="navigateToLogin()" style="z-index: 8;background-color: #ec2127 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">Login</a>
-      <a href="/about-us" *ngIf="user !== null" class="site-button btnhover14" style="z-index: 8;background-color: #ec2127 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">About Us</a>
-      <!-- <a href="javascript:void(0);" *ngIf="user !== null" class="site-button btnhover14" (click)="openLogoutModal(staticBackdropModal)" style="z-index: 8;background-color: #ec2127 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">LogOut</a> -->
+      <!-- <button class="btn"  style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">About</button> -->
+      <a href="javascript:void(0);" *ngIf="user === null" class="site-button btnhover14" (click)="navigateToLogin()" style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">Login</a>
+      <a href="/about-us" *ngIf="user !== null" class="site-button btnhover14" style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">About Us</a>
+      <!-- <a href="javascript:void(0);" *ngIf="user !== null" class="site-button btnhover14" (click)="openLogoutModal(staticBackdropModal)" style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">LogOut</a> -->
 
-      <button class="site-button btnhover10" *ngIf="user === null" (click)="openAuthModal(authenticationModal)" style="z-index: 8;background-color: #0e61bd !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">Register</button>
-      <a href="/contact_us" class="site-button btnhover10" *ngIf="user !== null" style="z-index: 8;background-color: #0e61bd !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">Contact us</a>
+      <button class="site-button btnhover10" *ngIf="user === null" (click)="openAuthModal(authenticationModal)" style="z-index: 8;background-color: #060b89 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">Register</button>
+      <a href="/contact_us" class="site-button btnhover10" *ngIf="user !== null" style="z-index: 8;background-color: #060b89 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">Contact us</a>
     </div>
   </div>
 
@@ -60,10 +60,10 @@
       </div>
       <div class="modal-footer d-flex justify-content-center" style="border: none !important;">
         <button type="button" class="site-button w-100"
-            style="width: 116px !important; background-color: #0e61bd !important; color: #fff !important;"
+            style="width: 116px !important; background-color: #060b89 !important; color: #fff !important;"
             (click)="modal.close('Close click')">No</button>
         <button type="button" class="site-button w-100"
-            style="width: 116px !important; background-color: #ec2127 !important; color: #fff !important;"
+            style="width: 116px !important; background-color: #fba126 !important; color: #fff !important;"
             (click)="logOUt()">Yes</button>
       </div>
   </div>
@@ -131,7 +131,7 @@
             </div> -->
             <div class="col-md-12 text-center mt-3">
                 <button name="submit" type="submit" value="Submit" class="site-button btn-block mb-2"><span>Sign Up</span></button>
-                <span class="text-secondary mt-2">Already Have An Account?&nbsp;<a href="javascript: void(0)" (click)="navigateToLogin('fromSignUp')" style="color: #ec2127 !important">Login</a> </span>
+                <span class="text-secondary mt-2">Already Have An Account?&nbsp;<a href="javascript: void(0)" (click)="navigateToLogin('fromSignUp')" style="color: #fba126 !important">Login</a> </span>
             </div>
         </div>
     </form>
