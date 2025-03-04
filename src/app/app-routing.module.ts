@@ -137,7 +137,7 @@ const routes: Routes = [
 	{path: 'about-2', component: AboutUs2Component},
 	{path: 'services-1', component: Services1Component},
 	{path: 'services-2', component: Services2Component},
-	{path: 'faq-1', component: FaqsComponent},
+	{path: 'faq', component: FaqsComponent},
 	{path: 'teacher', component: TeachersComponent},
 	{path: 'teachers-profile', component: TeachersProfileComponent},
 	{path: 'courses', component: CourcesComponent},

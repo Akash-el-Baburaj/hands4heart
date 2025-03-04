@@ -5952,7 +5952,7 @@ ol.comment-list li.comment .comment-respond .comment-form p {
 	content:none;
 }
 .widget-link li:after {
-    content: "/";
+    content: " | ";
     position: absolute;
     right: 0;
 }
