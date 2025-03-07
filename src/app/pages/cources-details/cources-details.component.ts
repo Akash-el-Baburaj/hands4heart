@@ -345,7 +345,7 @@ export class CourcesDetailsComponent implements OnInit {
   }
 
   openCentered(content: any) {
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content, { centered: true, windowClass: 'custom-modal' });
   }
 
   getCertificate(content: any, CourseId: string) {

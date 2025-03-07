@@ -514,7 +514,7 @@ sub {
   vertical-align: text-bottom !important;
 }
 .no-space-between-inline-blocks {
-  *letter-spacing: normal !important; 
+  /* *letter-spacing: normal !important;  */
   letter-spacing: -0.31em !important; 
   word-spacing: -0.43em !important; 
 }

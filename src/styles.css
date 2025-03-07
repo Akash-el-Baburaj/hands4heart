@@ -41,3 +41,8 @@
 .swal2-info {
   border-left: 4px solid #2196F3 !important;
 }
+
+.custom-modal .modal-dialog {
+  max-width: 900px;
+  width: auto;
+}
