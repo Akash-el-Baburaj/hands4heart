@@ -23,6 +23,7 @@
     "@sweetalert2/ngx-sweetalert2": "^13.0.0",
     "angularx-qrcode": "^16.0.2",
     "bootstrap": "^5.3.3",
+    "html5shiv": "^3.7.3",
     "lightgallery": "^2.7.2",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",

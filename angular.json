@@ -59,7 +59,8 @@
               "src/assets/js/rev-all.js",
               "src/assets/js/jquery.star-rating-svg.js",
               "src/assets/js/rev.slider.js",
-              "src/assets/js/custom.js"
+              "src/assets/js/custom.js",
+              "node_modules/html5shiv/dist/html5shiv.min.js"
             ],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"

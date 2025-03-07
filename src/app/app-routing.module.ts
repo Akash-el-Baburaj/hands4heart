@@ -82,6 +82,7 @@ import { CommonModule } from '@angular/common';
 import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
 import { TestEvaluationComponent } from './pages/test-evaluation/test-evaluation.component';
 import { TestEvautionListComponent } from './pages/test-evaution-list/test-evaution-list.component';
+import { CprCertificateComponent } from './elements/cpr-certificate/cpr-certificate.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeCoachingComponent },
@@ -189,6 +190,8 @@ const routes: Routes = [
 	{ path: 'contact-2', component: ContactUs2Component },
 	{ path: 'contact-3', component: ContactUs3Component },
 	{ path: 'contact-4', component: ContactUs4Component },
+
+	{ path: 'certificate', component: CprCertificateComponent },//pleasecomment it after styling
 
 	// Error -- 
 	{path: '**', component: Error404Component},

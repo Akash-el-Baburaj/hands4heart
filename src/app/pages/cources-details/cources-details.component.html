@@ -172,7 +172,7 @@
                   Certificate Payment pending
                 </button>
 
-                <button
+                <!-- <button
                   class="mobile-btn site-button btnhover14 w-auto px-auto ms-3"
                   (click)="getCertificate(certificate, courseId)"
                   *ngIf="
@@ -183,8 +183,15 @@
                   "
                 >
                   Downlaod Certificate
-                </button>
+                </button> -->
 
+                <button
+                  class="mobile-btn site-button btnhover14 w-auto px-auto ms-3"
+                  (click)="getCertificate(certificate, courseId)"
+
+                >
+                  Downlaod Certificate
+              </button>
                 <!-- <button
                   class="site-button btnhover14 w-25 ms-3"
                   (click)="
@@ -269,7 +276,7 @@
 </div>
 
 <ng-template #certificate let-modal>
-  <app-certificate [Data]="this.user" [qrData]="qrData"></app-certificate>
+  <cpr-certificate [Data]="this.user" [qrData]="qrData"></cpr-certificate>
 </ng-template>
 
 <ng-template #profileUpdateModal let-modal>

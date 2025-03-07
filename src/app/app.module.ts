@@ -222,6 +222,7 @@ import { ToastrComponent } from './elements/toastr/toastr.component';
 import { VideoBannerComponent } from './elements/video-banner/video-banner.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { TimeFormatePipe } from './core/pipes/time-formate.pipe';
+import { CprCertificateComponent } from './elements/cpr-certificate/cpr-certificate.component';
 
 @NgModule({
   declarations: [
@@ -431,7 +432,8 @@ import { TimeFormatePipe } from './core/pipes/time-formate.pipe';
     QrGeneratorComponent,
     ToastrComponent,
     VideoBannerComponent,
-    TimeFormatePipe
+    TimeFormatePipe,
+    CprCertificateComponent
   ],
   imports: [
     BrowserModule,
@@ -463,6 +465,7 @@ import { TimeFormatePipe } from './core/pipes/time-formate.pipe';
     RegistrationForm1Component,
     VideoEmbedComponent,
     CertificateComponent,
+    CprCertificateComponent,
     QrGeneratorComponent,
     ToastrComponent,
     VideoBannerComponent,
