@@ -72,7 +72,22 @@
     <img class="image2" src="../../../assets/images/certificate-og/image2.png" alt="" width="122" height="120">
     <img class="text-15" src="../../../assets/images/certificate-og/international_media_infor.png" alt="International Media &amp; Information Technology Park Ltd." width="156" height="28" title="International Media &amp; Information Technology Park Ltd.">
   </div>
+  <button href="javascript: void(0)" class="site-button w-100  d-none d-md-block" (click)="downloadAsPDF()"
+  style="background-color: #fba126 !important; color: #fff !important;"  [disabled]="isLoading"
+  >
+  Download
+</button>
 
+<div *ngIf="isLoading" class="loader-container  d-none d-md-block " 
+style="padding: 5px 10px !important; ">          
+          <div class="loader w-100 d-flex justify-content-center">
+            <!-- <img src="../../../assets/gif/loader-white.gif" alt=""> -->
+            <div class="spinner-overlay">
+              <div class="spinner"></div>
+            </div>
+          </div>
+          <p>&nbsp;&nbsp; Downloading...</p>
+        </div>
 
 <div class="d-block d-sm-block d-md-none">
   <div class="mt-2" style="z-index: 999999 !important; background-color: #fff;">
@@ -150,8 +165,13 @@
         <div *ngIf="isLoading" class="loader-container d-flex align-items-center justify-content-center" 
               style="padding: 5px 10px !important; width: 100vw !important; height: 100vh !important;">
           
-          <div class="loader"></div>
-          <p>Downloading...</p>
+          <div class="loader">
+            <!-- <img src="../../../assets/gif/loader-white.gif" alt=""> -->
+            <div class="spinner-overlay">
+              <div class="spinner"></div>
+            </div>
+          </div>
+          <p>&nbsp;&nbsp; Downloading...</p>
         </div>
     </div>
     <!-- <div class="modal-footer d-flex justify-content-center" style="border: none !important;">
