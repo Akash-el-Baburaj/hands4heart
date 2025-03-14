@@ -276,7 +276,7 @@
 </div>
 
 <ng-template #certificate let-modal>
-  <cpr-certificate [Data]="this.user" [qrData]="qrData" (modalClose)="modal.close('Close click')"></cpr-certificate>
+  <cpr-certificate [Data]="this.user" [qrData]="qrData" [certificateID]="certificateID" (modalClose)="modal.close('Close click')"></cpr-certificate>
 </ng-template>
 
 <ng-template #profileUpdateModal let-modal>

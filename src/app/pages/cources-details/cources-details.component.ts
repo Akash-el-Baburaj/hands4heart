@@ -62,6 +62,7 @@ export class CourcesDetailsComponent implements OnInit {
 
   VideoType: string = '';
   qrData: any | null = null;
+  certificateID: any | null = null;
 
   constructor(
     private courseService: CourseService,
@@ -145,9 +146,6 @@ export class CourcesDetailsComponent implements OnInit {
             }else{
               this.certificatePayment =res.data.enrolled[0].certificate.paymentStatus;
             }
-
-            console.log('::::::::::::this.certificatePayment::::::::',this.certificatePayment);
-
             this.profileUpdated = res.data.enrolled[0].userEnteredData;
             this.quizCompleted = res.data.enrolled[0].quizProgress?.score > 0 ? true :false;
             console.log('::::::::::::this.quizCompleted:::::::',this.quizCompleted);
@@ -185,11 +183,9 @@ export class CourcesDetailsComponent implements OnInit {
       const DATA = params['data'];
       if (DATA) {
         data = JSON.parse(DATA);
-        console.log('details data =>> ', data);
         const course_Id = data?.CourseDetails?.id
           ? data?.CourseDetails?.id
           : data.id;
-        console.log('course_Id => ', course_Id);
         this.courseId = course_Id;
         localStorage.setItem('courseId', this.courseId)
         this.getCourseDetailsByCourseId(course_Id);
@@ -200,7 +196,6 @@ export class CourcesDetailsComponent implements OnInit {
         this.userProfile.user_Phone = data.user_phone;
         this.userProfile.paymentStatus = data.paymentStatus;
         this.userProfile.createdBy = data.createdBy;
-        console.log('this.userProfile >>',this.userProfile)
         this.courserDescription = data.CourseDetails?.description;
         this.courseObjective = data.CourseDetails?.course_objective;
         // this.getSubscribedCourse();
@@ -250,7 +245,6 @@ export class CourcesDetailsComponent implements OnInit {
   }
 
   getCourseVideo(event: any, view?: boolean) {
-    console.log('event event', event);
     this.videoId = event.id;
     this.courseVideo = null;
     if (event) {
@@ -279,7 +273,6 @@ export class CourcesDetailsComponent implements OnInit {
   }
 
   getSafeUrl(videoUrl: string): SafeResourceUrl {
-    // console.log('CourseDetailsData',CourseDetailsData)
     if (this.isYouTubeUrl(videoUrl)) {
       const videoId = this.getYouTubeVideoId(videoUrl);
       const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
@@ -354,44 +347,36 @@ export class CourcesDetailsComponent implements OnInit {
     const formData = new FormData();
     formData.append('courseId', CourseId);
     this.qrData = 'CERT-3-4-1737805743557';
+    this.getCertificateId(1)
     this.openCentered(content);
-    // this.courseService.getCertificate(formData).subscribe({
-    //   next: (res: any) => {
-    //     console.log('res certificate => ', res)
-    //     this.qrData = res.data.certificateId;
-    //     this.openCentered(content)
-
-    //   }
-    // })
   }
 
   open(content: any) {
-
-    // this.getSubscribedCourse();
-    // const hasEmptyFields = this.checkForEmptyFields(this.user);
-
-
       this.setUserDataToForm();
       this.modalService.open(content, {
         windowClass: 'custom-modal',
         centered: true,
-      });
-      
+      });   
+  }
 
-   
+  getCertificateId(page: number) {
+    this.courseService.getMyCourseList(page).subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          const DATA = res.data
+          this.certificateID = DATA.enrolled[0].certificate.certificateId
+        }
+      }
+    })
   }
 
   updateProfile() {
     if (!this.updateProfileForm.valid) {
       this.toastr.warning('Please fill all the fields!!!', 'Warning');
-
       console.error('Form is invalid!', this.updateProfileForm.errors);
       this.updateProfileForm.markAllAsTouched(); // Mark all fields as touched
       return;
     }
-
-    console.log('Form is valid, proceeding with API call...');
-
     const formData = new FormData();
 
     formData.append('name', this.updateProfileForm.value.name);
@@ -414,7 +399,6 @@ export class CourcesDetailsComponent implements OnInit {
     );
     this.courseService.updateProfile(formData).subscribe({
       next: (response) => {
-        console.log('response of profile update- ', response);
         if (response.success) {
           this.toastr.success('Profile updated successfully!', 'Success');
 
@@ -431,7 +415,6 @@ export class CourcesDetailsComponent implements OnInit {
         console.error('Error creating profile:', error);
       },
       complete: () => {
-        console.log('Profile updated successfully!...');
         this.generateCertificate();
       },
     });
@@ -512,7 +495,6 @@ export class CourcesDetailsComponent implements OnInit {
         console.error('Error genearte certicate', error);
       },
       complete: () => {
-        console.log('certicate genearte successfully!...');
         
       },
     });
@@ -530,7 +512,6 @@ export class CourcesDetailsComponent implements OnInit {
     })
   }
   startAssessment(id: string) {
-    console.log('Navigating to quiz question')
     this.router.navigate(['/assessment'], {queryParams: {id: id}})
   }
 
