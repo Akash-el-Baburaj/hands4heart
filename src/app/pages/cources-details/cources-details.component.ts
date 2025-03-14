@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/core/service/authentication.servi
 import { AlertService } from 'src/app/core/service/services/alert.service';
 import { ToastService } from 'src/app/core/service/services/toast.service';
 import { AccessmentService } from 'src/app/core/service/accessment.service';
+import { PhonepeService } from 'src/app/core/service/phonePe/phonepe.service';
 
 @Component({
   selector: 'app-cources-details',
@@ -72,7 +73,8 @@ export class CourcesDetailsComponent implements OnInit {
     private modalService: NgbModal,
     private fb: FormBuilder,
     private authService: AuthenticationService,
-    private assessmentService: AccessmentService
+    private assessmentService: AccessmentService,
+    private phonePe: PhonepeService
   ) {
     this.getSubscribedCourse();
     this.getCourseId();
@@ -531,4 +533,10 @@ export class CourcesDetailsComponent implements OnInit {
     console.log('Navigating to quiz question')
     this.router.navigate(['/assessment'], {queryParams: {id: id}})
   }
+
+  makePayment() {
+    const transactionId = "TXN" + new Date().getTime(); // Generate a unique Transaction ID
+    this.phonePe.initiatePayment(500, '9876543210', transactionId);
+  }
+  
 }
