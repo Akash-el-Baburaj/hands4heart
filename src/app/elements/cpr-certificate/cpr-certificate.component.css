@@ -287,19 +287,20 @@ body {
   width: 600px
 }
 .row {
-  margin: 69px 24px 0 254px !important;
+  margin: 69px 5px 0 254px !important;
   position: relative !important;
 }
 .row > * {
   float: left !important;
-  margin: 0 34px 0 0 !important;
+  /* margin: 0 34px 0 0 !important; */
 }
 .row > *:last-child {
-  margin-right: 0 !important;
+  /* margin-right: 0 !important; */
 }
 .rectangle-3 {
   height: 3px !important;
   width: 154px !important;
+  margin-right: 34px !important;
   -webkit-border-radius: 1.54px !important;
   -moz-border-radius: 1.54px !important;
   border-radius: 1.54px !important;
@@ -316,6 +317,7 @@ body {
 .rectangle-3-copy {
   height: 3px !important;
   width: 154px !important;
+  margin-right: 34px !important;
   -webkit-border-radius: 1.54px !important;
   -moz-border-radius: 1.54px !important;
   border-radius: 1.54px !important;

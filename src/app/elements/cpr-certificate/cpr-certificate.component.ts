@@ -75,12 +75,14 @@ export class CprCertificateComponent implements OnChanges {
         const imgData = canvas.toDataURL('image/png');
 
         const pxToMm = 0.264583; 
-        const imgWidthMm = canvas.width * pxToMm;  
-        const imgHeightMm = canvas.height * pxToMm;
+        // const imgWidthMm = canvas.width * pxToMm;  
+        // const imgHeightMm = canvas.height * pxToMm;
+        const imgWidthMm = 3508;  
+        const imgHeightMm =  2480;
 
         const pdf = new jsPDF({
             orientation: imgWidthMm > imgHeightMm ? 'landscape' : 'portrait',
-            unit: 'mm',
+            unit: 'px',
             format: [imgWidthMm, imgHeightMm]
         });
 
