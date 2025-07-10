@@ -214,10 +214,14 @@ body {
 .certificate {
   display: block !important;
   margin: 0 auto !important;
+  height: 50px !important; /**img height resize*/
+  width: auto !important; 
 }
 .text {
   display: block !important;
   margin: 12px auto 0 !important;
+  height: 25px !important; /**img height resize*/
+  /* width: auto !important;  */
 }
 .image-4 {
   display: block !important;
