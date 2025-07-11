@@ -1,0 +1,42 @@
+<div class="page-wraper">
+  <!-- header -->
+  <app-header-light4></app-header-light4>
+  <!-- header END -->
+
+  <!-- Content -->
+  <div class="page-content bg-gray">
+    <div class="section-full content-inner">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-8 col-lg-10 col-md-12">
+            <div class="bg-white rounded shadow-sm p-5 text-center">
+
+              <h2 class="font-28 text-danger mb-3">Payment Failed!</h2>
+              <p class="text-muted mb-2">
+                Unfortunately, your payment could not be completed.
+              </p>
+              <p class="text-muted mb-2">
+                Please try again or contact support if the issue persists.
+              </p>
+              <p class="text-muted">
+                Click the button below to return to the course page and retry.
+              </p>
+
+              <div class="text-center mt-4">
+                <a [routerLink]="'/program'" class="site-button btnhover10"
+                  style="background-color: #dc3545 !important; color: white !important;">
+                  Go Back to Courses
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 
+  <app-footer4></app-footer4>
+  <app-scroltop></app-scroltop> -->
+</div>

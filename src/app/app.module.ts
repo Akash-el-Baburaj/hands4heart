@@ -223,6 +223,8 @@ import { VideoBannerComponent } from './elements/video-banner/video-banner.compo
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { TimeFormatePipe } from './core/pipes/time-formate.pipe';
 import { CprCertificateComponent } from './elements/cpr-certificate/cpr-certificate.component';
+import { PaymentSuccessComponent } from './pages/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './pages/payment-failed/payment-failed.component';
 
 @NgModule({
   declarations: [
@@ -433,7 +435,9 @@ import { CprCertificateComponent } from './elements/cpr-certificate/cpr-certific
     ToastrComponent,
     VideoBannerComponent,
     TimeFormatePipe,
-    CprCertificateComponent
+    CprCertificateComponent,
+    PaymentSuccessComponent,
+    PaymentFailedComponent
   ],
   imports: [
     BrowserModule,

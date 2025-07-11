@@ -322,22 +322,50 @@ export class CourcesDetailsComponent implements OnInit {
     this.router.navigate(['/courses']);
   }
 
+  // getEnroll(id: string) {
+  //   const formData = new FormData();
+  //   formData.append('course_id', id);
+  //   this.courseService.courseEnroll(formData).subscribe({
+  //     next: (res: any) => {
+  //       if (res.success) {
+  //         this.enrolled = 'true';
+  //         this.toastr.success('Your payment verification is pending!!', 'SUCCESS');
+  //         this.getSubscribedCourse();
+  //       } else {
+  //         this.toastr.error('ERROR!', res.message);
+  //       }
+  //     },
+  //   });
+  // }
+
   getEnroll(id: string) {
-    const formData = new FormData();
-    formData.append('course_id', id);
-    this.courseService.courseEnroll(formData).subscribe({
-      next: (res: any) => {
-        if (res.success) {
-          this.enrolled = 'true';
-          this.toastr.success('Your payment verification is pending!!', 'SUCCESS');
-          this.getSubscribedCourse();
-        } else {
-          // this.toastr.error('ERROR!', res.message);
-          this.toastr.error( 'Your payment verification is pending!!', 'ERROR!');
-        }
-      },
-    });
-  }
+  const formData = new FormData();
+  formData.append('course_id', id);
+  this.courseService.courseEnroll(formData).subscribe({
+    next: (res: any) => {
+      let paymentUrl = res?.data?.web;
+
+      if (res.success) {
+        this.enrolled = 'true';
+        this.toastr.success('Your payment verification is pending!!', 'SUCCESS');
+        this.getSubscribedCourse();
+      } else {
+        this.enrolled = 'true';
+        this.getSubscribedCourse();
+        this.toastr.error('ERROR!', res.message);
+      }
+
+      // Redirect to payment page if URL is available
+      if (paymentUrl) {
+        window.location.href = paymentUrl;
+      }
+    },
+    error: () => {
+      this.toastr.error('Something went wrong during enrollment.', 'ERROR');
+    }
+  });
+}
+
 
   openCentered(content: any) {
     this.modalService.open(content, { centered: true, windowClass: 'custom-modal-2' });
@@ -478,27 +506,58 @@ export class CourcesDetailsComponent implements OnInit {
     });
   }
 
-  generateCertificate() {
-    const formData = new FormData();
+  // generateCertificate() {
+  //   const formData = new FormData();
 
-    formData.append('courseId', this.courseId);
+  //   formData.append('courseId', this.courseId);
 
-    this.courseService.generateCertificate(formData).subscribe({
-      next: (response:any) => {
-        if (response.success) {
-         this.getSubscribedCourse();
-        } else {
-          console.error('Failed to genearte certicate:', response.message);
-        }
-      },
-      error: (error:any) => {
-        console.error('Error genearte certicate', error);
-      },
-      complete: () => {
+  //   this.courseService.generateCertificate(formData).subscribe({
+  //     next: (response:any) => {
+  //       if (response.success) {
+  //        this.getSubscribedCourse();
+  //       } else {
+  //         console.error('Failed to genearte certicate:', response.message);
+  //       }
+  //     },
+  //     error: (error:any) => {
+  //       console.error('Error genearte certicate', error);
+  //     },
+  //     complete: () => {
         
-      },
-    });
-  }
+  //     },
+  //   });
+  // }
+
+
+
+  generateCertificate() {
+  const formData = new FormData();
+  formData.append('courseId', this.courseId);
+
+  this.courseService.generateCertificate(formData).subscribe({
+    next: (response: any) => {
+      if (response.success) {
+        // Redirect to the payment or certificate URL if available
+        const certificateUrl = response?.data?.web;
+        if (certificateUrl) {
+          window.location.href = certificateUrl;
+          return; // Prevent further execution after redirect
+        }
+
+        this.getSubscribedCourse();
+      } else {
+        console.error('Failed to generate certificate:', response.message);
+        this.toastr.error('Certificate generation failed.', 'ERROR');
+      }
+    },
+    error: (error: any) => {
+      console.error('Error generating certificate', error);
+      this.toastr.error('An error occurred.', 'ERROR');
+    },
+  
+  });
+}
+
   getAssessmentList(id: string, page: number) {
    
     this.assessmentService.getQUizList(id, page).subscribe({

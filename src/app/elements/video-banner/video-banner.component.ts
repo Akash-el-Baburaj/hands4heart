@@ -276,7 +276,7 @@ export class VideoBannerComponent implements OnInit {
   
     pathOTPForm(data: any) {
       this.otpValidateForm.patchValue({
-        otp: data,
+        otp: '',
       });
     }
   

@@ -59,7 +59,9 @@ export class RegistrationForm1Component implements OnInit {
 
   _initOtpForm() {
     this.otpValidateForm = this.fb.group({
-      otp: [this.otp ?? '', Validators.required]
+      // otp: [this.otp ?? '', Validators.required]
+            otp: ['', Validators.required]
+
     })
   }
 
@@ -132,7 +134,7 @@ export class RegistrationForm1Component implements OnInit {
 
   pathOTPForm(data: any) {
     this.otpValidateForm.patchValue({
-      otp: data,
+      otp: '',
     });
   }
 

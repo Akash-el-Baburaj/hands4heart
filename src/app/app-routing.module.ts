@@ -83,6 +83,8 @@ import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
 import { TestEvaluationComponent } from './pages/test-evaluation/test-evaluation.component';
 import { TestEvautionListComponent } from './pages/test-evaution-list/test-evaution-list.component';
 import { CprCertificateComponent } from './elements/cpr-certificate/cpr-certificate.component';
+import { PaymentFailedComponent } from './pages/payment-failed/payment-failed.component';
+import { PaymentSuccessComponent } from './pages/payment-success/payment-success.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeCoachingComponent },
@@ -140,6 +142,10 @@ const routes: Routes = [
 	{path: 'services-2', component: Services2Component},
 	{path: 'faq', component: FaqsComponent},
 	{path: 'teacher', component: TeachersComponent},
+		{path: 'payment_success', component: PaymentSuccessComponent},
+
+			{path: 'payment_failed', component: PaymentFailedComponent},
+
 	{path: 'teachers-profile', component: TeachersProfileComponent},
 	{path: 'courses', component: CourcesComponent},
 	{path: 'program', component: MyCoursesComponent},

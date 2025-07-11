@@ -55,7 +55,8 @@ export class RegisterComponent {
   
     _initOtpForm() {
       this.otpValidateForm = this.fb.group({
-        otp: [this.otp ?? '', Validators.required]
+        // otp: [this.otp ?? '', Validators.required]
+         otp: ['', Validators.required]
       })
     }
   
@@ -113,7 +114,7 @@ export class RegisterComponent {
   
     pathOTPForm(data: any) {
       this.otpValidateForm.patchValue({
-        otp: data.otp,
+        otp: '',
       });
     }
   
