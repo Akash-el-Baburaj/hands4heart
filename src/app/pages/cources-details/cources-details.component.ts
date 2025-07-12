@@ -1,4 +1,11 @@
-import { Component, ElementRef, HostListener, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { CourseService } from 'src/app/core/service/course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -22,7 +29,6 @@ export class CourcesDetailsComponent implements OnInit {
 
   // private inactivityTimeout: any;
   // private inactivityThreshold: number = 30000; // 30 seconds (adjust as needed)
-
 
   banner: any = {
     pagetitle: 'Program', //rename to course details
@@ -59,7 +65,6 @@ export class CourcesDetailsComponent implements OnInit {
   videoId: any;
   quizCompleted: boolean = false;
 
-
   VideoType: string = '';
   qrData: any | null = null;
   certificateID: any | null = null;
@@ -79,7 +84,7 @@ export class CourcesDetailsComponent implements OnInit {
   ) {
     this.getSubscribedCourse();
     this.getCourseId();
-    this.getUserProfile()
+    this.getUserProfile();
   }
 
   ngOnInit(): void {
@@ -87,7 +92,6 @@ export class CourcesDetailsComponent implements OnInit {
     const userString = localStorage.getItem('user');
     this.user = userString ? JSON.parse(userString) : null;
     // this.resetInactivityTimer();
-
 
     // this.getSubscribedCourse();
     // const hasEmptyFields = this.checkForEmptyFields(this.user);
@@ -139,17 +143,21 @@ export class CourcesDetailsComponent implements OnInit {
           this.enrolledList = res.data.enrolled;
           if (this.enrolledList && this.enrolledList.length > 0) {
             this.paymentStatus = res.data.enrolled[0].paymentStatus;
-             this.enrolled = this.paymentStatus == 'paid' ? 'true':'false';
+            this.enrolled = this.paymentStatus == 'paid' ? 'true' : 'false';
             this.certificateReady = res.data.enrolled[0].certificateReady;
-            if(res.data.enrolled[0].certificate === null){
-              this.certificatePayment='unpaid';
-            }else{
-              this.certificatePayment =res.data.enrolled[0].certificate.paymentStatus;
+            if (res.data.enrolled[0].certificate === null) {
+              this.certificatePayment = 'unpaid';
+            } else {
+              this.certificatePayment =
+                res.data.enrolled[0].certificate.paymentStatus;
             }
             this.profileUpdated = res.data.enrolled[0].userEnteredData;
-            this.quizCompleted = res.data.enrolled[0].quizProgress?.score > 0 ? true :false;
-            console.log('::::::::::::this.quizCompleted:::::::',this.quizCompleted);
-
+            this.quizCompleted =
+              res.data.enrolled[0].quizProgress?.score > 0 ? true : false;
+            console.log(
+              '::::::::::::this.quizCompleted:::::::',
+              this.quizCompleted
+            );
           } else {
             console.log('::::::::::::enrolled listt is empty::::::::::');
           }
@@ -187,7 +195,7 @@ export class CourcesDetailsComponent implements OnInit {
           ? data?.CourseDetails?.id
           : data.id;
         this.courseId = course_Id;
-        localStorage.setItem('courseId', this.courseId)
+        localStorage.setItem('courseId', this.courseId);
         this.getCourseDetailsByCourseId(course_Id);
         this.paymentStatus = data?.paymentStatus
           ? data.paymentStatus
@@ -206,7 +214,6 @@ export class CourcesDetailsComponent implements OnInit {
   }
   showSuccess() {
     this.toastr.success('Operation Successful!', 'Success');
-
   }
 
   getCourseDetailsByCourseId(id: any) {
@@ -253,22 +260,23 @@ export class CourcesDetailsComponent implements OnInit {
       }, 30);
     }
 
-    if(view) {
+    if (view) {
       setTimeout(() => {
         if (this.mediaDiv?.nativeElement) {
           const element = this.mediaDiv.nativeElement;
-          const elementTop = element.getBoundingClientRect().top + window.scrollY;
-          const offset = 75; 
+          const elementTop =
+            element.getBoundingClientRect().top + window.scrollY;
+          const offset = 75;
           const targetPosition = elementTop - offset;
-  
+
           const finalPosition = Math.max(0, targetPosition);
-  
+
           window.scrollTo({
             top: finalPosition,
-            behavior: 'smooth'
+            behavior: 'smooth',
           });
         }
-      }, 0); 
+      }, 0);
     }
   }
 
@@ -339,63 +347,68 @@ export class CourcesDetailsComponent implements OnInit {
   // }
 
   getEnroll(id: string) {
-  const formData = new FormData();
-  formData.append('course_id', id);
-  this.courseService.courseEnroll(formData).subscribe({
-    next: (res: any) => {
-      let paymentUrl = res?.data?.web;
+    const formData = new FormData();
+    formData.append('course_id', id);
+    this.courseService.courseEnroll(formData).subscribe({
+      next: (res: any) => {
+        let paymentUrl = res?.data?.web;
 
-      if (res.success) {
-        this.enrolled = 'true';
-        this.toastr.success('Your payment verification is pending!!', 'SUCCESS');
-        this.getSubscribedCourse();
-      } else {
-        this.enrolled = 'true';
-        this.getSubscribedCourse();
-        this.toastr.error('ERROR!', res.message);
-      }
+        if (res.success) {
+          this.enrolled = 'true';
+          this.toastr.success(
+            'Your payment verification is pending!!',
+            'SUCCESS'
+          );
+          this.getSubscribedCourse();
+        } else {
+          this.enrolled = 'true';
+          this.getSubscribedCourse();
+          this.toastr.error('ERROR!', res.message);
+        }
 
-      // Redirect to payment page if URL is available
-      if (paymentUrl) {
-        window.location.href = paymentUrl;
-      }
-    },
-    error: () => {
-      this.toastr.error('Something went wrong during enrollment.', 'ERROR');
-    }
-  });
-}
-
+        // Redirect to payment page if URL is available
+        if (paymentUrl) {
+          window.location.href = paymentUrl;
+        }
+      },
+      error: () => {
+        this.toastr.error('Something went wrong during enrollment.', 'ERROR');
+      },
+    });
+  }
 
   openCentered(content: any) {
-    this.modalService.open(content, { centered: true, windowClass: 'custom-modal-2' });
+    this.modalService.open(content, {
+      centered: true,
+      windowClass: 'custom-modal-2',
+    });
   }
 
   getCertificate(content: any, CourseId: string) {
     const formData = new FormData();
     formData.append('courseId', CourseId);
     this.qrData = 'CERT-3-4-1737805743557';
-    this.getCertificateId(1)
+    this.getCertificateId(1);
     this.openCentered(content);
   }
 
   open(content: any) {
-      this.setUserDataToForm();
-      this.modalService.open(content, {
-        windowClass: 'custom-modal',
-        centered: true,
-      });   
+    this.setUserDataToForm();
+    this.modalService.open(content, {
+      windowClass: 'custom-modal',
+      centered: true,
+    });
   }
 
   getCertificateId(page: number) {
     this.courseService.getMyCourseList(page).subscribe({
       next: (res: any) => {
         if (res.success) {
-          const DATA = res.data
-          this.certificateID = DATA.enrolled[0].certificate.certificateId
+          const DATA = res.data;
+          this.certificateID = DATA.enrolled[0].certificate.certificateId;
         }
-      }
-    })
+      },
+    });
   }
 
   updateProfile() {
@@ -461,11 +474,11 @@ export class CourcesDetailsComponent implements OnInit {
     // const hasEmptyFields = this.checkForEmptyFields(this.user);
 
     // if (this.profileUpdated) {
-       this.setUserDataToForm();
-      this.open(profileupdateModal);
+    this.setUserDataToForm();
+    this.open(profileupdateModal);
     // } else {
     //   console.log('user profile updated with all data');
-      // this.openCentered(certificate);
+    // this.openCentered(certificate);
     //}
   }
 
@@ -523,7 +536,7 @@ export class CourcesDetailsComponent implements OnInit {
   //       console.error('Error genearte certicate', error);
   //     },
   //     complete: () => {
-        
+
   //     },
   //   });
   // }
@@ -531,52 +544,50 @@ export class CourcesDetailsComponent implements OnInit {
 
 
   generateCertificate() {
-  const formData = new FormData();
-  formData.append('courseId', this.courseId);
+    const formData = new FormData();
+    formData.append('courseId', this.courseId);
 
-  this.courseService.generateCertificate(formData).subscribe({
-    next: (response: any) => {
-      if (response.success) {
-        // Redirect to the payment or certificate URL if available
-        const certificateUrl = response?.data?.web;
-        if (certificateUrl) {
-          window.location.href = certificateUrl;
-          return; // Prevent further execution after redirect
+    this.courseService.generateCertificate(formData).subscribe({
+      next: (response: any) => {
+        let paymentUrl = response?.data?.web;
+
+        if (response.success) {
+          // Redirect to the payment or certificate URL if available
+
+          this.getSubscribedCourse();
+        } else {
+          console.error('Failed to generate certificate:', response.message);
+          this.toastr.error('Certificate generation failed.', 'ERROR');
         }
 
-        this.getSubscribedCourse();
-      } else {
-        console.error('Failed to generate certificate:', response.message);
-        this.toastr.error('Certificate generation failed.', 'ERROR');
-      }
-    },
-    error: (error: any) => {
-      console.error('Error generating certificate', error);
-      this.toastr.error('An error occurred.', 'ERROR');
-    },
-  
-  });
-}
+        // Redirect to payment page if URL is available
+        if (paymentUrl) {
+          window.location.href = paymentUrl;
+        }
+      },
+      error: (error: any) => {
+        console.error('Error generating certificate', error);
+        this.toastr.error('An error occurred.', 'ERROR');
+      },
+    });
+  }
 
   getAssessmentList(id: string, page: number) {
-   
     this.assessmentService.getQUizList(id, page).subscribe({
       next: (res: any) => {
         if (res.success) {
           this.assessmentId = res.data.quiz_list[0].id;
-          this.startAssessment(this.assessmentId)
-     
+          this.startAssessment(this.assessmentId);
         }
-      }
-    })
+      },
+    });
   }
   startAssessment(id: string) {
-    this.router.navigate(['/assessment'], {queryParams: {id: id}})
+    this.router.navigate(['/assessment'], { queryParams: { id: id } });
   }
 
   makePayment() {
-    const transactionId = "TXN" + new Date().getTime(); // Generate a unique Transaction ID
+    const transactionId = 'TXN' + new Date().getTime(); // Generate a unique Transaction ID
     this.phonePe.initiatePayment(500, '9876543210', transactionId);
   }
-  
 }
