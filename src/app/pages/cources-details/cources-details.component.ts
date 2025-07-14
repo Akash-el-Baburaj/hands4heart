@@ -154,6 +154,8 @@ export class CourcesDetailsComponent implements OnInit {
             this.profileUpdated = res.data.enrolled[0].userEnteredData;
             this.quizCompleted =
               res.data.enrolled[0].quizProgress?.score > 0 ? true : false;
+
+
             console.log(
               '::::::::::::this.quizCompleted:::::::',
               this.quizCompleted
@@ -446,6 +448,7 @@ export class CourcesDetailsComponent implements OnInit {
           this.getSubscribedCourse();
           this.getUserProfile();
           this.resetForm();
+          this.generateCertificate();
         } else {
           this.toastr.error(response.message, 'Failed');
 
@@ -456,7 +459,7 @@ export class CourcesDetailsComponent implements OnInit {
         console.error('Error creating profile:', error);
       },
       complete: () => {
-        this.generateCertificate();
+         
       },
     });
   }
@@ -555,7 +558,7 @@ export class CourcesDetailsComponent implements OnInit {
           // Redirect to the payment or certificate URL if available
   // Redirect to payment page if URL is available
         if (paymentUrl) {
-          window.location.href = paymentUrl;
+          // window.location.href = paymentUrl;
         }
           this.getSubscribedCourse();
         } else {
