@@ -553,17 +553,17 @@ export class CourcesDetailsComponent implements OnInit {
 
         if (response.success) {
           // Redirect to the payment or certificate URL if available
-
+  // Redirect to payment page if URL is available
+        if (paymentUrl) {
+          window.location.href = paymentUrl;
+        }
           this.getSubscribedCourse();
         } else {
           console.error('Failed to generate certificate:', response.message);
           this.toastr.error('Certificate generation failed.', 'ERROR');
         }
 
-        // Redirect to payment page if URL is available
-        if (paymentUrl) {
-          window.location.href = paymentUrl;
-        }
+      
       },
       error: (error: any) => {
         console.error('Error generating certificate', error);
