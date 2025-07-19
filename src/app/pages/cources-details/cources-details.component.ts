@@ -229,6 +229,11 @@ export class CourcesDetailsComponent implements OnInit {
             this.courseObjective
           );
           this.patchValues(this.courseDetails);
+        } else if(!res.success) {
+          this.toastr.warning('Session expired, Please login again.', 'Warning!')
+          localStorage.clear();
+          sessionStorage.clear();
+          this.router.navigate(['/'])
         }
       },
     });
@@ -251,6 +256,31 @@ export class CourcesDetailsComponent implements OnInit {
     };
 
     return DATA;
+  }
+
+  getCertificatePayment(id: any) {
+    const payload = new FormData();
+    payload.append('courseId', id)
+    this.courseService.generateCertificate(payload).subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          let paymentUrl = res?.data?.web;
+          this.toastr.success(res.message, 'Success!')
+          if (paymentUrl) {
+            window.location.href = paymentUrl;
+          }
+        } else {
+          let paymentUrl = res?.data?.web;
+          this.toastr.info(res.message, 'Info!')
+          if (paymentUrl) {
+            window.location.href = paymentUrl;
+          }
+        }
+      },
+      error: (err) => {
+        this.toastr.error(err.error.message, 'Error!')
+      }
+    })
   }
 
   getCourseVideo(event: any, view?: boolean) {

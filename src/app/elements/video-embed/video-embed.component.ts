@@ -82,7 +82,7 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
   }
 
   onTimeUpdate(video: HTMLVideoElement): void {
-    const threshold = 0.90; // 90% watched threshold
+    const threshold = 0.98; // 90% watched threshold
     const watchedPercentage = video.currentTime / video.duration;
 
     if (watchedPercentage >= threshold && !this.isVideoWatched) {

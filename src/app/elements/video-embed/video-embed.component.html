@@ -35,6 +35,8 @@
   (ended)="onVideoEnded(videoPlayer)" 
   (loadedmetadata)="onMetadataLoaded(videoPlayer)"
   (timeupdate)="onTimeUpdate(videoPlayer)"
+  controlsList="nodownload"
+
 >
   <source
     [src]="videoEmbedUrl"
