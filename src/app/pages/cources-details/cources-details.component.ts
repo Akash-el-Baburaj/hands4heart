@@ -10,7 +10,7 @@ import { CourseService } from 'src/app/core/service/course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { EnrolledUser } from './model';
 import { AuthenticationService } from 'src/app/core/service/authentication.service';
 import { AlertService } from 'src/app/core/service/services/alert.service';
@@ -99,27 +99,34 @@ export class CourcesDetailsComponent implements OnInit {
     //   this.profileUpdated = true;
     // }
 
-    this.updateProfileForm = this.fb.group({
-      name: [this.user?.name || '', Validators.required],
-      code: [this.user?.code, Validators.required],
-      phone: [this.user?.phone || '', Validators.required],
-      email: [this.user?.email || '', [Validators.required, Validators.email]],
-      age: [
-        this.user?.age || '',
-        [Validators.required, Validators.min(1), Validators.max(120)],
-      ],
-      blood_group: [this.user?.blood_group || '', Validators.required],
-      education: [this.user?.education || '', Validators.required],
-      pincode: [this.user?.pincode || '', Validators.required],
-      thaluk: [this.user?.thaluk || '', Validators.required],
-      district: [this.user?.district || '', Validators.required],
-      state: [this.user?.state || '', Validators.required],
-      country: [this.user?.country || '', Validators.required],
-      address: [this.user?.address || '', Validators.required],
-      gender: [this.user?.gender || '', Validators.required],
-      date_of_birth: [this.user?.date_of_birth || '', Validators.required],
-    });
+  this.updateProfileForm = this.fb.group({
+  name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
+  code: [null, Validators.required],
+  phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+  email: ['', [Validators.required, Validators.email]],
+  age: [
+    null,
+    [Validators.required, Validators.min(1), Validators.max(120)],
+  ],
+  blood_group: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
+  education: ['', Validators.required],
+  pincode: ['', Validators.required],
+  thaluk: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
+  district: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
+  state: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
+  country: ['', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]],
+  address: ['', Validators.required],
+  gender: ['', Validators.required],
+  date_of_birth: ['', Validators.required],
+});
+
   }
+
+
+
+
+
+  
 
   // @HostListener('window:mousemove') // Detects mouse movement
   // @HostListener('window:scroll') // Detects scrolling
@@ -543,6 +550,26 @@ export class CourcesDetailsComponent implements OnInit {
       next: (res: any) => {
         if (res.success) {
           this.user = res.data;
+
+            // Patch the form with user data
+        this.updateProfileForm.patchValue({
+          name: this.user.name || '',
+          code: this.user.code || '',
+          phone: this.user.phone || '',
+          email: this.user.email || '',
+          age: this.user.age || '',
+          blood_group: this.user.blood_group || '',
+          education: this.user.education || '',
+          pincode: this.user.pincode || '',
+          thaluk: this.user.thaluk || '',
+          district: this.user.district || '',
+          state: this.user.state || '',
+          country: this.user.country || '',
+          address: this.user.address || '',
+          gender: this.user.gender || '',
+          date_of_birth: this.user.date_of_birth || ''
+        });
+
           this.userProfile.user_name = this.user.name;
           this.userProfile.user_Phone = this.user.phone;
           this.userProfile.paymentStatus = this.paymentStatus;

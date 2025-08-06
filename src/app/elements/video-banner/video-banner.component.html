@@ -1,118 +1,143 @@
 <!-- banner.component.html -->
 <div class="banner-container">
-  <div class="banner-media">
-    <!-- Video Banner -->
-    <video *ngIf="currentBanner?.bannerType === 'VIDEO' && !isExternalVideo(currentBanner.videoUrl)" 
-           [muted]="true" autoplay loop playsinline>
-      <source [src]="currentBanner?.videoUrl" type="video/mp4">
-    </video>
-    
-    <!-- External Video (YouTube/Vimeo) -->
-    <iframe *ngIf="currentBanner?.bannerType === 'VIDEO' && isExternalVideo(currentBanner.videoUrl)"
-            [src]="getSafeVideoUrl(currentBanner.videoUrl)" 
-            frameborder="0" allow="autoplay; encrypted-media" 
+    <div class="banner-media">
+        <!-- Video Banner -->
+        <video *ngIf="currentBanner?.bannerType === 'VIDEO' && !isExternalVideo(currentBanner.videoUrl)" [muted]="true"
+            autoplay loop playsinline>
+            <source [src]="currentBanner?.videoUrl" type="video/mp4">
+        </video>
+
+        <!-- External Video (YouTube/Vimeo) -->
+        <iframe *ngIf="currentBanner?.bannerType === 'VIDEO' && isExternalVideo(currentBanner.videoUrl)"
+            [src]="getSafeVideoUrl(currentBanner.videoUrl)" frameborder="0" allow="autoplay; encrypted-media"
             allowfullscreen muted playsinline>
-    </iframe>
-    
-    <!-- Image Banner -->
-    <img *ngIf="currentBanner?.bannerType === 'IMAGE'" 
-         [src]="currentBanner?.videoUrl" 
-         alt="Banner Image">
-  </div>
+        </iframe>
 
-  <div class="mask-layer"></div>
-
-  <div class="content-layer">
-    <div class="banner-text">
-      <h1 class="tp-caption" style="z-index: 6; min-width: 800px; max-width: 800px; font-weight: 600; white-space: normal; color: #fff; font-family:'Merriweather', serif;">{{currentBanner?.headline}}</h1>
-      <p style="z-index: 7; min-width: 640px; max-width: 640px; font-weight: 700; font-size: 18px; line-height: 30px; font-weight: 400; color: #fff; font-family: 'Roboto',sans-serif;">{{currentBanner?.paragraph}}</p>
-      <!-- <h3>Login / Register</h3> -->
+        <!-- Image Banner -->
+        <img *ngIf="currentBanner?.bannerType === 'IMAGE'" [src]="currentBanner?.videoUrl" alt="Banner Image">
     </div>
-    <div class="button-group d-flex align-item-center">
-      <!-- <button class="btn"  style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">About</button> -->
-      <a href="javascript:void(0);" *ngIf="user === null" class="site-button btnhover14" (click)="navigateToLogin()" style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">Login</a>
-      <a href="/about-us" *ngIf="user !== null" class="site-button btnhover14" style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">About Us</a>
-      <!-- <a href="javascript:void(0);" *ngIf="user !== null" class="site-button btnhover14" (click)="openLogoutModal(staticBackdropModal)" style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">LogOut</a> -->
 
-      <button class="site-button btnhover10" *ngIf="user === null" (click)="openAuthModal(authenticationModal)" style="z-index: 8;background-color: #060b89 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">Register</button>
-      <a href="/contact_us" class="site-button btnhover10" *ngIf="user !== null" style="z-index: 8;background-color: #060b89 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">Contact us</a>
+    <div class="mask-layer"></div>
+
+    <div class="content-layer">
+        <div class="banner-text">
+            <h1 class="tp-caption"
+                style="z-index: 6; min-width: 800px; max-width: 800px; font-weight: 600; white-space: normal; color: #fff; font-family:'Merriweather', serif;">
+                {{currentBanner?.headline}}</h1>
+            <p
+                style="z-index: 7; min-width: 640px; max-width: 640px; font-weight: 700; font-size: 18px; line-height: 30px; font-weight: 400; color: #fff; font-family: 'Roboto',sans-serif;">
+                {{currentBanner?.paragraph}}</p>
+            <!-- <h3>Login / Register</h3> -->
+        </div>
+        <div class="button-group d-flex align-item-center">
+            <!-- <button class="btn"  style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">About</button> -->
+            <a href="javascript:void(0);" *ngIf="user === null" class="site-button btnhover14"
+                (click)="navigateToLogin()"
+                style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">Login</a>
+            <a href="/about-us" *ngIf="user !== null" class="site-button btnhover14"
+                style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">About
+                Us</a>
+            <!-- <a href="javascript:void(0);" *ngIf="user !== null" class="site-button btnhover14" (click)="openLogoutModal(staticBackdropModal)" style="z-index: 8;background-color: #fba126 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">LogOut</a> -->
+
+            <button class="site-button btnhover10" *ngIf="user === null" (click)="openAuthModal(authenticationModal)"
+                style="z-index: 8;background-color: #060b89 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px;">Register</button>
+            <a href="/contact_us" class="site-button btnhover10" *ngIf="user !== null"
+                style="z-index: 8;background-color: #060b89 !important;letter-spacing: 2px; white-space: nowrap; font-size: 12px; font-weight: 600; color: rgba(255,255,255,1);  text-transform: uppercase; border-radius:4px; text-decoration: none;">Contact
+                us</a>
+        </div>
     </div>
-  </div>
 
-  <div class="banner-controls">
-    <button class="control-btn prev" (click)="changeBanner(-1)">‹</button>
-    <button class="control-btn next" (click)="changeBanner(1)">›</button>
-  </div>
+    <div class="banner-controls">
+        <button class="control-btn prev" (click)="changeBanner(-1)">‹</button>
+        <button class="control-btn next" (click)="changeBanner(1)">›</button>
+    </div>
 </div>
 
 
 <ng-template #staticBackdropModal let-modal>
-  <div>
-      <div class="modal-header d-flex justify-content-center w-100 text-center" style="border: none !important; background-color: #fff !important;">
-          <h4 class="modal-title pull-left text-dark"><i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i> Are
-              you sure? </h4>
-          <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <div>
+        <div class="modal-header d-flex justify-content-center w-100 text-center"
+            style="border: none !important; background-color: #fff !important;">
+            <h4 class="modal-title pull-left text-dark"><i class="fa fa-exclamation-triangle text-warning"
+                    aria-hidden="true"></i> Are
+                you sure? </h4>
+            <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
 
           </button> -->
-      </div>
-      <div class="modal-body text-center">
-          <p class="m-0">Are you sure you want to logout ?</p>
-      </div>
-      <div class="modal-footer d-flex justify-content-center" style="border: none !important;">
-        <button type="button" class="site-button w-100"
-            style="width: 116px !important; background-color: #060b89 !important; color: #fff !important;"
-            (click)="modal.close('Close click')">No</button>
-        <button type="button" class="site-button w-100"
-            style="width: 116px !important; background-color: #fba126 !important; color: #fff !important;"
-            (click)="logOUt()">Yes</button>
-      </div>
-  </div>
+        </div>
+        <div class="modal-body text-center">
+            <p class="m-0">Are you sure you want to logout ?</p>
+        </div>
+        <div class="modal-footer d-flex justify-content-center" style="border: none !important;">
+            <button type="button" class="site-button w-100"
+                style="width: 116px !important; background-color: #060b89 !important; color: #fff !important;"
+                (click)="modal.close('Close click')">No</button>
+            <button type="button" class="site-button w-100"
+                style="width: 116px !important; background-color: #fba126 !important; color: #fff !important;"
+                (click)="logOUt()">Yes</button>
+        </div>
+    </div>
 
 </ng-template>
 
 
 <ng-template #authenticationModal let-modal>
-  <div class="register-form style1 mb-2 d-flex align-items-center card blur-card">
-    <div class="mb-3 mt-3 w-100 d-flex justify-content-center">
-        <h3 class="text-secondary cred-title"><span *ngIf="regForm && !otpForm">Sign Up</span><span *ngIf="!regForm && !otpForm">Sign In</span><span *ngIf="!regForm && otpForm">OTP Verification</span></h3>
-    </div>
-    <form [formGroup]="signUpForm" class="mt-3"  (ngSubmit)="onSubmit()" *ngIf="regForm && !otpForm">
-        <!-- <input type="hidden" value="Appointment" name="dzToDo" > -->
-        <div class="row sp15">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <input class="form-control border" placeholder="Name" type="text" formControlName="full_name" >
+    <div class="register-form style1 mb-2 d-flex align-items-center card blur-card">
+        <div class="mb-3 mt-3 w-100 d-flex justify-content-center">
+            <h3 class="text-secondary cred-title"><span *ngIf="regForm && !otpForm">Sign Up</span><span
+                    *ngIf="!regForm && !otpForm">Sign In</span><span *ngIf="!regForm && otpForm">OTP Verification</span>
+            </h3>
+        </div>
+        <form [formGroup]="signUpForm" class="mt-3" (ngSubmit)="onSubmit()" *ngIf="regForm && !otpForm">
+            <!-- <input type="hidden" value="Appointment" name="dzToDo" > -->
+            <div class="row sp15">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input class="form-control border" placeholder="Name" type="text" formControlName="full_name">
+                        <div *ngIf="signUpForm.get('full_name')?.touched && signUpForm.get('full_name')?.invalid"
+                            class="text-danger mt-1 fs-12">
+                            <div *ngIf="signUpForm.get('full_name')?.errors?.['required']">Name is required.</div>
+                            <div *ngIf="signUpForm.get('full_name')?.errors?.['pattern']">Only alphabets are allowed.
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            <div class="col-md-12 px-2">
-                <div class="form-group">
-                    <div class="d-flex">
-                        <select class="w-auto" formControlName="code" aria-label="Country code">
-                            <option value="+1">+1 (USA)</option>
-                            <option value="+44">+44 (UK)</option>
-                            <option value="+91">+91 (India)</option>
-                            <option value="+61">+61 (Australia)</option>
-                            <!-- Add more country codes as needed -->
-                        </select>
-                    <!-- </div>
+                <div class="col-md-12 px-2">
+                    <div class="form-group">
+                        <div class="d-flex">
+                            <select class="w-auto" formControlName="code" aria-label="Country code">
+                                <option value="+1">+1 (USA)</option>
+                                <option value="+44">+44 (UK)</option>
+                                <option value="+91">+91 (India)</option>
+                                <option value="+61">+61 (Australia)</option>
+                                <!-- Add more country codes as needed -->
+                            </select>
+                            <!-- </div>
                     <div class="col-8"> -->
-                        <!-- <div class=""> -->
-                            <input class="form-control border" formControlName="mob" style="width: 90% !important" placeholder="Phone" type="text">
-                        <!-- </div> -->
+                            <!-- <div class=""> -->
+                            <input class="form-control border" formControlName="mob" style="width: 90% !important"
+                                placeholder="Phone" type="text">
+                            <!-- </div> -->
+                        </div>
+                        <div *ngIf="signUpForm.get('mob')?.touched && signUpForm.get('mob')?.invalid"
+                            class="text-danger mt-1 fs-12">
+                            <div *ngIf="signUpForm.get('mob')?.errors?.['required']">Phone number is required.</div>
+                            <div *ngIf="signUpForm.get('mob')?.errors?.['pattern']">Enter a valid 10-digit number.</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12 mb-3">
-                <div class="form-group">
-                    <input class="form-control border" formControlName="email" placeholder="Email" type="text">
+                <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                        <input class="form-control border" formControlName="email" placeholder="Email" type="text">
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <!-- <div class="form-group">
+                <div class="col-md-12">
+                    <!-- <div class="form-group">
                     <input name="dzOther[date]" class="form-control border" placeholder="Select Date" type="text">
                 </div> -->
-            </div>
-            <!-- <div class="col-md-12">
+                </div>
+                <!-- <div class="col-md-12">
                 <div class="form-group">
                     <select class="bs-select-hidden" name="dzOther[service]" >
                         <option value="Yoda">Mathematics</option>
@@ -129,37 +154,41 @@
                     </div>
                 </div>
             </div> -->
-            <div class="col-md-12 text-center mt-3">
-                <button name="submit" type="submit" value="Submit" class="site-button btn-block mb-2"><span>Sign Up</span></button>
-                <span class="text-secondary mt-2">Already Have An Account?&nbsp;<a href="javascript: void(0)" (click)="navigateToLogin('fromSignUp')" style="color: #fba126 !important">Login</a> </span>
-            </div>
-        </div>
-    </form>
-    <form [formGroup]="signInForm" class="mt-3"  (ngSubmit)="onLogin()" *ngIf="!regForm && !otpForm">
-        <!-- <input type="hidden" value="Appointment" name="dzToDo" > -->
-        <div class="row sp15">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <input class="form-control border" placeholder="Phone" type="text" formControlName="phone" >
+                <div class="col-md-12 text-center mt-3">
+                    <button name="submit" type="submit" value="Submit" class="site-button btn-block mb-2"><span>Sign
+                            Up</span></button>
+                    <span class="text-secondary mt-2">Already Have An Account?&nbsp;<a href="javascript: void(0)"
+                            (click)="navigateToLogin('fromSignUp')" style="color: #fba126 !important">Login</a> </span>
                 </div>
             </div>
-            <div class="col-md-12 text-center mt-3">
-                <button name="submit" type="submit" value="Submit" class="site-button btn-block mb-2"><span>Sign In</span></button>
-            </div>
-        </div>
-    </form>
-    <form [formGroup]="otpValidateForm" class="mt-3"  (ngSubmit)="verifyOTP()" *ngIf="!regForm && otpForm">
-        <!-- <input type="hidden" value="Appointment" name="dzToDo" > -->
-        <div class="row sp15">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <input class="form-control border" placeholder="OTP" type="text" formControlName="otp" >
+        </form>
+        <form [formGroup]="signInForm" class="mt-3" (ngSubmit)="onLogin()" *ngIf="!regForm && !otpForm">
+            <!-- <input type="hidden" value="Appointment" name="dzToDo" > -->
+            <div class="row sp15">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input class="form-control border" placeholder="Phone" type="text" formControlName="phone">
+                    </div>
+                </div>
+                <div class="col-md-12 text-center mt-3">
+                    <button name="submit" type="submit" value="Submit" class="site-button btn-block mb-2"><span>Sign
+                            In</span></button>
                 </div>
             </div>
-            <div class="col-md-12 text-center mt-3">
-                <button name="submit" type="submit" value="Submit" class="site-button btn-block mb-2"><span>Verify</span></button>
+        </form>
+        <form [formGroup]="otpValidateForm" class="mt-3" (ngSubmit)="verifyOTP()" *ngIf="!regForm && otpForm">
+            <!-- <input type="hidden" value="Appointment" name="dzToDo" > -->
+            <div class="row sp15">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input class="form-control border" placeholder="OTP" type="text" formControlName="otp">
+                    </div>
+                </div>
+                <div class="col-md-12 text-center mt-3">
+                    <button name="submit" type="submit" value="Submit"
+                        class="site-button btn-block mb-2"><span>Verify</span></button>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </ng-template>

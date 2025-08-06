@@ -43,51 +43,66 @@
 						</ul>
 					</div>
 					<div class="col-lg-8 col-md-7 col-sm-12 m-b30">
-						<form class="contact-box dzForm" action="script/contact.php">
-							<!-- <h3 class="title-box" style="background: #060b89 !important;" >Write us a few words about your project and we’ll prepare a proposal for you within <strong>24</strong> hours</h3> -->
-							<div class="dzFormMsg m-b20"></div>
-							<input type="hidden" value="Contact" name="dzToDo">
-							<div class="row">
-								<div class="col-lg-6 col-md-6">
-									<div class="form-group">
-										<div class="input-group">
-											<input name="dzFirstName" type="text" required="" class="form-control" placeholder="First Name">
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-6">
-									<div class="form-group">
-										<div class="input-group">
-											<input name="dzLastName" type="text" required="" class="form-control" placeholder="Last Name">
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-6">
-									<div class="form-group">
-										<div class="input-group">
-											<input name="dzOther[Phone]" type="text" required="" class="form-control" placeholder="Phone">
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-6">
-									<div class="form-group">
-										<div class="input-group"> 
-											<input name="dzEmail" type="email" class="form-control" required="" placeholder="Your Email Id">
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-12 col-md-12">
-									<div class="form-group">
-										<div class="input-group">
-											<textarea name="dzMessage" rows="4" class="form-control" required="" placeholder="Your message."></textarea>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-12 col-md-12">
-									<button name="submit" type="submit" value="Submit" class="site-button">Send</button>
-								</div>
-							</div>
-						</form>
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-box">
+  <div class="row">
+    <!-- First Name -->
+    <div class="col-lg-6 col-md-6">
+      <div class="form-group">
+        <input formControlName="firstName" type="text" class="form-control" placeholder="First Name">
+        <div class="text-danger" *ngIf="contactForm.get('firstName')?.touched && contactForm.get('firstName')?.invalid">
+          First name is required
+        </div>
+      </div>
+    </div>
+
+    <!-- Last Name -->
+    <div class="col-lg-6 col-md-6">
+      <div class="form-group">
+        <input formControlName="lastName" type="text" class="form-control" placeholder="Last Name">
+        <div class="text-danger" *ngIf="contactForm.get('lastName')?.touched && contactForm.get('lastName')?.invalid">
+          Last name is required
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone -->
+    <div class="col-lg-6 col-md-6">
+      <div class="form-group">
+        <input formControlName="phone" type="text" class="form-control" placeholder="Phone">
+        <div class="text-danger" *ngIf="contactForm.get('phone')?.touched && contactForm.get('phone')?.invalid">
+          Phone number is required
+        </div>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="col-lg-6 col-md-6">
+      <div class="form-group">
+        <input formControlName="email" type="email" class="form-control" placeholder="Your Email Id">
+        <div class="text-danger" *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.errors">
+          <div *ngIf="contactForm.get('email')?.errors?.['required']">Email is required</div>
+          <div *ngIf="contactForm.get('email')?.errors?.['email']">Invalid email address</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message -->
+    <div class="col-lg-12 col-md-12">
+      <div class="form-group">
+        <textarea formControlName="message" rows="4" class="form-control" placeholder="Your message."></textarea>
+        <div class="text-danger" *ngIf="contactForm.get('message')?.touched && contactForm.get('message')?.invalid">
+          Message is required
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="col-lg-12 col-md-12">
+      <button type="submit" class="site-button" [disabled]="contactForm.invalid">Send</button>
+    </div>
+  </div>
+</form>
+
 					</div>
 				</div>
 			</div>
