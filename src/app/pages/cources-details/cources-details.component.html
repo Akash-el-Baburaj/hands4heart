@@ -69,7 +69,7 @@
                 <div class="media m-b30">
                   <img *ngIf="!courseVideo" src="assets/images/blog/default/thum1.jpg" alt="" />
                   <app-video-embed class="w-100" *ngIf="courseVideo" [VideoURL]="getSafeUrl(courseVideo)"
-                    [VideoType]="VideoType" [videoId]="videoId"></app-video-embed>
+                    [VideoType]="VideoType" [videoId]="videoId" [lastIndex]="lastIndex"></app-video-embed>
                   <div class="w-100" *ngIf="!courseVideo">
                     <!-- <iframe
                     
@@ -108,6 +108,8 @@
                   Test
                 </button>
 
+                
+
                 <button class="mobile-btn site-button btnhover14 w-auto ms-3" (click)="open(profileUpdateModal)" *ngIf="
                     certificateReady &&
                     quizCompleted &&
@@ -117,7 +119,9 @@
                   Apply Certificate
                 </button>
 
-                <!-- <button class="mobile-btn site-button btnhover14 w-auto ms-3" (click)="open(profileUpdateModal)">
+                
+<!-- 
+                <button class="mobile-btn site-button btnhover14 w-auto ms-3" (click)="open(profileUpdateModal)">
                   Apply Certificate
                 </button> -->
 
@@ -162,15 +166,17 @@
                 </button> -->
               </div>
               <div class="col-lg-12 d-md-block d-lg-none mt-2">
+                <!-- ********************course selecting component***************** -->
                 <app-recent-posts1 class="d-block d-lg-none" [ngClass]="{ 'disabled-link': paymentStatus === 'unpaid' }"
                   [data]="CourseDetailsData" [PaymentStatus]="paymentStatus"
-                  (courseSelected)="getCourseVideo($event, true)"></app-recent-posts1>
+                  (courseSelected)="getCourseVideo($event, true)" (lastIndexSelected)="onLastIndexSelected($event)">
+                  ></app-recent-posts1>
               </div>
               <div class="col-lg-12">
                 <!-- Tabs -->
                 <app-courses6 [data]="CourseDetailsData" [ngClass]="{ 'disabled-link': paymentStatus === 'unpaid' }"
                   (courseSelected)="getCourseVideo($event, true)" [PaymentStatus]="paymentStatus"></app-courses6>
-                <!-- Tabs End-->
+                <!-- Tabs End
               </div>
               <div class="col-lg-12" class="d-block d-lg-none">
                 <div class="widget">
@@ -196,35 +202,35 @@
               </div>
             </div>
           </div>
-          <!-- left part start -->
+           left part start -->
+              </div>
+            </div>
+          </div>
         </div>
+        <!-- Content END-->
+        <!-- Footer -->
+        <!-- Newsletter -->
+        <!-- <app-newsletter2></app-newsletter2> -->
+        <!-- Footer -->
+        <app-footer4></app-footer4>
+        <!-- Footer END-->
+        <!-- scroll top button -->
+        <!-- scroltop -->
+        <app-scroltop></app-scroltop>
       </div>
-    </div>
-  </div>
-  <!-- Content END-->
-  <!-- Footer -->
-  <!-- Newsletter -->
-  <!-- <app-newsletter2></app-newsletter2> -->
-  <!-- Footer -->
-  <app-footer4></app-footer4>
-  <!-- Footer END-->
-  <!-- scroll top button -->
-  <!-- scroltop -->
-  <app-scroltop></app-scroltop>
-</div>
 
-<ng-template #certificate let-modal>
-  <cpr-certificate [Data]="this.user" [qrData]="qrData" [certificateID]="certificateID"
-    (modalClose)="modal.close('Close click')"></cpr-certificate>
-</ng-template>
+      <ng-template #certificate let-modal>
+        <cpr-certificate [Data]="this.user" [qrData]="qrData" [certificateID]="certificateID"
+          (modalClose)="modal.close('Close click')"></cpr-certificate>
+      </ng-template>
 
-<ng-template #profileUpdateModal let-modal>
-  <div class="modal-body">
-    <form class="ps-3 pe-3" [formGroup]="updateProfileForm" (ngSubmit)="updateProfile()">
-      <br /><br />
-      <div class="mb-2">
-        <label for="username" class="form-label">Full Name</label>
-        <input style="
+      <ng-template #profileUpdateModal let-modal>
+        <div class="modal-body">
+          <form class="ps-3 pe-3" [formGroup]="updateProfileForm" (ngSubmit)="updateProfile()">
+            <br /><br />
+            <div class="mb-2">
+              <label for="username" class="form-label">Full Name</label>
+              <input style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -233,22 +239,22 @@
             font-size: 14px;
             color: #333;
           " class="form-control" type="email" id="name" required formControlName="name"
-          placeholder="Enter your name " />
+                placeholder="Enter your name " />
 
 
-        <div *ngIf="updateProfileForm.get('name')?.touched && updateProfileForm.get('name')?.invalid"
-          class="text-danger mt-1 fs-12">
-          <div *ngIf="updateProfileForm.get('name')?.errors?.['required']">Name is required.</div>
-          <div *ngIf="updateProfileForm.get('name')?.errors?.['pattern']">Only alphabets are allowed.
-          </div>
-        </div>
+              <div *ngIf="updateProfileForm.get('name')?.touched && updateProfileForm.get('name')?.invalid"
+                class="text-danger mt-1 fs-12">
+                <div *ngIf="updateProfileForm.get('name')?.errors?.['required']">Name is required.</div>
+                <div *ngIf="updateProfileForm.get('name')?.errors?.['pattern']">Only alphabets are allowed.
+                </div>
+              </div>
 
 
-      </div>
-      <div class="mb-2" style="display: flex; gap: 10px; align-items: center">
-        <div style="flex: 1">
-          <label for="countryCode" class="form-label">Country Code</label>
-          <input style="
+            </div>
+            <div class="mb-2" style="display: flex; gap: 10px; align-items: center">
+              <div style="flex: 1">
+                <label for="countryCode" class="form-label">Country Code</label>
+                <input style="
               border: 1px solid #ccc;
               border-radius: 4px;
               padding: 8px;
@@ -257,10 +263,10 @@
               font-size: 14px;
               color: #333;
             " class="form-control" type="text" id="code" required formControlName="code" />
-        </div>
-        <div style="flex: 3">
-          <label for="phone" class="form-label">Phone</label>
-          <input style="
+              </div>
+              <div style="flex: 3">
+                <label for="phone" class="form-label">Phone</label>
+                <input style="
               border: 1px solid #ccc;
               border-radius: 4px;
               padding: 8px;
@@ -269,18 +275,20 @@
               font-size: 14px;
               color: #333;
             " class="form-control" type="text" id="phone" required formControlName="phone"
-            placeholder="Enter phone number" />
-     <div *ngIf="updateProfileForm.get('phone')?.touched && updateProfileForm.get('phone')?.invalid" class="text-danger mt-1 fs-12">
-  <div *ngIf="updateProfileForm.get('phone')?.errors?.['required']">Phone is required.</div>
-  <div *ngIf="updateProfileForm.get('phone')?.errors?.['pattern']">Enter a valid 10-digit phone number.</div>
-</div>
+                  placeholder="Enter phone number" />
+                <div *ngIf="updateProfileForm.get('phone')?.touched && updateProfileForm.get('phone')?.invalid"
+                  class="text-danger mt-1 fs-12">
+                  <div *ngIf="updateProfileForm.get('phone')?.errors?.['required']">Phone is required.</div>
+                  <div *ngIf="updateProfileForm.get('phone')?.errors?.['pattern']">Enter a valid 10-digit phone number.
+                  </div>
+                </div>
 
-        </div>
-      </div>
+              </div>
+            </div>
 
-      <div class="mb-2">
-        <label for="email" class="form-label">Email</label>
-        <input style="
+            <div class="mb-2">
+              <label for="email" class="form-label">Email</label>
+              <input style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -289,16 +297,16 @@
             font-size: 14px;
             color: #333;
           " class="form-control" type="email" id="email" required formControlName="email" placeholder="Enter email" />
-        <div *ngIf="updateProfileForm.get('email')?.touched && updateProfileForm.get('email')?.errors"
-          class="text-danger">
-          <div *ngIf="updateProfileForm.get('email')?.errors?.['required']">Email is required.</div>
-          <div *ngIf="updateProfileForm.get('email')?.errors?.['email']">Invalid email format.</div>
-        </div>
-      </div>
+              <div *ngIf="updateProfileForm.get('email')?.touched && updateProfileForm.get('email')?.errors"
+                class="text-danger">
+                <div *ngIf="updateProfileForm.get('email')?.errors?.['required']">Email is required.</div>
+                <div *ngIf="updateProfileForm.get('email')?.errors?.['email']">Invalid email format.</div>
+              </div>
+            </div>
 
-      <div class="mb-2">
-        <label for="age" class="form-label">Age</label>
-        <input style="
+            <div class="mb-2">
+              <label for="age" class="form-label">Age</label>
+              <input style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -307,16 +315,17 @@
             font-size: 14px;
             color: #333;
           " class="form-control" type="number" id="age" required formControlName="age" placeholder="Enter age" />
-    <div *ngIf="updateProfileForm.get('age')?.touched && updateProfileForm.get('age')?.invalid" class="text-danger mt-1 fs-12">
-  <div *ngIf="updateProfileForm.get('age')?.errors?.['required']">Age is required.</div>
-  <div *ngIf="updateProfileForm.get('age')?.errors?.['min']">Minimum age is 5.</div>
-  <div *ngIf="updateProfileForm.get('age')?.errors?.['max']">Maximum age is 100.</div>
-</div>
-      </div>
+              <div *ngIf="updateProfileForm.get('age')?.touched && updateProfileForm.get('age')?.invalid"
+                class="text-danger mt-1 fs-12">
+                <div *ngIf="updateProfileForm.get('age')?.errors?.['required']">Age is required.</div>
+                <div *ngIf="updateProfileForm.get('age')?.errors?.['min']">Minimum age is 5.</div>
+                <div *ngIf="updateProfileForm.get('age')?.errors?.['max']">Maximum age is 100.</div>
+              </div>
+            </div>
 
-      <div class="mb-2">
-        <label for="blood_group" class="form-label">Blood Group</label>
-        <input style="
+            <div class="mb-2">
+              <label for="blood_group" class="form-label">Blood Group</label>
+              <input style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -325,16 +334,18 @@
             font-size: 14px;
             color: #333;
           " class="form-control" type="text" id="blood_group" required formControlName="blood_group"
-          placeholder="Enter blood group" />
-     <div *ngIf="updateProfileForm.get('blood_group')?.touched && updateProfileForm.get('blood_group')?.invalid" class="text-danger mt-1 fs-12">
-  <div *ngIf="updateProfileForm.get('blood_group')?.errors?.['required']">Blood group is required.</div>
-  <div *ngIf="updateProfileForm.get('blood_group')?.errors?.['pattern']">Only alphabets are allowed.</div>
-</div>
-      </div>
+                placeholder="Enter blood group" />
+              <div
+                *ngIf="updateProfileForm.get('blood_group')?.touched && updateProfileForm.get('blood_group')?.invalid"
+                class="text-danger mt-1 fs-12">
+                <div *ngIf="updateProfileForm.get('blood_group')?.errors?.['required']">Blood group is required.</div>
+                <div *ngIf="updateProfileForm.get('blood_group')?.errors?.['pattern']">Only alphabets are allowed.</div>
+              </div>
+            </div>
 
-      <div class="mb-3">
-        <label class="form-label">Education</label>
-        <select style="
+            <div class="mb-3">
+              <label class="form-label">Education</label>
+              <select style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -343,22 +354,22 @@
             font-size: 14px;
             color: #333;
           " class="form-control" formControlName="education">
-          <option value="" disabled selected>Select Education</option>
-          <option value="HIGHER_SECONDARY">Higher Secondary</option>
-          <option value="GRADUATE">Graduate</option>
-          <option value="POST_GRADUATE">Post Graduate</option>
-          <option value="PHD">PhD</option>
-          <option value="OTHER">Other</option>
-        </select>
-        <div *ngIf="updateProfileForm.get('education')?.touched && updateProfileForm.get('education')?.invalid"
-          class="text-danger">
-          Education is required.
-        </div>
-      </div>
+                <option value="" disabled selected>Select Education</option>
+                <option value="HIGHER_SECONDARY">Higher Secondary</option>
+                <option value="GRADUATE">Graduate</option>
+                <option value="POST_GRADUATE">Post Graduate</option>
+                <option value="PHD">PhD</option>
+                <option value="OTHER">Other</option>
+              </select>
+              <div *ngIf="updateProfileForm.get('education')?.touched && updateProfileForm.get('education')?.invalid"
+                class="text-danger">
+                Education is required.
+              </div>
+            </div>
 
-      <div class="mb-2">
-        <label for="pincode" class="form-label">Pincode</label>
-        <input style="
+            <div class="mb-2">
+              <label for="pincode" class="form-label">Pincode</label>
+              <input style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -367,17 +378,17 @@
             font-size: 14px;
             color: #333;
           " class="form-control" type="text" id="pincode" required formControlName="pincode"
-          placeholder="Enter pincode" />
-        <div *ngIf="updateProfileForm.get('pincode')?.touched && updateProfileForm.get('pincode')?.invalid"
-          class="text-danger">
-          Pincode is required.
-        </div>
+                placeholder="Enter pincode" />
+              <div *ngIf="updateProfileForm.get('pincode')?.touched && updateProfileForm.get('pincode')?.invalid"
+                class="text-danger">
+                Pincode is required.
+              </div>
 
-      </div>
+            </div>
 
-      <div class="mb-2">
-        <label for="thaluk" class="form-label">Thaluk</label>
-        <input style="
+            <div class="mb-2">
+              <label for="thaluk" class="form-label">Thaluk</label>
+              <input style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -386,16 +397,17 @@
             font-size: 14px;
             color: #333;
           " class="form-control" type="text" id="thaluk" required formControlName="thaluk"
-          placeholder="Enter thaluk" />
-     <div *ngIf="updateProfileForm.get('thaluk')?.touched && updateProfileForm.get('thaluk')?.invalid" class="text-danger mt-1 fs-12">
-  <div *ngIf="updateProfileForm.get('thaluk')?.errors?.['required']">Thaluk is required.</div>
-  <div *ngIf="updateProfileForm.get('thaluk')?.errors?.['pattern']">Only alphabets are allowed.</div>
-</div>
-      </div>
+                placeholder="Enter thaluk" />
+              <div *ngIf="updateProfileForm.get('thaluk')?.touched && updateProfileForm.get('thaluk')?.invalid"
+                class="text-danger mt-1 fs-12">
+                <div *ngIf="updateProfileForm.get('thaluk')?.errors?.['required']">Thaluk is required.</div>
+                <div *ngIf="updateProfileForm.get('thaluk')?.errors?.['pattern']">Only alphabets are allowed.</div>
+              </div>
+            </div>
 
-      <div class="mb-2">
-        <label for="district" class="form-label">District</label>
-        <input style="
+            <div class="mb-2">
+              <label for="district" class="form-label">District</label>
+              <input style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -404,16 +416,17 @@
             font-size: 14px;
             color: #333;
           " class="form-control" type="text" id="district" required formControlName="district"
-          placeholder="Enter district" />
-       <div *ngIf="updateProfileForm.get('district')?.touched && updateProfileForm.get('district')?.invalid" class="text-danger mt-1 fs-12">
-  <div *ngIf="updateProfileForm.get('district')?.errors?.['required']">District is required.</div>
-  <div *ngIf="updateProfileForm.get('district')?.errors?.['pattern']">Only alphabets are allowed.</div>
-</div>
-      </div>
+                placeholder="Enter district" />
+              <div *ngIf="updateProfileForm.get('district')?.touched && updateProfileForm.get('district')?.invalid"
+                class="text-danger mt-1 fs-12">
+                <div *ngIf="updateProfileForm.get('district')?.errors?.['required']">District is required.</div>
+                <div *ngIf="updateProfileForm.get('district')?.errors?.['pattern']">Only alphabets are allowed.</div>
+              </div>
+            </div>
 
-      <div class="mb-2">
-        <label for="state" class="form-label">State</label>
-        <input style="
+            <div class="mb-2">
+              <label for="state" class="form-label">State</label>
+              <input style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -422,15 +435,16 @@
             font-size: 14px;
             color: #333;
           " class="form-control" type="text" id="state" required formControlName="state" placeholder="Enter state" />
-      <div *ngIf="updateProfileForm.get('state')?.touched && updateProfileForm.get('state')?.invalid" class="text-danger mt-1 fs-12">
-  <div *ngIf="updateProfileForm.get('state')?.errors?.['required']">State is required.</div>
-  <div *ngIf="updateProfileForm.get('state')?.errors?.['pattern']">Only alphabets are allowed.</div>
-</div>
-      </div>
+              <div *ngIf="updateProfileForm.get('state')?.touched && updateProfileForm.get('state')?.invalid"
+                class="text-danger mt-1 fs-12">
+                <div *ngIf="updateProfileForm.get('state')?.errors?.['required']">State is required.</div>
+                <div *ngIf="updateProfileForm.get('state')?.errors?.['pattern']">Only alphabets are allowed.</div>
+              </div>
+            </div>
 
-      <div class="mb-2">
-        <label for="country" class="form-label">Country</label>
-        <input style="
+            <div class="mb-2">
+              <label for="country" class="form-label">Country</label>
+              <input style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -439,16 +453,17 @@
             font-size: 14px;
             color: #333;
           " class="form-control" type="text" id="country" required formControlName="country"
-          placeholder="Enter country" />
-    <div *ngIf="updateProfileForm.get('country')?.touched && updateProfileForm.get('country')?.invalid" class="text-danger mt-1 fs-12">
-  <div *ngIf="updateProfileForm.get('country')?.errors?.['required']">Country is required.</div>
-  <div *ngIf="updateProfileForm.get('country')?.errors?.['pattern']">Only alphabets are allowed.</div>
-</div>
-      </div>
+                placeholder="Enter country" />
+              <div *ngIf="updateProfileForm.get('country')?.touched && updateProfileForm.get('country')?.invalid"
+                class="text-danger mt-1 fs-12">
+                <div *ngIf="updateProfileForm.get('country')?.errors?.['required']">Country is required.</div>
+                <div *ngIf="updateProfileForm.get('country')?.errors?.['pattern']">Only alphabets are allowed.</div>
+              </div>
+            </div>
 
-      <div class="mb-2">
-        <label for="address" class="form-label">Address</label>
-        <textarea style="
+            <div class="mb-2">
+              <label for="address" class="form-label">Address</label>
+              <textarea style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -457,16 +472,16 @@
             font-size: 14px;
             color: #333;
           " class="form-control" id="address" required formControlName="address"
-          placeholder="Enter address"></textarea>
-        <div *ngIf="updateProfileForm.get('address')?.touched && updateProfileForm.get('address')?.invalid"
-          class="text-danger">
-          Address is required.
-        </div>
-      </div>
+                placeholder="Enter address"></textarea>
+              <div *ngIf="updateProfileForm.get('address')?.touched && updateProfileForm.get('address')?.invalid"
+                class="text-danger">
+                Address is required.
+              </div>
+            </div>
 
-      <div class="mb-3">
-        <label class="form-label">Gender</label>
-        <select style="
+            <div class="mb-3">
+              <label class="form-label">Gender</label>
+              <select style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -475,20 +490,20 @@
             font-size: 14px;
             color: #333;
           " class="form-control" formControlName="gender">
-          <option value="" disabled selected>Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </select>
-        <div *ngIf="updateProfileForm.get('gender')?.touched && updateProfileForm.get('gender')?.invalid"
-          class="text-danger">
-          Gender is required.
-        </div>
-      </div>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+              <div *ngIf="updateProfileForm.get('gender')?.touched && updateProfileForm.get('gender')?.invalid"
+                class="text-danger">
+                Gender is required.
+              </div>
+            </div>
 
-      <div class="mb-2">
-        <label for="date_of_birth" class="form-label">Date of Birth</label>
-        <input style="
+            <div class="mb-2">
+              <label for="date_of_birth" class="form-label">Date of Birth</label>
+              <input style="
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 8px;
@@ -497,18 +512,19 @@
             font-size: 14px;
             color: #333;
           " class="form-control" type="date" id="date_of_birth" required formControlName="date_of_birth" />
-        <div *ngIf="updateProfileForm.get('date_of_birth')?.touched && updateProfileForm.get('date_of_birth')?.invalid"
-          class="text-danger">
-          Date of birth is required.
-        </div>
-      </div>
+              <div
+                *ngIf="updateProfileForm.get('date_of_birth')?.touched && updateProfileForm.get('date_of_birth')?.invalid"
+                class="text-danger">
+                Date of birth is required.
+              </div>
+            </div>
 
-      <div class="mb-3 text-center">
-        <button class="btn btn-primary" type="submit">Update Details</button>
+            <div class="mb-3 text-center">
+              <button class="btn btn-primary" type="submit">Update Details</button>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+      <div *ngIf="updateProfileForm.invalid && updateProfileForm.touched" class="text-danger">
+        Please fill out all required fields correctly.
       </div>
-    </form>
-  </div>
-</ng-template>
-<div *ngIf="updateProfileForm.invalid && updateProfileForm.touched" class="text-danger">
-  Please fill out all required fields correctly.
-</div>

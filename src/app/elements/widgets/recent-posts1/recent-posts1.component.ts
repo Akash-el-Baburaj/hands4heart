@@ -49,11 +49,15 @@ export class RecentPosts1Component implements OnInit {
   @Input() PaymentStatus: any;
 
   @Output() courseSelected = new EventEmitter<any>(); // Emits selected course to parent
+    @Output() lastIndexSelected = new EventEmitter<boolean>(); // 👈 New output
+
   courseDetails: any[] = [];
   selectedCourse: any = null; // Stores selected course
   payment: any;
+  lastIndex: boolean = false;
 
   ngOnChanges(changes: SimpleChanges): void {
+    // console.log('datadatadata', JSON.stringify(this.data));
     if (changes['data']) {
       this.courseDetails = this.data?.details?.details || [];
     }
@@ -70,9 +74,12 @@ export class RecentPosts1Component implements OnInit {
 
   ngOnInit(): void {}
 
-  getCourseVideo(course: any) {
-    this.selectedCourse = course; // Set selected course
+   getCourseVideo(course: any, index: number, lastIndex: number) {
+    this.selectedCourse = course;
     this.courseSelected.emit(course);
+
+    const isLast = index === lastIndex;
+    this.lastIndexSelected.emit(isLast); // 👈 Emit true/false
   }
 
   isSelected(course: any): boolean {
@@ -80,6 +87,4 @@ export class RecentPosts1Component implements OnInit {
   }
 
   constructor(private cdRef: ChangeDetectorRef) {}
-
-
 }

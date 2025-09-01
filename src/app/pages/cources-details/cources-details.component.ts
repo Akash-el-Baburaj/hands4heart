@@ -69,6 +69,9 @@ export class CourcesDetailsComponent implements OnInit {
   qrData: any | null = null;
   certificateID: any | null = null;
 
+    lastIndex: boolean = false;
+
+
   constructor(
     private courseService: CourseService,
     private route: ActivatedRoute,
@@ -290,6 +293,13 @@ export class CourcesDetailsComponent implements OnInit {
     })
   }
 
+  onLastIndexSelected(isLast: boolean) {
+  console.log("Is last index?", isLast);
+  if (isLast) {
+    this.lastIndex=true;
+  }
+}
+
   getCourseVideo(event: any, view?: boolean) {
     this.videoId = event.id;
     this.courseVideo = null;
@@ -480,6 +490,8 @@ export class CourcesDetailsComponent implements OnInit {
     this.courseService.updateProfile(formData).subscribe({
       next: (response) => {
         if (response.success) {
+                      this.router.navigate(['/program']);
+
           this.toastr.success('Profile updated successfully!', 'Success');
 
           this.getSubscribedCourse();

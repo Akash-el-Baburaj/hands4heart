@@ -48,7 +48,7 @@
                     
                     <div class="register-form style1 mb-2 d-flex align-items-center card blur-card">
                         <div class="mb-3 mt-3 w-100 d-flex justify-content-center">
-                            <h3 class="text-secondary cred-title"><span *ngIf="regForm && !otpForm">Sign Up</span><span *ngIf="!regForm && !otpForm">Sign In</span><span *ngIf="!regForm && otpForm">OTP Verification</span></h3>
+                            <h3 class="text-secondary cred-title"><span *ngIf="regForm && !otpForm">Sign Up</span><span *ngIf="!regForm && !otpForm">Login</span><span *ngIf="!regForm && otpForm">OTP Verification</span></h3>
                         </div>
                         <form [formGroup]="signUpForm" class="mt-3"  (ngSubmit)="onSubmit()" *ngIf="regForm && !otpForm">
                             <!-- <input type="hidden" value="Appointment" name="dzToDo" > -->
@@ -118,7 +118,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-center mt-3">
-                                    <button name="submit" type="submit" value="Submit" class="site-button btn-block mb-2"><span>Sign In</span></button>
+                                    <button name="submit" type="submit" value="Submit" class="site-button btn-block mb-2"><span>Login</span></button>
                                 </div>
                             </div>
                         </form>

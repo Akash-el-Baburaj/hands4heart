@@ -58,7 +58,7 @@
             <!-- <div class="card" (click)="getCourseVideo(course)" 
                  [ngClass]="{'playing': isSelected(course), 'highlighted': isSelected(course)}"> -->
             <div class="card" 
-                 (click)="getCourseVideo(course)" 
+                  (click)="getCourseVideo(course, i, courseDetails.length - 1)"
                  [ngClass]="{
                      'even': i % 2 === 0,
                      'odd': i % 2 !== 0,

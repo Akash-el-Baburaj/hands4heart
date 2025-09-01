@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class HomeCoachingComponent {
 
+  login:boolean=false;
+
+  ngOnInit(): void {
+     this.login= localStorage.getItem('userId')?true:false;
+
+  }
+
+
 }

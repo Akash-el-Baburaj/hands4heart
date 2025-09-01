@@ -1,5 +1,14 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { CourseService } from 'src/app/core/service/course.service';
 import { ToastService } from 'src/app/core/service/services/toast.service';
 import { EnrolledUser, SubCourse } from 'src/app/pages/cources-details/model';
@@ -7,73 +16,64 @@ import { EnrolledUser, SubCourse } from 'src/app/pages/cources-details/model';
 @Component({
   selector: 'app-video-embed',
   templateUrl: './video-embed.component.html',
-  styleUrls: ['./video-embed.component.css']
+  styleUrls: ['./video-embed.component.css'],
 })
 export class VideoEmbedComponent implements OnChanges, OnInit {
-
   @Input() VideoURL: SafeResourceUrl | null = '';
   @Input() VideoType: string = '';
-  @Input() videoId: any ;
-  @Output() VideoCompleted = new EventEmitter<any>(); 
+  @Input() videoId: any;
+  @Input() lastIndex: any;
+
+  @Output() VideoCompleted = new EventEmitter<any>();
 
   videoEmbedUrl: SafeResourceUrl | null = '';
   videoEmbedType: string | null = '';
   duration: number | null = null;
   isLoading: boolean = true;
   isVideoWatched: boolean = false;
-  enrolled_id:any;
-  video_id:any;
+  enrolled_id: any;
+  video_id: any;
   subCourseList: SubCourse[] = [];
-  
 
-
-  
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['VideoURL']) {
       this.videoEmbedUrl = this.VideoURL;
-      this.videoEmbedType = this.VideoType
-      this.video_id = this.videoId
-
-     
+      this.videoEmbedType = this.VideoType;
+      this.video_id = this.videoId;
     }
   }
 
   ngOnInit(): void {
-    this.enrolled_id=localStorage.getItem('enrolled_id')
+    this.enrolled_id = localStorage.getItem('enrolled_id');
     this.videoEmbedUrl = this.VideoURL;
     this.videoEmbedType = this.VideoType;
     // this.isLoading = true;
     setTimeout(() => {
       this.isLoading = false;
     }, 3000);
-    
   }
   constructor(
-      private courseService: CourseService,
-          private toastr: ToastService,
-      
-      
-    ) {
-
-    }
+    private courseService: CourseService,
+    private toastr: ToastService,
+    public router: Router
+  ) {}
 
   onMetadataLoaded(video: HTMLVideoElement): void {
     this.duration = video.duration; // Get video duration in seconds
     console.log('Video duration (seconds):', this.duration);
-  
+
     const hours = Math.floor(this.duration / 3600); // Calculate hours
     const minutes = Math.floor((this.duration % 3600) / 60); // Calculate remaining minutes
     const seconds = Math.floor(this.duration % 60); // Calculate remaining seconds
-  
+
     console.log(
       `Video duration: ${hours} hour(s), ${minutes} minute(s), and ${seconds} second(s)`
     );
   }
-  
+
   onVideoEnded(video: HTMLVideoElement): void {
     video.autoplay = false; // Stop autoplay after the first play
     console.log('Video ended. Autoplay disabled.');
-
   }
 
   onVideoCanPlay(): void {
@@ -88,8 +88,7 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
     if (watchedPercentage >= threshold && !this.isVideoWatched) {
       this.isVideoWatched = true;
       console.log('Video is completely watched');
-      this.getSubscribedCourse()
-   
+      this.getSubscribedCourse();
     }
   }
 
@@ -98,23 +97,32 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
 
     formData.append('enrollId', this.enrolled_id);
     formData.append('subCourseId', this.video_id);
-    
+
     this.courseService.markVideo(formData).subscribe({
       next: (response) => {
         console.log('response of mark video as completed- ', response);
         if (response.success) {
-          console.log('video marked as completed')
-     
+          console.log('****is last video****', this.lastIndex);
+          if (this.lastIndex) {
+            this.router.navigate(['/program']);
+
+            this.toastr.success(
+              'Course completed..Please Complete the quiz',
+              'SUCCESS'
+            );
+          } else {
+            this.toastr.success(
+              'Course completed..Please watch next video!!',
+              'SUCCESS'
+            );
+          }
+          console.log('video marked as completed');
         } else {
           console.error('Failed to mark video as completed:', response.message);
         }
       },
       error: (error) => {
         console.error('Error mark video as completed:', error);
-      },
-      complete: () => {
-        this.toastr.success('Course completed..Please watch next video!!', 'SUCCESS');
-        console.log('mark video  completed successfully!...');
       },
     });
   }
@@ -124,13 +132,17 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
       next: (res) => {
         if (res.success) {
           this.subCourseList = res.data.enrolled[0].subCourses;
-  
+
           // Check if the current video is completed
-          const currentVideo = this.subCourseList.find(course => course.id === this.video_id);
-  
+          const currentVideo = this.subCourseList.find(
+            (course) => course.id === this.video_id
+          );
+
           if (currentVideo) {
             if (currentVideo.completed) {
-              console.log('Video already marked as completed, no need to update.');
+              console.log(
+                'Video already marked as completed, no need to update.'
+              );
             } else {
               console.log('Video not marked as completed, updating now.');
               this.updateVideoMarked();
@@ -138,16 +150,17 @@ export class VideoEmbedComponent implements OnChanges, OnInit {
           } else {
             console.log('Current video not found in the subscribed list.');
           }
-  
         } else {
-          console.log(':::::::::::::failed fetching the subscribed course:::::::::::');
+          console.log(
+            ':::::::::::::failed fetching the subscribed course:::::::::::'
+          );
         }
       },
       error: () => {
-        console.log(':::::::::::::something went wrong fetching subscribed course:::::::::::');
-      }
+        console.log(
+          ':::::::::::::something went wrong fetching subscribed course:::::::::::'
+        );
+      },
     });
   }
-  
-
 }
