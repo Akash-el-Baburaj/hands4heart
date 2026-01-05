@@ -26,7 +26,9 @@
                         </ul>
                     </div>
                     <div class="dlab-post-title">
-                        <h4 class="post-title"><a [routerLink]="['/event-details']">{{event.name}}</a></h4>
+                        <h4 class="post-title">
+                            <a href="javascript:void(0)" (click)="navigateto('/event-details', event.id, page)">{{event.name}}</a>
+                        </h4>
                     </div>
                 </div>
             </div>

@@ -103,12 +103,15 @@
                   ENROLLED
                 </button>
 
-                <button class="mobile-btn site-button btnhover14 w-auto ms-3" (click)="navigateToTestList(courseId)"
+                <!-- <button class="mobile-btn site-button btnhover14 w-auto ms-3" (click)="navigateToTestList(courseId)"
                   *ngIf="certificateReady && !quizCompleted">
                   Test
-                </button>
+                </button> -->
 
-                
+                    <button class="mobile-btn site-button btnhover14 w-auto ms-3" (click)="navigateToTestList(courseId)"
+                >
+                  Test
+                </button>
 
                 <button class="mobile-btn site-button btnhover14 w-auto ms-3" (click)="open(profileUpdateModal)" *ngIf="
                     certificateReady &&

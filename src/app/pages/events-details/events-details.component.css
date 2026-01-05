@@ -1,0 +1,6 @@
+.event-details-image {
+  display: block;
+  width: 50%;
+  max-height: 360px;
+  object-fit: cover;
+}
